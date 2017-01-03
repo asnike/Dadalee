@@ -10732,4 +10732,18 @@ button.close {
   clip: auto;
 }
 
+body {
+  background: #fff;
+}
+
+.logo-txt {
+  font-size: 22px;
+  line-height: 42px;
+  padding-left: 15px;
+}
+
+.navbar-default {
+  border-color: #ddd;
+}
+
 /*# sourceMappingURL=app.css.map */

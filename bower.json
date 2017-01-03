@@ -1,0 +1,20 @@
+{
+  "name": "Dadalee",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/asnike/Dadalee",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "bootstrap-sass": "^3.3.7",
+    "jquery": "^3.1.1"
+  }
+}

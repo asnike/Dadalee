@@ -6,5 +6,17 @@
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../vendor/font-awesome/scss/font-awesome";
+
+
+body{background:#fff;}
+
+.logo-txt{
+  font-size:22px;
+  line-height:42px;
+  padding-left:15px;
+}
+.navbar-default{
+  border-color: #ddd;
+}

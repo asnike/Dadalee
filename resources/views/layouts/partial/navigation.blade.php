@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
         <span class="sr-only">Toggle Navigation</span>
@@ -10,7 +10,7 @@
       </button>
 
       <a href="{{ route('home') }}" class="navbar-brand" style="padding:4px;">
-        <img src="/img/laravel.png" style="display: inline-block; height: 45px;"/>
+        <span class="logo-txt">Dadalee</span>
       </a>
     </div>
 
@@ -18,10 +18,10 @@
       <ul class="nav navbar-nav navbar-right">
         @if(! auth()->check())
           <li>
-            <a href="{{ route('session.create') }}"><i class="fa fa-sign-in icon"></i> Login</a>
+            <a href="{{ route('session.create') }}"><strong>{{ trans('common.login') }}</strong></a>
           </li>
           <li>
-            <a href="{{ route('user.create') }}"><i class="fa fa-certificate icon"></i> Sign up</a>
+            <a href="{{ route('user.create') }}"><strong>{{ trans('common.signup') }}</strong></a>
           </li>
         @else
           <li>
