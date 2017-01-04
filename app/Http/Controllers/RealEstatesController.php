@@ -15,7 +15,8 @@ class RealEstatesController extends Controller
     public function index()
     {
         //
-        return view('realestate.index');
+        $realestates = RealEstate::where('user_id', auth()->id())->get();
+        return view('realestate.index')->with('realestates', $realestates);
     }
 
     /**
@@ -36,7 +37,18 @@ class RealEstatesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+
+        print_r($data);
+
+        $realestate = RealEstate::create($data);
+        flash()->success(trans('realestate.added'));
+
+        return response()->json([
+            'id'=>$realestate->id,
+            'name'=>$realestate->name
+        ]);
     }
 
     /**

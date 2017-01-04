@@ -1,7 +1,7 @@
 @section('content')
     <div class="row">
 
-        <form action="" class="search-form" onsubmit="onSubmit()">
+        <form action="" class="search-form" onsubmit="return Controller.onSubmit();">
             <div class="fomr-group clearfix">
                 <div class="col-md-2"><input type="text" required class="form-control" id="name" placeholder="{{ trans('common.name') }}" /></div>
                 <div class="col-md-5"><input type="text" required class="form-control" id="addr" readonly onfocus="sample2_execDaumPostcode()" placeholder="{{ trans('common.address') }}" /></div>
@@ -14,7 +14,13 @@
         <div class="col-md-8">
             <div id="map" style="width:100%;height:350px;"></div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <ul class="list-group">
+                @foreach($realestates as $realestate)
+                    <li class="list-group-item"><span>{{ $realestate->name }}</span></li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 
 
@@ -53,6 +59,8 @@
                     console.log(data);
                     console.log(fullAddr);
 
+                    addr2coord(data.jibunAddress);
+
                     element_layer.style.display = 'none';
                 },
                 width : '100%',
@@ -64,7 +72,7 @@
         }
 
         function initLayerPosition(){
-            var width = 300;
+            var width = 450;
             var height = 460;
             var borderWidth = 5;
 
@@ -73,6 +81,18 @@
             element_layer.style.border = borderWidth + 'px solid';
             element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
             element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+        }
+
+        function addr2coord(addr){
+            var geocoder = new daum.maps.services.Geocoder();
+
+            geocoder.addr2coord(addr, function(status, result) {
+                if (status === daum.maps.services.Status.OK) {
+                    if(typeof Controller.searchCallback == 'function'){
+                        Controller.searchCallback(result.addr[0]);
+                    }
+                }
+            });
         }
     </script>
 @stop

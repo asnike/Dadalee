@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         \Laravel\Socialite\SocialiteServiceProvider::Class,
+        \Laracasts\Flash\FlashServiceProvider::class,
 
         //
 
@@ -228,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Socialite'=>\Laravel\Socialite\Facades\Socialite::Class,
-
+        'Flash'=>\Laracasts\Flash\Flash::class,
     ],
 
 ];

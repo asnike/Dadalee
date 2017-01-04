@@ -10758,4 +10758,8 @@ body {
   padding: 15px;
 }
 
+.search-form input[type="text"] {
+  width: 100%;
+}
+
 /*# sourceMappingURL=app.css.map */
