@@ -10746,4 +10746,16 @@ body {
   border-color: #ddd;
 }
 
+.contents {
+  margin-top: 50px;
+}
+
+.panel-default, .panel-default > .panel-heading {
+  border-color: #ddd;
+}
+
+.search-form {
+  padding: 15px;
+}
+
 /*# sourceMappingURL=app.css.map */

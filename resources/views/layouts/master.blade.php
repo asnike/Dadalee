@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-  <title>Laravel 5 Essential</title>
+  <title>Dadalee</title>
 
   <link href="{{ elixir("css/app.css") }}" rel="stylesheet">
   @yield('style')
@@ -24,7 +24,7 @@
 
   @include('layouts.partial.flash_message')
 
-  <div class="container main">
+  <div class="container contents">
     @yield('content')
   </div>
 

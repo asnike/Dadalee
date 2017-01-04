@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook'=>[
+        'client_id'=>'200093723788409',
+        'client_secret'=>'e691b2b3d9025cacf0b491e168d7842a',
+        'redirect'=>'http://dadalee.app/auth/fb/callback'
+    ],
+
 ];

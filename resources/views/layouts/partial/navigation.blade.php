@@ -24,18 +24,16 @@
             <a href="{{ route('user.create') }}"><strong>{{ trans('common.signup') }}</strong></a>
           </li>
         @else
-          <li>
-            <a href="{{ route('documents.show') }}"><i class="fa fa-book icon"></i> Document Viewer</a>
-          </li>
-          <li>
-            <a href="/articles"><i class="fa fa-weixin icon"></i> Forum</a>
-          </li>
+
+          <li><a href="/realestates"><strong>{{ trans('common.manageRealestate') }}</strong></a></li>
+          <li><a href="/pricetags"><strong>{{ trans('common.priceMap') }}</strong></a></li>
+
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-user icon"></i> {{ auth()->user()->name }} <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{{ route('session.destroy') }}"><i class="fa fa-sign-out icon"></i> Log out</a></li>
+              <li><a href="{{ route('session.destroy') }}"><i class="fa fa-sign-out icon"></i> {{ trans('common.logout') }}</a></li>
             </ul>
           </li>
         @endif

@@ -40,4 +40,17 @@ Route::group(['prefix' => 'auth', 'as' => 'session.'], function(){
         'as' => 'destroy',
         'uses'=>'Auth\LoginController@logout'
     ]);
+    Route::get('fb', [
+        'as'=>'fb.login',
+        'uses'=>'SocialAuthController@getFbAuth'
+    ]);
+    Route::get('fb/callback', [
+        'as'=>'fb.callback',
+        'uses'=>'SocialAuthController@getFbAuthCallback'
+    ]);
 });
+Auth::routes();
+
+Route::resource('realestates', 'RealEstatesController');
+Route::resource('pricetags', 'PriceTagsController');
+

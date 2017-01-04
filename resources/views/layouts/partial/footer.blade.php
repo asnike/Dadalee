@@ -1,6 +1,7 @@
 <footer class="footer">
-
-  <div>
-    &copy; {{ date('Y') }} &nbsp; <a href="https://github.com/appkr/l5essential">Laravel 5 Essential</a>
+  <div class="container">
+    <div class="text-center">
+      &copy; {{ date('Y') }} &nbsp; <a href="{{ route('home') }}">Dadalee</a>
+    </div>
   </div>
 </footer>

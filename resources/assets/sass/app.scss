@@ -20,3 +20,18 @@ body{background:#fff;}
 .navbar-default{
   border-color: #ddd;
 }
+
+.contents{
+  margin-top:50px;
+}
+
+.panel-default, .panel-default>.panel-heading{
+  border-color: #ddd;
+}
+
+.search-form{
+  padding:15px;
+}
+.search-form input[type="text"]{
+  width:100%;
+}
