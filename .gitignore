@@ -6,7 +6,11 @@
 Homestead.json
 Homestead.yaml
 .env
+/public/build/js
+/public/build/css
+/public/build
 /public/css
 /public/js
+/public
 .example
 /resources/assets/vendor

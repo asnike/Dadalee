@@ -10,6 +10,10 @@
                 level: 3
             };
 
-        var map = new daum.maps.Map(mapContainer, mapOption);
+        //var map = new daum.maps.Map(mapContainer, mapOption);
+
+        function onSubmit(){
+            return false;
+        }
     </script>
 @stop
