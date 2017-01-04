@@ -12,7 +12,7 @@
     </div>
     <div class="row clearfix">
         <div class="col-md-8">
-            <div id="map" style="width:100%;height:350px;"></div>
+            <div id="map" style="width:100%;height:350px;border:1px solid #ddd;"></div>
         </div>
         <div class="col-md-4">
             <ul class="list-group realestate-list">
