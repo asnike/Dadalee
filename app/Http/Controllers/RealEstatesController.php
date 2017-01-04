@@ -12,10 +12,17 @@ class RealEstatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $realestates = RealEstate::where('user_id', auth()->id())->get();
+        if($request->ajax()){
+            return response()->json([
+                'result'=>1,
+                'lists'=>$realestates
+            ]);
+        }
+
         return view('realestate.index')->with('realestates', $realestates);
     }
 
@@ -39,8 +46,6 @@ class RealEstatesController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->id();
-
-        print_r($data);
 
         $realestate = RealEstate::create($data);
         flash()->success(trans('realestate.added'));

@@ -15,9 +15,9 @@
             <div id="map" style="width:100%;height:350px;"></div>
         </div>
         <div class="col-md-4">
-            <ul class="list-group">
+            <ul class="list-group realestate-list">
                 @foreach($realestates as $realestate)
-                    <li class="list-group-item"><span>{{ $realestate->name }}</span></li>
+                    <li class="list-group-item" data-id="{{ $realestate->id }}"><span>{{ $realestate->name }}</span></li>
                 @endforeach
             </ul>
         </div>

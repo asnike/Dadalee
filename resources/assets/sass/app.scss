@@ -35,3 +35,13 @@ body{background:#fff;}
 .search-form input[type="text"]{
   width:100%;
 }
+
+.list-group-item{
+  border-color: #ddd;
+}
+.realestate-list{
+
+}
+.realestate-list>.list-group-item{
+  cursor: pointer;
+}

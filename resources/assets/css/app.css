@@ -10762,4 +10762,12 @@ body {
   width: 100%;
 }
 
+.list-group-item {
+  border-color: #ddd;
+}
+
+.realestate-list > .list-group-item {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=app.css.map */

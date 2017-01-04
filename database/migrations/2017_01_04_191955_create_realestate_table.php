@@ -18,8 +18,8 @@ class CreateRealestateTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address');
-            $table->float('lat');
-            $table->float('lng');
+            $table->double('lat');
+            $table->double('lng');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
