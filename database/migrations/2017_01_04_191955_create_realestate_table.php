@@ -20,6 +20,9 @@ class CreateRealestateTable extends Migration
             $table->string('address');
             $table->double('lat');
             $table->double('lng');
+            $table->boolean('own')->default(0);
+            $table->boolean('market')->default(0);
+
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 

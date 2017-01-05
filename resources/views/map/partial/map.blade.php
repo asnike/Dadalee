@@ -1,15 +1,10 @@
 @section('content')
-    <div class="row">
+    @if($type == 'realestate')
+        @include('realestate.partial.add')
+    @elseif($type == 'pricetag')
+        @include('pricetag.partial.add')
+    @endif
 
-        <form action="" class="search-form" onsubmit="return Controller.onSubmit();">
-            <div class="fomr-group clearfix">
-                <div class="col-md-2"><input type="text" required class="form-control" id="name" placeholder="{{ trans('common.name') }}" /></div>
-                <div class="col-md-5"><input type="text" required class="form-control" id="addr" readonly onfocus="sample2_execDaumPostcode()" placeholder="{{ trans('common.address') }}" /></div>
-                <div class="col-md-2"><button type="submit" class="btn btn-primary">{{ trans('common.realestateAdd') }}</button></div>
-            </div>
-        </form>
-
-    </div>
     <div class="row clearfix">
         <div class="col-md-8">
             <div id="map" style="width:100%;height:350px;border:1px solid #ddd;"></div>
@@ -83,12 +78,12 @@
             element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
         }
 
-        function addr2coord(addr){
+        function addr2coord(addr) {
             var geocoder = new daum.maps.services.Geocoder();
 
-            geocoder.addr2coord(addr, function(status, result) {
+            geocoder.addr2coord(addr, function (status, result) {
                 if (status === daum.maps.services.Status.OK) {
-                    if(typeof Controller.searchCallback == 'function'){
+                    if (typeof Controller.searchCallback == 'function') {
                         Controller.searchCallback(result.addr[0]);
                     }
                 }

@@ -72,7 +72,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
                             <div class="col-md-6">
-                                <a class="btn btn-default btn-block" href="{{ route('session.fb.login') }}">
+                                <a class="btn btn-default btn-block btn-fb" href="{{ route('session.fb.login') }}">
                                     <strong><i class="fa fa-facebook icon"></i> {{ trans('common.registerWithFacebook') }}</strong>
                                 </a>
                             </div>

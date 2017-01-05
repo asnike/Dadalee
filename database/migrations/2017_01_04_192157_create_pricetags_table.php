@@ -20,6 +20,9 @@ class CreatePricetagsTable extends Migration
             $table->integer('price');
             $table->integer('deposit');
             $table->integer('monthlyfee')->nullable();
+
+            $table->integer('year');
+            $table->integer('month');
             $table->timestamps();
 
             $table->foreign('realestate_id')->references('id')->on('realestates')->onUpate('cascade')->onDelete('cascade');

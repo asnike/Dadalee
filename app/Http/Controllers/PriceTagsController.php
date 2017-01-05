@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PriceTag;
+use App\RealEstate;
 use Illuminate\Http\Request;
 
 class PriceTagsController extends Controller
@@ -12,10 +13,18 @@ class PriceTagsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('pricetag.index');
+        $realestates = RealEstate::where('user_id', auth()->id())->where('market', 1)->get();
+        if($request->ajax()){
+            return response()->json([
+                'result'=>1,
+                'lists'=>$realestates
+            ]);
+        }
+
+        return view('pricetag.index')->with('realestates', $realestates);
     }
 
     /**
@@ -37,6 +46,7 @@ class PriceTagsController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**

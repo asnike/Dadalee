@@ -29,4 +29,8 @@ return [
     'address'=>'주소',
     
     'realestateAdd'=>'추가',
+
+    'price'=>'매매가',
+    'deposit'=>'보증금',
+    'monthlyFee'=>'차임',
 ];

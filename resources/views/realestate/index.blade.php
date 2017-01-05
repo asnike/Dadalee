@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@include('map.partial.map', ['realestates', $realestates])
+@include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
 
 @section('script')
     <script>

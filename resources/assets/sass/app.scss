@@ -8,6 +8,7 @@
 // Bootstrap
 @import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "../vendor/font-awesome/scss/font-awesome";
+@import "../vendor/select2/src/scss/core";
 
 
 body{background:#fff;}
@@ -44,4 +45,16 @@ body{background:#fff;}
 }
 .realestate-list>.list-group-item{
   cursor: pointer;
+}
+
+.btn-fb{
+  background: #3b5998;
+  border:1px solid #29487d;
+  color:#fff;
+}
+
+.btn-fb:hover, .btn-fb:active, .btn-fb:focus{
+  background: #415579;
+  border-color: #365899;
+  color:#fff;
 }
