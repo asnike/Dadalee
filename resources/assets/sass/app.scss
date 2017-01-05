@@ -58,3 +58,11 @@ body{background:#fff;}
   border-color: #365899;
   color:#fff;
 }
+
+.footer{
+  border-top:1px solid #ddd;
+}
+.footer .logo, .footer .logo:hover{
+  color:inherit;
+  text-decoration: none;
+}

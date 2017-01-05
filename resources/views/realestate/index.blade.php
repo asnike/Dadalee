@@ -3,6 +3,7 @@
 @include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
 
 @section('script')
+
     <script>
         var Controller = (function(){
             var map, realestates, markers = [], searchedInfo, init = function(){
@@ -48,14 +49,14 @@
                 console.log('result : ', result);
                 searchedInfo = result;
             },
-            setMarker = function(lat, lng, moveCenter){
-                var coords = new daum.maps.LatLng(lat, lng);
+            setMarker = function(data, moveCenter){
+                var coords = new daum.maps.LatLng(data.lat, data.lng);
                 var marker = new daum.maps.Marker({
                     map: map,
                     position: coords
                 }), markerData;
                 if(moveCenter) map.setCenter(coords);
-                markers[markers.length] = markerData = {marker:marker, click:function(){ showInfo(marker); }};
+                markers[markers.length] = markerData = {data:data, marker:marker, click:function(){ showInfo(markerData); }};
                 daum.maps.event.addListener(marker, 'click', markerData.click);
             },
             getRealestates = function(){
@@ -76,13 +77,13 @@
                 realestates = data.lists;
 
                 for(i = 0, j = markers.length ; i < j ; i++){
-                    daum.maps.event.removeListener(markers[i].marker, 'click', marker[i].click);
+                    daum.maps.event.removeListener(markers[i].marker, 'click', markers[i].click);
                     markers[i].setMap(null);
                 }
                 markers = [];
 
                 for(html = '', i = 0, j = data.lists.length ; i < j ; i++){
-                    setMarker(data.lists[i].lat, data.lists[i].lng, i == 0);
+                    setMarker(data.lists[i], i == 0);
                     html += '<li class="list-group-item" data-id="'
                         + data.lists[i].id+'">'
                         + data.lists[i].name
@@ -92,14 +93,26 @@
                 $('.realestate-list').html(html);
                 $('.realestate-list>.list-group-item').click(focusRealestate);
             },
-            showInfo = function(marker){
-                var content = '<div style="padding:5px;">Hello World!<br>dsfadfadfsadfa<br>fassldjflsakf</div>';
+            showInfo = function(markerData){
+                var template = Handlebars.compile($('#info-window').html()),
+                    content = template({
+                        'title':markerData.data.name,
+                        'contents':markerData.data.address,
+                        'id':markerData.data.id,
+                    });
 
                 var infowindow = new daum.maps.InfoWindow({
                     content:content,
                     removable:true
                 });
-                infowindow.open(map, marker);
+
+                var overlay = new daum.maps.CustomOverlay({
+                    content: content,
+                    map: map,
+                    position: markerData.marker.getPosition()
+                });
+                overlay.setMap(map);
+                markerData.overlay = overlay;
             },
             focusRealestate = function(e){
                 var i, j, id = $(this).attr('data-id'), idx, coords;
@@ -111,12 +124,27 @@
                 }
                 coords = new daum.maps.LatLng(realestates[idx].lat, realestates[idx].lng);
                 map.setCenter(coords);
+            },
+            hideInfo = function(target) {
+                console.log(target);
+
+                var i, j, id = $(target).attr('data-id'), overlay;
+                for(i = 0, j = markers.length ; i < j ; i++){
+                    if(markers[i].data.id == id){
+                        overlay = markers[i].overlay;
+                        break;
+                    }
+                }
+                overlay.setMap(null);
             };
             init();
             return {
                 onSubmit:onSubmit,
                 searchCallback:searchCallback,
+                hideInfo:hideInfo,
             }
         })();
     </script>
 @stop
+
+@include('realestate.partial.handlebars')

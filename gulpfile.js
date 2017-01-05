@@ -22,6 +22,7 @@ elixir((mix) => {
         '../vendor/jquery/dist/jquery.js',
         '../vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
         '../vendor/select2/dist/js/select2.js',
+        '../vendor/handlebars/handlebars.js',
         'app.js'
     ], 'public/js/app.js')
     .version([
