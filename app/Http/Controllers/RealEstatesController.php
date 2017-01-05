@@ -15,6 +15,7 @@ class RealEstatesController extends Controller
     public function index(Request $request)
     {
         //
+        header('Vary:X-Requested-With');
         $realestates = RealEstate::where('user_id', auth()->id())->where('market', 0)->get();
         if($request->ajax()){
             return response()->json([
@@ -51,8 +52,11 @@ class RealEstatesController extends Controller
         //flash()->success(trans('realestate.added'));
 
         return response()->json([
-            'id'=>$realestate->id,
-            'name'=>$realestate->name
+            'result'=>1,
+            'data'=>[
+                'id'=>$realestate->id,
+                'name'=>$realestate->name
+            ]
         ]);
     }
 

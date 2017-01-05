@@ -5,11 +5,9 @@
 @section('script')
     <script>
         var Controller = (function(){
-            var map, realestates, searchedInfo, init = function(){
+            var map, realestates, markers = [], searchedInfo, init = function(){
                 initMap();
                 getRealestates();
-
-                $('.realestate-list>.list-group-item').click(focusRealestate);
             },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
@@ -24,6 +22,8 @@
                     addr = $('#addr').val();
                 if(name && addr){
                     $.ajax({
+                        dataType: 'json',
+                        cache: false,
                         type:'POST',
                         url:'/realestates',
                         headers:{
@@ -37,7 +37,9 @@
                         }
                     }).done(function(){
                         console.log('added!!');
-                        setMarker(searchedInfo.lat, searchedInfo.lng, true);
+                        //setMarker(searchedInfo.lat, searchedInfo.lng, true);
+
+                        getRealestates();
                     });
                 }
                 return false;
@@ -51,8 +53,10 @@
                 var marker = new daum.maps.Marker({
                     map: map,
                     position: coords
-                });
+                }), markerData;
                 if(moveCenter) map.setCenter(coords);
+                markers[markers.length] = markerData = {marker:marker, click:function(){ showInfo(marker); }};
+                daum.maps.event.addListener(marker, 'click', markerData.click);
             },
             getRealestates = function(){
                 $.ajax({
@@ -67,11 +71,35 @@
                 }).done(getRealestatesSuccess);
             },
             getRealestatesSuccess = function(data){
+                var i, j, html;
                 console.log(data);
                 realestates = data.lists;
-                for(var i = 0, j = data.lists.length ; i < j ; i++){
-                    setMarker(data.lists[i].lat, data.lists[i].lng, i == 0);
+
+                for(i = 0, j = markers.length ; i < j ; i++){
+                    daum.maps.event.removeListener(markers[i].marker, 'click', marker[i].click);
+                    markers[i].setMap(null);
                 }
+                markers = [];
+
+                for(html = '', i = 0, j = data.lists.length ; i < j ; i++){
+                    setMarker(data.lists[i].lat, data.lists[i].lng, i == 0);
+                    html += '<li class="list-group-item" data-id="'
+                        + data.lists[i].id+'">'
+                        + data.lists[i].name
+                        + '</li>';
+                }
+                $('.realestate-list>.list-group-item').off();
+                $('.realestate-list').html(html);
+                $('.realestate-list>.list-group-item').click(focusRealestate);
+            },
+            showInfo = function(marker){
+                var content = '<div style="padding:5px;">Hello World!<br>dsfadfadfsadfa<br>fassldjflsakf</div>';
+
+                var infowindow = new daum.maps.InfoWindow({
+                    content:content,
+                    removable:true
+                });
+                infowindow.open(map, marker);
             },
             focusRealestate = function(e){
                 var i, j, id = $(this).attr('data-id'), idx, coords;

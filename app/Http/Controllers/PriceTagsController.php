@@ -45,8 +45,21 @@ class PriceTagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->only(['addr', 'lat', 'lng']);
+        $data['user_id'] = auth()->id();
+        $realestate = RealEstate::firstOrCreate($data);
 
+        $data = $request->only(['price', 'deposit', 'monthlyfee']);
+        $data['realestate_id'] = $realestate->id;
+        $pricetag = $realestate->priceTags()->create($data);
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'realestate_id'=>$realestate->id,
+                'pricetag_id'=>$pricetag->id,
+            ]
+        ]);
     }
 
     /**
