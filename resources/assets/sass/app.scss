@@ -1,16 +1,25 @@
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
 
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../vendor/font-awesome/scss/font-awesome";
 @import "../vendor/select2/src/scss/core";
+@import "../vendor/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";
 
 
+body {
+  font-family: 'Noto Sans KR',Dotum,'돋움',Helvetica,AppleSDGothicNeo,sans-serif;
+}
 body{background:#fff;}
 
 .logo-txt{
@@ -25,6 +34,7 @@ body{background:#fff;}
 .contents{
   margin-top:50px;
 }
+
 
 .panel-default, .panel-default>.panel-heading{
   border-color: #ddd;
@@ -61,8 +71,37 @@ body{background:#fff;}
 
 .footer{
   border-top:1px solid #ddd;
+  padding:20px 0;
+  font-size:12px;
+
 }
 .footer .logo, .footer .logo:hover{
   color:inherit;
   text-decoration: none;
+}
+
+.map-info-window>.panel-heading:before{
+  width:10px;
+  height:10px;
+  display:block;
+  content:'';
+  opacity:1;
+  position:absolute;
+  background:#fff;
+  border:1px solid #ddd;
+  border-color:transparent transparent #ddd #ddd;
+  top:-49px;
+  left:47.7%;
+  transform:rotate(-45deg);z-index:100;
+}
+
+.login.panel, .register.panel{
+  margin: 0px 0 200px 0;
+}
+
+.checkbox label::before{
+  margin-top:3px;
+}
+.checkbox label::after{
+  top:2px;
 }

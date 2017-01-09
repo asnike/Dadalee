@@ -3,8 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <h2 class="text-center" style="margin: 100px 0;">다달이에 오신것을 환영합니다.</h2>
+    </div>
+    <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default">
+            <div class="panel panel-default register">
                 <div class="panel-heading">{{ trans('common.signup') }}</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">

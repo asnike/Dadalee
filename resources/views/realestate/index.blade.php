@@ -20,7 +20,8 @@
             },
             onSubmit = function(){
                 var name = $('#name').val(),
-                    addr = $('#addr').val();
+                    addr = $('#addr').val(),
+                    own = $('#own').checked();
                 if(name && addr){
                     $.ajax({
                         dataType: 'json',
@@ -35,6 +36,7 @@
                             address:searchedInfo.title + (searchedInfo.buildingAddress ? searchedInfo.buildingAddress : ''),
                             lat:searchedInfo.lat,
                             lng:searchedInfo.lng,
+                            own:own,
                         }
                     }).done(function(){
                         console.log('added!!');
@@ -58,6 +60,7 @@
                 if(moveCenter) map.setCenter(coords);
                 markers[markers.length] = markerData = {data:data, marker:marker, click:function(){ showInfo(markerData); }};
                 daum.maps.event.addListener(marker, 'click', markerData.click);
+
             },
             getRealestates = function(){
                 $.ajax({
@@ -78,7 +81,7 @@
 
                 for(i = 0, j = markers.length ; i < j ; i++){
                     daum.maps.event.removeListener(markers[i].marker, 'click', markers[i].click);
-                    markers[i].setMap(null);
+                    markers[i].marker.setMap(null);
                 }
                 markers = [];
 
@@ -94,6 +97,7 @@
                 $('.realestate-list>.list-group-item').click(focusRealestate);
             },
             showInfo = function(markerData){
+                if(markerData.overlay) return;
                 var template = Handlebars.compile($('#info-window').html()),
                     content = template({
                         'title':markerData.data.name,
@@ -136,6 +140,7 @@
                     }
                 }
                 overlay.setMap(null);
+                markers[i].overlay = overlay = null;
             };
             init();
             return {
