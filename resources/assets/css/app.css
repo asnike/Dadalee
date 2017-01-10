@@ -11816,4 +11816,16 @@ body {
   padding-right: 8px;
 }
 
+.realestate-list .addr {
+  font-size: 12px;
+}
+
+.realestate-list .info {
+  float: left;
+}
+
+.realestate-list .tools {
+  float: right;
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -33,4 +33,8 @@ return [
     'price'=>'매매가',
     'deposit'=>'보증금',
     'monthlyFee'=>'차임',
+
+    'own'=>'소유',
+    'attension'=>'관심',
+
 ];

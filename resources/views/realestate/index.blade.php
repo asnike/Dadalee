@@ -9,7 +9,14 @@
             var map, realestates, markers = [], searchedInfo, init = function(){
                 initMap();
                 getRealestates();
+                initBtnTab();
             },
+            initBtnTab = function(){
+                $('.btn-tab').click(function(e){
+                    $('.btn-tab>.btn').removeClass('active');
+                    $(e.target).addClass('active');
+                });
+            }
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
                     mapOption = {
@@ -21,7 +28,7 @@
             onSubmit = function(){
                 var name = $('#name').val(),
                     addr = $('#addr').val(),
-                    own = $('#own').checked();
+                    own = $('#own').is(':checked');
                 if(name && addr){
                     $.ajax({
                         dataType: 'json',
@@ -85,12 +92,15 @@
                 }
                 markers = [];
 
+                var template = Handlebars.compile($('#realestate-list-item').html());
+
                 for(html = '', i = 0, j = data.lists.length ; i < j ; i++){
                     setMarker(data.lists[i], i == 0);
-                    html += '<li class="list-group-item" data-id="'
-                        + data.lists[i].id+'">'
-                        + data.lists[i].name
-                        + '</li>';
+                    html += template({
+                        'id':data.lists[i].id,
+                        'name':data.lists[i].name,
+                        'address':data.lists[i].address,
+                    });
                 }
                 $('.realestate-list>.list-group-item').off();
                 $('.realestate-list').html(html);

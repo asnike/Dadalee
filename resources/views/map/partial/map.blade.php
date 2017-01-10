@@ -10,11 +10,34 @@
             <div id="map" style="width:100%;min-height:768px;border:1px solid #ddd;"></div>
         </div>
         <div class="col-md-4">
-            <ul class="list-group realestate-list">
-                @foreach($realestates as $realestate)
-                    <li class="list-group-item" data-id="{{ $realestate->id }}"><span>{{ $realestate->name }}</span></li>
-                @endforeach
-            </ul>
+            <div>
+                <div class="clearfix">
+                    <div class="btn-group btn-tab pull-right">
+                        <a href="#own-tab" class="btn btn-default" data-toggle="tab">{{ trans('common.own') }}</a>
+                        <a href="#attension-tab" class="btn btn-default" data-toggle="tab">{{ trans('common.attension') }}</a>
+                    </div>
+                </div>
+
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="own-tab">
+                        <br>
+                        <ul class="list-group realestate-list">
+                            @foreach($realestates as $realestate)
+                                <li class="list-group-item" data-id="{{ $realestate->id }}">
+                                    <span>{{ $realestate->name }}</span>
+                                    <div class="addr">{{ $realestate->address }}</div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="attension-tab">...</div>
+                </div>
+
+            </div>
+
+
         </div>
     </div>
 
