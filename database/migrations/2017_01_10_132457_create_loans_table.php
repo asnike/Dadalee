@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEarningrateTable extends Migration
+class CreateLoansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateEarningrateTable extends Migration
      */
     public function up()
     {
-        Schema::create('earningrates', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('realestate_id')->unsigned();
 
-            $table->integer('price');
-            $table->integer('deposit');
-            $table->integer('monthlyfee')->nullable();
-            $table->integer('investment')->nullable();
-            $table->integer('interest_amount')->nullable();
-            $table->integer('real_earning')->nullable();
+            $table->integer('amount');
+            $table->float('interest_rate');
+            $table->float('repay_commission');
+            $table->integer('unredeem_period')->default(0);
+            $table->integer('repay_period');
+            $table->integer('repay_method_id')->unsigned();
+            $table->char('bank');
+            $table->char('account_no');
+            $table->text('options');
 
             $table->timestamps();
 

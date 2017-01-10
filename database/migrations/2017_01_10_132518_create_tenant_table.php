@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEarningrateTable extends Migration
+class CreateTenantTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateEarningrateTable extends Migration
      */
     public function up()
     {
-        Schema::create('earningrates', function (Blueprint $table) {
+        //
+        Schema::create('tenants', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('realestate_id')->unsigned();
 
-            $table->integer('price');
-            $table->integer('deposit');
-            $table->integer('monthlyfee')->nullable();
-            $table->integer('investment')->nullable();
-            $table->integer('interest_amount')->nullable();
-            $table->integer('real_earning')->nullable();
-
+            $table->char('name');
+            $table->integer('tel');
+            $table->integer('pay_day');
+            $table->char('pay_account_no');
+            $table->char('pay_account_bank');
             $table->timestamps();
 
             $table->foreign('realestate_id')->references('id')->on('realestates')->onUpate('cascade')->onDelete('cascade');

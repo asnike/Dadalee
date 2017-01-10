@@ -22,6 +22,11 @@ class CreateRealestateTable extends Migration
             $table->double('lng');
             $table->boolean('own')->default(0);
             $table->boolean('market')->default(0);
+            $table->integer('floor')->nullable();
+
+            $table->date('completed_at')->nullable();
+            $table->float('exclusive_size')->nullable();
+            $table->text('memo')->nullable();
 
             $table->integer('user_id')->unsigned();
             $table->timestamps();
