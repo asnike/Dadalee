@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\EarningRate;
+use App\Loan;
 use Illuminate\Http\Request;
 
-class EarningRatesController extends Controller
+class LoansController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,30 +35,35 @@ class EarningRatesController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $this->validate($request, [
-            'price'=>'required|numeric',
-            'deposit'=>'required|numeric',
-            'monthlyfee'=>'numeric',
-            'investment'=>'numeric',
-            'interest_amount'=>'numeric',
-            'real_earning'=>'numeric',
+            'amount'=>'required|numeric',
+            'interest_rate'=>'required|numeric',
+            'repay_commission'=>'required|numeric',
+            'unredeem_period'=>'numeric',
+            'repay_period'=>'numeric',
+            'repay_method_id'=>'numeric|in:App\RepayMethod',
+            'bank'=>'alpha',
+            'account_no'=>'numeric',
         ]);
 
         $realestate_id = $request->input('realestate_id');
 
-        $earningRate = RealEstate::find($realestate_id)->earningRate()->create([
-            'price'=> $request->input('price'),
-            'deposit'=> $request->input('deposit'),
-            'monthlyfee'=> $request->input('monthlyfee'),
-            'investment'=> $request->input('investment'),
-            'interest_amount'=> $request->input('interest_amount'),
-            'real_earning'=> $request->input('real_earning'),
+        $loan = RealEstate::find($realestate_id)->loan()->create([
+            'amount'=> $request->input('amount'),
+            'interest_rate'=> $request->input('interest_rate'),
+            'repay_commission'=> $request->input('repay_commission'),
+            'unredeem_period'=> $request->input('unredeem_period'),
+            'repay_period'=> $request->input('repay_period'),
+            'repay_method_id'=> $request->input('repay_method_id'),
+            'bank'=>$request->input('bank'),
+            'account_no'=>$request->input('account_no'),
         ]);
 
         return response()->json([
             'result'=>1,
             'data'=>[
-                'id'=>$earningRate->id,
+                'id'=>$loan->id,
                 'realestate_id'=>$realestate_id,
             ]
         ]);
@@ -67,10 +72,10 @@ class EarningRatesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\EarningRate  $earningRate
+     * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function show(EarningRate $earningRate)
+    public function show(Loan $loan)
     {
         //
     }
@@ -78,44 +83,33 @@ class EarningRatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\EarningRate  $earningRate
+     * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function edit(EarningRate $earningRate, $id)
+    public function edit(Loan $loan)
     {
         //
-        $earningRate = EarningRate::find($id);
-
-        return response()->json($earningRate);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EarningRate  $earningRate
+     * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EarningRate $earningRate)
+    public function update(Request $request, Loan $loan)
     {
         //
-        $earningRate->update($request->all());
-
-        return response()->json([
-            'result'=>1,
-            'data'=>[
-                'id'=>$earningRate->id,
-            ]
-        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EarningRate  $earningRate
+     * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EarningRate $earningRate)
+    public function destroy(Loan $loan)
     {
         //
     }

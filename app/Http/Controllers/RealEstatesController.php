@@ -49,7 +49,6 @@ class RealEstatesController extends Controller
         $data['user_id'] = auth()->id();
 
         $realestate = RealEstate::create($data);
-        //flash()->success(trans('realestate.added'));
 
         return response()->json([
             'result'=>1,

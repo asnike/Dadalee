@@ -151,15 +151,20 @@
                 }
                 overlay.setMap(null);
                 markers[i].overlay = overlay = null;
+            },
+            openDetailModal = function(){
+                $('#realestate-detail').modal();
             };
             init();
             return {
                 onSubmit:onSubmit,
                 searchCallback:searchCallback,
                 hideInfo:hideInfo,
+                openDetailModal:openDetailModal,
             }
         })();
     </script>
 @stop
 
 @include('realestate.partial.handlebars')
+@include('realestate.partial.modal')

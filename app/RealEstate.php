@@ -20,6 +20,9 @@ class RealEstate extends Model
         return $this->hasMany('App\PriceTag');
     }
     public function earningRate(){
-        return $this->hasOne('App\EarningRate');
+        return $this->hasOne('App\EarningRate', 'realestate_id');
+    }
+    public function loan(){
+        return $this->hasOne('App\Loan', 'realestate_id');
     }
 }
