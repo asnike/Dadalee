@@ -111,6 +111,7 @@
                         });
                     }
                 }
+<<<<<<< HEAD
                 $('.realestate-own-list>.list-group-item').off();
                 $('.realestate-own-list').html(ownHtml);
                 $('.realestate-own-list>.list-group-item').click(focusRealestate);
@@ -119,6 +120,13 @@
                 $('.realestate-attension-list').html(attensionHtml);
                 $('.realestate-attension-list>.list-group-item').click(focusRealestate);
 
+=======
+                $('.realestate-list>.list-group-item').off();
+                $('.realestate-list>.list-group-item>.tools>.btn-detail').off();
+                $('.realestate-list').html(html);
+                $('.realestate-list>.list-group-item').click(focusRealestate);
+                $('.realestate-list>.list-group-item>.tools>.btn-detail').click(openDetailModal);
+>>>>>>> 69f1b295410a4214a3900e879fb33f437bbb6414
             },
             showInfo = function(markerData){
                 if(markerData.overlay) return;
@@ -166,8 +174,20 @@
                 overlay.setMap(null);
                 markers[i].overlay = overlay = null;
             },
-            openDetailModal = function(){
-                $('#realestate-detail').modal();
+            openDetailModal = function(e){
+                var l = Ladda.create(this);
+                l.start();
+                $.ajax({
+                    type:'GET',
+                    url:'/realestates/' + $(this).attr('data-id') + '/edit',
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                }).done(function(data){
+                    console.log(data);
+                    l.stop();
+                    $('#realestate-detail').modal();
+                });
             };
             init();
             return {

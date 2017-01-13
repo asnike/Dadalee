@@ -76,9 +76,19 @@ class RealEstatesController extends Controller
      * @param  \App\RealEstate  $realEstate
      * @return \Illuminate\Http\Response
      */
-    public function edit(RealEstate $realEstate)
+    public function edit($id)
     {
         //
+        $realEstate = RealEstate::with(['earningRate', 'loan'])->findOrFail($id);
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'realestate'=>$realEstate,
+                'earningrate'=>$realEstate->earningRate(),
+                'loan'=>$realEstate->loan(),
+            ]
+        ]);
     }
 
     /**

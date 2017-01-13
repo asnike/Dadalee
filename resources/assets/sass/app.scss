@@ -15,6 +15,8 @@
 @import "../vendor/font-awesome/scss/font-awesome";
 @import "../vendor/select2/src/scss/core";
 @import "../vendor/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";
+@import "../vendor/ladda-bootstrap/css/ladda.scss";
+
 
 
 body {
@@ -112,6 +114,31 @@ body{background:#fff;}
   padding-right: 8px;
 }
 
+
 .realestate-list .addr{font-size:12px;}
 .realestate-list .info{float:left;}
 .realestate-list .tools{float:right;}
+
+#realestate-detail .modal-dialog{
+  width:800px;
+}
+
+.modal-tab .modal-header{
+  padding:5px 5px 0 5px;
+  background-color:#f5f5f5;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.modal-tab .nav.nav-tabs{
+  border-bottom:0;
+}
+
+.modal-tab .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+  background-color: #fff;
+  border-bottom-color:transparent;
+}
+.modal-tab .nav-tabs > li > a{
+  background-color: #f5f8fa;
+  border:1px solid #dddddd;
+  color:#555555;
+}

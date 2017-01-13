@@ -20,6 +20,7 @@
   "devDependencies": {
     "select2": "^4.0.3",
     "handlebars": "^4.0.5",
-    "awesome-bootstrap-checkbox": "^0.3.7"
+    "awesome-bootstrap-checkbox": "^0.3.7",
+    "ladda-bootstrap": "^0.1.0"
   }
 }

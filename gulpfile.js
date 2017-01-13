@@ -23,6 +23,8 @@ elixir((mix) => {
         '../vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
         '../vendor/select2/dist/js/select2.js',
         '../vendor/handlebars/handlebars.js',
+        '../vendor/ladda-bootstrap/dist/spin.js',
+        '../vendor/ladda-bootstrap/dist/ladda.js',
         'app.js'
     ], 'public/js/app.js')
     .version([
