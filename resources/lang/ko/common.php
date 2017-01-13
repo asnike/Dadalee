@@ -33,8 +33,27 @@ return [
     'price'=>'매매가',
     'deposit'=>'보증금',
     'monthlyFee'=>'차임',
+    'investment'=>'실투자금',
+    'interestAmount'=>'이자금액',
+    'realErning'=>'실수익금액',
+    'loanAmount'=>'대출금액',
+    'interestRate'=>'대출이율',
+    'repayCommission'=>'중도상환수수료',
+    'unredeemPeriod'=>'거치기간',
+    'repayPeriod'=>'상환기간',
+    'repayMethod'=>'상환방법',
+    'bank'=>'은행',
+    'accountNo'=>'계좌번호',
+    'optionDeal'=>'부수거래',
 
     'own'=>'소유',
     'attension'=>'관심',
 
+    'save'=>'저장',
+    'close'=>'닫기',
+    'realestateDetail'=>'상세',
+
+    'basicInfo'=>'기본정보',
+    'earningRate'=>'수익률',
+    'loan'=>'대출',
 ];

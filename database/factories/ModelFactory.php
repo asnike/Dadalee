@@ -33,3 +33,9 @@ $factory->define(App\RealEstate::class, function(Faker\Generator $faker){
         'user_id'=>11,
     ];
 });
+
+$factory->define(App\RepayMethod::class, function(Faker\Generator $faker){
+    return [
+        'name'=>$faker->name
+    ];
+});
