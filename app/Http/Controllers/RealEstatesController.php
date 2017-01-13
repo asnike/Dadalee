@@ -47,7 +47,7 @@ class RealEstatesController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->id();
-
+        $data['own'] = $request->has('own');
         $realestate = RealEstate::create($data);
 
         return response()->json([

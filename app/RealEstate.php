@@ -8,12 +8,16 @@ class RealEstate extends Model
 {
     //
     protected $table = 'realestates';
+    protected $casts = [
+      'own'=>'boolean',
+    ];
     protected $fillable = [
         'name',
         'address',
         'lat',
         'lng',
         'user_id',
+        'own'
     ];
 
     public function priceTags(){

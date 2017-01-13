@@ -82,7 +82,7 @@
                 }).done(getRealestatesSuccess);
             },
             getRealestatesSuccess = function(data){
-                var i, j, html;
+                var i, j, ownHtml, attensionHtml, realestate;
                 console.log(data);
                 realestates = data.lists;
 
@@ -94,17 +94,31 @@
 
                 var template = Handlebars.compile($('#realestate-list-item').html());
 
-                for(html = '', i = 0, j = data.lists.length ; i < j ; i++){
+                for(ownHtml = attensionHtml = '', i = 0, j = data.lists.length ; i < j ; i++){
+                    realestate = data.lists[i];
                     setMarker(data.lists[i], i == 0);
-                    html += template({
-                        'id':data.lists[i].id,
-                        'name':data.lists[i].name,
-                        'address':data.lists[i].address,
-                    });
+                    if(realestate.own) {
+                        ownHtml += template({
+                            'id': realestate.id,
+                            'name': realestate.name,
+                            'address': realestate.address,
+                        });
+                    }else{
+                        attensionHtml += template({
+                            'id': realestate.id,
+                            'name': realestate.name,
+                            'address': realestate.address,
+                        });
+                    }
                 }
-                $('.realestate-list>.list-group-item').off();
-                $('.realestate-list').html(html);
-                $('.realestate-list>.list-group-item').click(focusRealestate);
+                $('.realestate-own-list>.list-group-item').off();
+                $('.realestate-own-list').html(ownHtml);
+                $('.realestate-own-list>.list-group-item').click(focusRealestate);
+
+                $('.realestate-attension-list>.list-group-item').off();
+                $('.realestate-attension-list').html(attensionHtml);
+                $('.realestate-attension-list>.list-group-item').click(focusRealestate);
+
             },
             showInfo = function(markerData){
                 if(markerData.overlay) return;
