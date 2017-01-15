@@ -18,3 +18,36 @@
 const app = new Vue({
     el: '#app'
 });*/
+
+
+var U = (function(){
+    var init = function(){
+
+    },
+    Form = (function(){
+        var setText = function(sel, val){
+           switch($(sel)[0].tagName) {
+               case 'INPUT':{
+                   if($(sel)[0].type == 'checkbox') $(sel).attr('checked', val);
+                   else $(sel).val(val);
+               }
+               break;
+               case 'DIV':$(sel).html(val);
+               break;
+               case 'TEXTAREA':$(sel).val(val);
+               break;
+           }
+        },
+        setTextWithForm = function(data){
+            for(key in data){
+                setText(key, data[key]);
+            }
+        };
+        return{
+            setTextWithForm:setTextWithForm
+        }
+    })();
+    return {
+        Form:Form
+    }
+})();

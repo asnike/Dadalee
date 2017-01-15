@@ -21,20 +21,26 @@
                         <form class="form-horizontal" action="">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.name') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control"></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="name"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.address') }}</label>
-                                <div class="col-md-6"><input type="text" class="form-control"></div>
+                                <div class="col-md-6"><input type="text" class="form-control" name="address"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4"><div class="checkbox">
-                                        <input id="editOwn" class="styled" type="checkbox">
+                                        <input id="editOwn" class="styled" type="checkbox" name="own">
                                         <label for="editOwn">
                                             {{ trans('common.own') }}
                                         </label>
                                     </div></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for=""></label>
+                                <div class="col-md-4">
+                                    <div class="btn btn-success btn-basic-edit">{{ trans('common.save') }}</div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -67,7 +73,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <div class="btn btn-success">{{ trans('common.save') }}</div>
+                                    <div class="btn btn-success btn-earning-edit">{{ trans('common.save') }}</div>
                                 </div>
                             </div>
                         </form>
@@ -98,7 +104,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.repayMethod') }}</label>
                                 <div class="col-md-4">
-                                    <select name="" id="" class="form-control">
+                                    <select name="repayMethods" id="" class="form-control">
 
                                     </select>
                                 </div>
@@ -120,7 +126,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <div class="btn btn-success">{{ trans('common.save') }}</div>
+                                    <div class="btn btn-success btn-loan-edit">{{ trans('common.save') }}</div>
                                 </div>
                             </div>
                         </form>

@@ -21,3 +21,7 @@
         </div>
     </li>
 </script>
+
+<script id="option-item" type="text/x-handlebars-template">
+    <option value="{{ value }}">{{ name }}</option>
+</script>

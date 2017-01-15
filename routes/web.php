@@ -54,3 +54,7 @@ Auth::routes();
 Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');
 
+Route::get('repaymethods',[
+    'as'=>'repay.methods',
+    'uses'=>'RepayMethodsController@index',
+]);

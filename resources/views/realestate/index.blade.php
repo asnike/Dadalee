@@ -6,7 +6,9 @@
 
     <script>
         var Controller = (function(){
-            var map, realestates, markers = [], searchedInfo, init = function(){
+            var map, realestates, markers = [], searchedInfo,
+                repayMethods,
+            init = function(){
                 initMap();
                 getRealestates();
                 initBtnTab();
@@ -111,7 +113,7 @@
                         });
                     }
                 }
-<<<<<<< HEAD
+
                 $('.realestate-own-list>.list-group-item').off();
                 $('.realestate-own-list').html(ownHtml);
                 $('.realestate-own-list>.list-group-item').click(focusRealestate);
@@ -120,13 +122,11 @@
                 $('.realestate-attension-list').html(attensionHtml);
                 $('.realestate-attension-list>.list-group-item').click(focusRealestate);
 
-=======
-                $('.realestate-list>.list-group-item').off();
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').off();
-                $('.realestate-list').html(html);
                 $('.realestate-list>.list-group-item').click(focusRealestate);
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').click(openDetailModal);
->>>>>>> 69f1b295410a4214a3900e879fb33f437bbb6414
+
+
             },
             showInfo = function(markerData){
                 if(markerData.overlay) return;
@@ -186,8 +186,37 @@
                 }).done(function(data){
                     console.log(data);
                     l.stop();
+
+                    if(repayMethods){
+                        repayMethodsRender();
+                    }else{
+                        $.ajax({
+                            type:'GET',
+                            url:'/repaymethods',
+                            headers:{
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        }).done(function(data) {
+                            repayMethods = data.lists;
+                            repayMethodsRender();
+                        });
+                    }
+
+                    U.Form.setTextWithForm({
+                        '#basicPanel input[name="name"]':data.data.realestate.name,
+                        '#basicPanel input[name="address"]':data.data.realestate.address,
+                        '#basicPanel input[name="own"]':data.data.realestate.own,
+                    });
+
                     $('#realestate-detail').modal();
                 });
+            },
+            repayMethodsRender = function(){
+                var html, i, j, template = Handlebars.compile($('#option-item').html());
+                for(html = [], i = 0, j = repayMethods.length ; i < j ; i++){
+                    html[html.length] = template({value:repayMethods[i].id, name:repayMethods[i].name});
+                }
+                $('select[name="repayMethods"]').html(html.join(''));
             };
             init();
             return {

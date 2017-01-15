@@ -15,6 +15,10 @@ class RepayMethodsController extends Controller
     public function index()
     {
         //
+        return response()->json([
+            'result'=>1,
+            'lists'=>RepayMethod::all()
+        ]);
     }
 
     /**
@@ -36,6 +40,7 @@ class RepayMethodsController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
