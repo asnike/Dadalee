@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="realestate-detail">
+<div class="modal fade" tabindex="-1" role="dialog" id="realestate-detail" data-backdrop="static">
     <div class="modal-dialog modal-tab">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,7 +25,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.address') }}</label>
-                                <div class="col-md-6"><input type="text" class="form-control" name="address"></div>
+                                <div class="col-md-6"><input readonly onfocus="daumAddressOpen()" type="text" class="form-control" name="address"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
@@ -48,27 +48,27 @@
                         <form class="form-horizontal" action="">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.price') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="price" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.deposit') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="deposit" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.monthlyFee') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control"></div>
+                                <div class="col-md-4"><input name="monthly_fee" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.investment') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" readonly></div>
+                                <div class="col-md-4"><input name="investment" type="text" class="form-control" readonly></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestAmount') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="interest_amount"  type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.realErning') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" readonly></div>
+                                <div class="col-md-4"><input name="real_earning" type="text" class="form-control" readonly></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
@@ -83,43 +83,43 @@
                         <form class="form-horizontal" action="">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.loanAmount') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="amount" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestRate') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="interest_rate" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.repayCommission') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="repay_commission" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.unredeemPeriod') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control"></div>
+                                <div class="col-md-4"><input name="unredeem_period" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.repayPeriod') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="repay_period" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.repayMethod') }}</label>
                                 <div class="col-md-4">
-                                    <select name="repayMethods" id="" class="form-control">
+                                    <select name="repay_method_id" id="" class="form-control">
 
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.bank') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control"></div>
+                                <div class="col-md-4"><input name="bank" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.accountNo') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" readonly></div>
+                                <div class="col-md-4"><input name="account_no" type="text" class="form-control" readonly></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.optionDeal') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control"></div>
+                                <div class="col-md-4"><input name="options" type="text" class="form-control"></div>
                             </div>
 
 
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('common.close') }}</button>
+                <button type="button" class="btn btn-default btn-close">{{ trans('common.close') }}</button>
             </div>
         </div>
     </div>

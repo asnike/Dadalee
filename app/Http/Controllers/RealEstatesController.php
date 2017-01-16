@@ -98,9 +98,24 @@ class RealEstatesController extends Controller
      * @param  \App\RealEstate  $realEstate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RealEstate $realEstate)
+    public function update(Request $request, $id)
     {
         //
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+        $data['own'] = $request->has('own');
+        $realestate = RealEstate::findOrFail($id);
+        $realestate->update($data);
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'realestate'=>$realEstate,
+                'earningrate'=>$realEstate->earningRate(),
+                'loan'=>$realEstate->loan(),
+            ],
+            'msg'=>trans('common.realestate_add_success')
+        ]);
     }
 
     /**

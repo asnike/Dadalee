@@ -6,19 +6,34 @@
 
     <script>
         var Controller = (function(){
-            var map, realestates, markers = [], searchedInfo,
+            var map, realestates, markers = [], searchedInfo = {}, selectedData = {},
                 repayMethods,
             init = function(){
                 initMap();
                 getRealestates();
-                initBtnTab();
+                initDetailModal();
             },
-            initBtnTab = function(){
+            initDetailModal = function(){
                 $('.btn-tab').click(function(e){
                     $('.btn-tab>.btn').removeClass('active');
                     $(e.target).addClass('active');
                 });
-            }
+
+                $('.btn-close').click(function(e){
+                    U.global.isDetailModalOpened = false;
+                    $('#realestate-detail').modal('hide');
+                });
+
+                $('.btn-basic-edit').click(basicInfoEdit);
+            },
+            basicInfoEdit = function(e){
+                var data = U.Form.getValueWithForm('#basicPanel');
+                data = $.extend(data, {method:'POST', lat:searchedInfo.lat, lng:searchedInfo.lng, '_method':'put'});
+                console.log('data : ',data);
+                U.http(function(data){
+                    U.Modal.alert(data.msg);
+                }, '/realestates/' + selectedData.id, data);
+            },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
                     mapOption = {
@@ -32,26 +47,13 @@
                     addr = $('#addr').val(),
                     own = $('#own').is(':checked');
                 if(name && addr){
-                    $.ajax({
-                        dataType: 'json',
-                        cache: false,
-                        type:'POST',
-                        url:'/realestates',
-                        headers:{
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data:{
-                            name:name,
-                            address:searchedInfo.title + (searchedInfo.buildingAddress ? searchedInfo.buildingAddress : ''),
-                            lat:searchedInfo.lat,
-                            lng:searchedInfo.lng,
-                            own:own,
-                        }
-                    }).done(function(){
-                        console.log('added!!');
-                        //setMarker(searchedInfo.lat, searchedInfo.lng, true);
-
-                        getRealestates();
+                    U.http(getRealestates, '/realestates', {
+                        method:'POST',
+                        name:name,
+                        address:searchedInfo.title + (searchedInfo.buildingAddress ? searchedInfo.buildingAddress : ''),
+                        lat:searchedInfo.lat,
+                        lng:searchedInfo.lng,
+                        own:own,
                     });
                 }
                 return false;
@@ -72,16 +74,7 @@
 
             },
             getRealestates = function(){
-                $.ajax({
-                    type:'GET',
-                    url:'/realestates',
-                    headers:{
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data:{
-
-                    }
-                }).done(getRealestatesSuccess);
+                U.http(getRealestatesSuccess, '/realestates', {method:'GET'});
             },
             getRealestatesSuccess = function(data){
                 var i, j, ownHtml, attensionHtml, realestate;
@@ -177,46 +170,64 @@
             openDetailModal = function(e){
                 var l = Ladda.create(this);
                 l.start();
-                $.ajax({
-                    type:'GET',
-                    url:'/realestates/' + $(this).attr('data-id') + '/edit',
-                    headers:{
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                }).done(function(data){
+
+                U.http(function(data){
                     console.log(data);
                     l.stop();
+                    selectedData = data;
+                    searchedInfo.lat = data.data.realestate.lat,
+                    searchedInfo.lng = data.data.realestate.lng;
 
                     if(repayMethods){
                         repayMethodsRender();
                     }else{
-                        $.ajax({
-                            type:'GET',
-                            url:'/repaymethods',
-                            headers:{
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        }).done(function(data) {
+                        U.http(function(data) {
                             repayMethods = data.lists;
                             repayMethodsRender();
-                        });
+                        }, '/repaymethods', {method:'GET'});
                     }
 
                     U.Form.setTextWithForm({
                         '#basicPanel input[name="name"]':data.data.realestate.name,
                         '#basicPanel input[name="address"]':data.data.realestate.address,
                         '#basicPanel input[name="own"]':data.data.realestate.own,
-                    });
 
+
+                    });
+                    if(data.data.earningrate){
+                        U.Form.setTextWithForm({
+                            '#earningPanel input[name="price"]':data.data.earningrate.price,
+                            '#earningPanel input[name="deposit"]':data.data.earningrate.deposit,
+                            '#earningPanel input[name="monthly_fee"]':data.data.earningrate.monthlyfee,
+                            '#earningPanel input[name="investment"]':data.data.earningrate.investment,
+                            '#earningPanel input[name="interest_amount"]':data.data.earningrate.interest_amount,
+                            '#earningPanel input[name="real_earning"]':data.data.earningrate.real_earning,
+                        });
+                    }
+                    if(data.data.loan){
+                        U.Form.setTextWithForm({
+                            '#loanPanel input[name="amount"]':data.data.loan.amount,
+                            '#loanPanel input[name="interest_rate"]':data.data.loan.interest_rate,
+                            '#loanPanel input[name="repay_commission"]':data.data.loan.repay_commission,
+                            '#loanPanel input[name="unredeem_period"]':data.data.loan.unredeem_period,
+                            '#loanPanel input[name="repay_period"]':data.data.loan.repay_period,
+                            '#loanPanel select[name="repay_method_id"]':data.data.loan.repay_method_id,
+                            '#loanPanel input[name="bank"]':data.data.loan.bank,
+                            '#loanPanel input[name="account_no"]':data.data.loan.account_no,
+                            '#loanPanel input[name="options"]':data.data.loan.options,
+                        });
+                    }
+
+                    U.global.isDetailModalOpened = true;
                     $('#realestate-detail').modal();
-                });
+                }, '/realestates/' + $(this).attr('data-id') + '/edit', {method:'GET'});
             },
             repayMethodsRender = function(){
                 var html, i, j, template = Handlebars.compile($('#option-item').html());
                 for(html = [], i = 0, j = repayMethods.length ; i < j ; i++){
                     html[html.length] = template({value:repayMethods[i].id, name:repayMethods[i].name});
                 }
-                $('select[name="repayMethods"]').html(html.join(''));
+                $('select[name="repay_method_id"]').html(html.join(''));
             };
             init();
             return {

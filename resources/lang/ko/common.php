@@ -56,4 +56,11 @@ return [
     'basicInfo'=>'기본정보',
     'earningRate'=>'수익률',
     'loan'=>'대출',
+
+    'ok'=>'확인',
+    'alert'=>'알림',
+    'confirm'=>'확인',
+
+    'realestate_add_success'=>'추가했습니다.',
+    'realestate_edit_success'=>'수정했습니다.',
 ];
