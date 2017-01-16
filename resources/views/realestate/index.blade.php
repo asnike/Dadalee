@@ -174,7 +174,7 @@
                 U.http(function(data){
                     console.log(data);
                     l.stop();
-                    selectedData = data;
+                    selectedData = data.data;
                     searchedInfo.lat = data.data.realestate.lat,
                     searchedInfo.lng = data.data.realestate.lng;
 
