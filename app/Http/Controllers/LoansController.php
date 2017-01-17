@@ -98,9 +98,18 @@ class LoansController extends Controller
      * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Loan $loan)
+    public function update(Request $request, $id)
     {
         //
+        $loan = Loan::findOrFail($id);
+        $loan->update($request->all());
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'id'=>$loan->id,
+            ]
+        ]);
     }
 
     /**

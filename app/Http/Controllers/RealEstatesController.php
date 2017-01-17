@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EarningRate;
 use App\RealEstate;
 use Illuminate\Http\Request;
 
@@ -110,9 +111,9 @@ class RealEstatesController extends Controller
         return response()->json([
             'result'=>1,
             'data'=>[
-                'realestate'=>$realEstate,
-                'earningrate'=>$realEstate->earningRate(),
-                'loan'=>$realEstate->loan(),
+                'realestate'=>$realestate,
+                'earningrate'=>$realestate->earningRate(),
+                'loan'=>$realestate->loan(),
             ],
             'msg'=>trans('common.realestate_add_success')
         ]);
@@ -124,8 +125,79 @@ class RealEstatesController extends Controller
      * @param  \App\RealEstate  $realEstate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RealEstate $realEstate)
+    public function destroy($id)
     {
         //
+        $realestate = RealEstate::findOrFail($id);
+        $realestate->earningRate()->delete();
+        $realestate->lona()->delete();
+        $realestate->delete();
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'id'=>$id
+            ]
+        ]);
+    }
+
+    public function earning(Request $request, $id){
+        $realestate = RealEstate::findOrFail($id);
+        $earningRate = $realestate->earningRate();
+        if($earningRate){
+            $earningRate->update($request->all());
+        }else{
+            $data = array_merge($request->all(), ['realestate_id'=>$realestate->id]);
+            $earningRate->create($data);
+        }
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'id'=>$realestate->id,
+                'earningrate'=>$realestate->earningRate()
+            ],
+            'msg'=>trans('common.realestate_add_success')
+        ]);
+    }
+
+    public function loan(Request $request, $id){
+        $realestate = RealEstate::findOrFail($id);
+        $loan = $realestate->loan();
+        if($loan){
+            $loan->update($request->all());
+        }else{
+            $data = array_merge($request->all(), ['realestate_id'=>$realestate->id]);
+            $loan->create($data);
+        }
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'id'=>$realestate->id,
+                'loan'=>$realestate->loan()
+            ],
+            'msg'=>trans('common.realestate_add_success')
+        ]);
+    }
+
+    public function tenant(Request $request, $id){
+        $realestate = RealEstate::findOrFail($id);
+        $tenant = $realestate->tenant();
+        if($tenant){
+            $tenant->update($request->all());
+        }else{
+            $data = array_merge($request->all(), ['realestate_id'=>$realestate->id]);
+            $tenant->create($data);
+        }
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'id'=>$realestate->id,
+                'tenant'=>$realestate->tenant()
+            ],
+            'msg'=>trans('common.realestate_add_success')
+        ]);
     }
 }

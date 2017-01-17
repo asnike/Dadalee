@@ -52,6 +52,17 @@ Route::group(['prefix' => 'auth', 'as' => 'session.'], function(){
 Auth::routes();
 
 Route::resource('realestates', 'RealEstatesController');
+Route::group(['prefix'=>'realestate', 'as'=>'realestate.'], function(){
+    Route::patch('{id}/earning', [
+        'as'=>'earning.update',
+        'uses'=>'RealEstatesController@earning'
+    ]);
+    Route::patch('{id}/loan', [
+        'as'=>'loan.update',
+        'uses'=>'RealEstatesController@loan'
+    ]);
+});
+
 Route::resource('pricetags', 'PriceTagsController');
 
 Route::get('repaymethods',[

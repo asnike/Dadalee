@@ -29,4 +29,7 @@ class RealEstate extends Model
     public function loan(){
         return $this->hasOne('App\Loan', 'realestate_id');
     }
+    public function tenant(){
+        return $this->hasOne('App\Tenant', 'realestate_id');
+    }
 }

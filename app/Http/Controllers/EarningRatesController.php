@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EarningRate;
+use App\RealEstate;
 use Illuminate\Http\Request;
 
 class EarningRatesController extends Controller
@@ -96,9 +97,11 @@ class EarningRatesController extends Controller
      * @param  \App\EarningRate  $earningRate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EarningRate $earningRate)
+    public function update(Request $request, $id)
     {
         //
+        $earningRate = EarningRate::findOrFail($id);
+
         $earningRate->update($request->all());
 
         return response()->json([
