@@ -191,12 +191,6 @@ class RealEstatesController extends Controller
     public function tradePrice(Request $request){
         $client = new Client();
         $res = $client->get('http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade?serviceKey=zuAaDK5U8Aq8gEqZqUMJtdrh8EqsfFyJbLJhWXF8Qizu53BgkMSDjNSCixt30QNPx%2Bk5oea4im7bYVSBsR%2BS2A%3D%3D&LAWD_CD=28245&DEAL_YMD=201612');
-
-
-        //$parser->payload();
         dd(Parser::xml($res->getBody()));
-    }
-    public function trade(Request $request){
-        echo 'trade';
     }
 }

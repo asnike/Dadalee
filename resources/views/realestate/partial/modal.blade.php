@@ -36,6 +36,27 @@
                                         </label>
                                     </div></div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="">{{ trans('common.floor') }}</label>
+                                <div class="col-md-4"><input type="text" class="form-control" name="floor"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="">{{ trans('common.built') }}</label>
+                                <div class="col-md-4"><input type="text" class="form-control" name="completed_at"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="">{{ trans('common.exclusiveSize') }}</label>
+                                <div class="col-md-4"><input type="text" class="form-control" name="exclusive_size"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="">{{ trans('common.memo') }}</label>
+                                <div class="col-md-4"><textarea rows="3" class="form-control" name="memo"></textarea></div>
+                            </div>
+
+
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">

@@ -31,3 +31,7 @@
         </div>
     </div>
 </div>
+
+<div class="block" id="block">
+    <div class="loader"></div>
+</div>

@@ -28,6 +28,7 @@ var U = (function(){
         var type = data.method;
         delete data.method;
         console.log('http data:', data);
+        U.Modal.blockOpen();
         $.ajax({
             type:type,
             url:url,
@@ -35,7 +36,10 @@ var U = (function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data:data
-        }).done(end);
+        }).done(function(data){
+            U.Modal.blockClose();
+            end(data);
+        });
     },
     Form = (function(){
         var setText = function(sel, val){
@@ -95,9 +99,22 @@ var U = (function(){
         var alert = function (msg) {
             $('#alert .modal-body>.contents').html(msg);
             $('#alert').modal();
+        },
+        confirm = function(opt) {
+            $('#confirm .modal-body>.contents').html(opt.msg);
+            $('#confirm').modal();
+        },
+        blockOpen = function(){
+            $('#block').fadeIn();
+        },
+        blockClose = function(){
+            $('#block').fadeOut();
         };
         return {
-            alert:alert
+            alert:alert,
+            confirm:confirm,
+            blockOpen:blockOpen,
+            blockClose:blockClose,
         }
     })();
     return {

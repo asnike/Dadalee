@@ -15,9 +15,13 @@ require('laravel-elixir-vue-2');
 
 elixir((mix) => {
     mix.sass('app.scss', 'resources/assets/css')
+    .sass('admin.scss', 'resources/assets/css')
     .styles([
         'app.css'
     ], 'public/css/app.css')
+    .styles([
+    'admin.css'
+    ], 'public/css/admin.css')
     .scripts([
         '../vendor/jquery/dist/jquery.js',
         '../vendor/bootstrap-sass/assets/javascripts/bootstrap.js',
@@ -29,6 +33,7 @@ elixir((mix) => {
     ], 'public/js/app.js')
     .version([
         'css/app.css',
+        'css/admin.css',
         'js/app.js'
     ])
     .copy("resources/assets/vendor/font-awesome/fonts", 'public/build/fonts');

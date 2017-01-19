@@ -215,8 +215,6 @@
                         '#basicPanel input[name="name"]':realestate.name,
                         '#basicPanel input[name="address"]':realestate.address,
                         '#basicPanel input[name="own"]':realestate.own,
-
-
                     });
                     if(realestate.earning_rate){
                         U.Form.setTextWithForm({
