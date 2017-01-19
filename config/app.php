@@ -168,7 +168,7 @@ return [
          */
         \Laravel\Socialite\SocialiteServiceProvider::Class,
         \Laracasts\Flash\FlashServiceProvider::class,
-
+        Nathanmac\Utilities\Parser\ParserServiceProvider::class,
         //
 
         /*
@@ -230,6 +230,7 @@ return [
 
         'Socialite'=>\Laravel\Socialite\Facades\Socialite::Class,
         'Flash'=>\Laracasts\Flash\Flash::class,
+        'Parser' => Nathanmac\Utilities\Parser\Facades\Parser::class,
     ],
 
 ];

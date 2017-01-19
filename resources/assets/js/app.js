@@ -82,7 +82,7 @@ var U = (function(){
                     case 'TEXTAREA':val = $(sel).val();
                         break;
                 }
-                data[el.name] = val;
+                if(val) data[el.name] = val;
             }
             return data;
         };
@@ -90,10 +90,22 @@ var U = (function(){
             setTextWithForm:setTextWithForm,
             getValueWithForm:getValueWithForm,
         }
+    })(),
+    Modal = (function(){
+        var alert = function (msg) {
+            $('#alert .modal-body>.contents').html(msg);
+            $('#alert').modal();
+        };
+        return {
+            alert:alert
+        }
     })();
     return {
         Form:Form,
+        Modal:Modal,
+
         http:http,
         global:global,
+
     }
 })();

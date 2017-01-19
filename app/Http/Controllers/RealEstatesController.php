@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\EarningRate;
+use App\Loan;
 use App\RealEstate;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Nathanmac\Utilities\Parser\Facades\Parser;
 
 class RealEstatesController extends Controller
 {
@@ -86,8 +89,6 @@ class RealEstatesController extends Controller
             'result'=>1,
             'data'=>[
                 'realestate'=>$realEstate,
-                'earningrate'=>$realEstate->earningRate(),
-                'loan'=>$realEstate->loan(),
             ]
         ]);
     }
@@ -112,8 +113,6 @@ class RealEstatesController extends Controller
             'result'=>1,
             'data'=>[
                 'realestate'=>$realestate,
-                'earningrate'=>$realestate->earningRate(),
-                'loan'=>$realestate->loan(),
             ],
             'msg'=>trans('common.realestate_add_success')
         ]);
@@ -143,19 +142,13 @@ class RealEstatesController extends Controller
 
     public function earning(Request $request, $id){
         $realestate = RealEstate::findOrFail($id);
-        $earningRate = $realestate->earningRate();
-        if($earningRate){
-            $earningRate->update($request->all());
-        }else{
-            $data = array_merge($request->all(), ['realestate_id'=>$realestate->id]);
-            $earningRate->create($data);
-        }
+        $earningRate = EarningRate::updateOrCreate(['realestate_id'=>$id], $request->except(['_method']));
 
         return response()->json([
             'result'=>1,
             'data'=>[
                 'id'=>$realestate->id,
-                'earningrate'=>$realestate->earningRate()
+                'earningrate'=>$earningRate
             ],
             'msg'=>trans('common.realestate_add_success')
         ]);
@@ -163,19 +156,13 @@ class RealEstatesController extends Controller
 
     public function loan(Request $request, $id){
         $realestate = RealEstate::findOrFail($id);
-        $loan = $realestate->loan();
-        if($loan){
-            $loan->update($request->all());
-        }else{
-            $data = array_merge($request->all(), ['realestate_id'=>$realestate->id]);
-            $loan->create($data);
-        }
+        $loan = Loan::updateOrCreate(['realestate_id'=>$id], $request->except(['_method']));
 
         return response()->json([
             'result'=>1,
             'data'=>[
                 'id'=>$realestate->id,
-                'loan'=>$realestate->loan()
+                'loan'=>$loan
             ],
             'msg'=>trans('common.realestate_add_success')
         ]);
@@ -185,9 +172,9 @@ class RealEstatesController extends Controller
         $realestate = RealEstate::findOrFail($id);
         $tenant = $realestate->tenant();
         if($tenant){
-            $tenant->update($request->all());
+            $tenant->update($request->except(['_method']));
         }else{
-            $data = array_merge($request->all(), ['realestate_id'=>$realestate->id]);
+            $data = array_merge($request->except(['_method']), ['realestate_id'=>$realestate->id]);
             $tenant->create($data);
         }
 
@@ -199,5 +186,17 @@ class RealEstatesController extends Controller
             ],
             'msg'=>trans('common.realestate_add_success')
         ]);
+    }
+
+    public function tradePrice(Request $request){
+        $client = new Client();
+        $res = $client->get('http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade?serviceKey=zuAaDK5U8Aq8gEqZqUMJtdrh8EqsfFyJbLJhWXF8Qizu53BgkMSDjNSCixt30QNPx%2Bk5oea4im7bYVSBsR%2BS2A%3D%3D&LAWD_CD=28245&DEAL_YMD=201612');
+
+
+        //$parser->payload();
+        dd(Parser::xml($res->getBody()));
+    }
+    public function trade(Request $request){
+        echo 'trade';
     }
 }

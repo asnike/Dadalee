@@ -25,6 +25,8 @@
                 });
 
                 $('.btn-basic-edit').click(basicInfoEdit);
+                $('.btn-earning-edit').click(earningInfoEdit);
+                $('.btn-loan-edit').click(loanInfoEdit);
             },
             basicInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#basicPanel');
@@ -33,6 +35,22 @@
                 U.http(function(data){
                     U.Modal.alert(data.msg);
                 }, '/realestates/' + selectedData.id, data);
+            },
+            earningInfoEdit = function(e){
+                var data = U.Form.getValueWithForm('#earningPanel');
+                data = $.extend(data, {method:'POST','_method':'put'});
+                console.log('data : ',data);
+                U.http(function(data){
+                    U.Modal.alert(data.msg);
+                }, '/realestates/' + selectedData.id + '/earning', data);
+            },
+            loanInfoEdit = function(e){
+                var data = U.Form.getValueWithForm('#earningPanel');
+                    data = $.extend(data, {method:'POST','_method':'patch'});
+                console.log('data : ',data);
+                U.http(function(data){
+                    U.Modal.alert(data.msg);
+                }, '/realestates/' + selectedData.id + '/loan', data);
             },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
@@ -116,8 +134,10 @@
                 $('.realestate-attension-list>.list-group-item').click(focusRealestate);
 
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').off();
+                $('.realestate-list>.list-group-item>.tools>.btn-price').off();
                 $('.realestate-list>.list-group-item').click(focusRealestate);
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').click(openDetailModal);
+                $('.realestate-list>.list-group-item>.tools>.btn-price').click(openPriceModal);
 
 
             },
@@ -167,16 +187,20 @@
                 overlay.setMap(null);
                 markers[i].overlay = overlay = null;
             },
+            openPriceModal = function(e){
+                U.http(function(data){ console.log('price : ', data) },'/realestates/tradeprice', {method:'GET'});
+            },
             openDetailModal = function(e){
                 var l = Ladda.create(this);
                 l.start();
 
                 U.http(function(data){
+                    realestate = data.data.realestate;
                     console.log(data);
                     l.stop();
-                    selectedData = data.data;
-                    searchedInfo.lat = data.data.realestate.lat,
-                    searchedInfo.lng = data.data.realestate.lng;
+                    selectedData = realestate;
+                    searchedInfo.lat = realestate.lat,
+                    searchedInfo.lng = realestate.lng;
 
                     if(repayMethods){
                         repayMethodsRender();
@@ -188,33 +212,33 @@
                     }
 
                     U.Form.setTextWithForm({
-                        '#basicPanel input[name="name"]':data.data.realestate.name,
-                        '#basicPanel input[name="address"]':data.data.realestate.address,
-                        '#basicPanel input[name="own"]':data.data.realestate.own,
+                        '#basicPanel input[name="name"]':realestate.name,
+                        '#basicPanel input[name="address"]':realestate.address,
+                        '#basicPanel input[name="own"]':realestate.own,
 
 
                     });
-                    if(data.data.earningrate){
+                    if(realestate.earning_rate){
                         U.Form.setTextWithForm({
-                            '#earningPanel input[name="price"]':data.data.earningrate.price,
-                            '#earningPanel input[name="deposit"]':data.data.earningrate.deposit,
-                            '#earningPanel input[name="monthly_fee"]':data.data.earningrate.monthlyfee,
-                            '#earningPanel input[name="investment"]':data.data.earningrate.investment,
-                            '#earningPanel input[name="interest_amount"]':data.data.earningrate.interest_amount,
-                            '#earningPanel input[name="real_earning"]':data.data.earningrate.real_earning,
+                            '#earningPanel input[name="price"]':realestate.earning_rate.price,
+                            '#earningPanel input[name="deposit"]':realestate.earning_rate.deposit,
+                            '#earningPanel input[name="monthlyfee"]':realestate.earning_rate.monthlyfee,
+                            '#earningPanel input[name="investment"]':realestate.earning_rate.investment,
+                            '#earningPanel input[name="interest_amount"]':realestate.earning_rate.interest_amount,
+                            '#earningPanel input[name="real_earning"]':realestate.earning_rate.real_earning,
                         });
                     }
-                    if(data.data.loan){
+                    if(realestate.loan){
                         U.Form.setTextWithForm({
-                            '#loanPanel input[name="amount"]':data.data.loan.amount,
-                            '#loanPanel input[name="interest_rate"]':data.data.loan.interest_rate,
-                            '#loanPanel input[name="repay_commission"]':data.data.loan.repay_commission,
-                            '#loanPanel input[name="unredeem_period"]':data.data.loan.unredeem_period,
-                            '#loanPanel input[name="repay_period"]':data.data.loan.repay_period,
-                            '#loanPanel select[name="repay_method_id"]':data.data.loan.repay_method_id,
-                            '#loanPanel input[name="bank"]':data.data.loan.bank,
-                            '#loanPanel input[name="account_no"]':data.data.loan.account_no,
-                            '#loanPanel input[name="options"]':data.data.loan.options,
+                            '#loanPanel input[name="amount"]':realestate.loan.amount,
+                            '#loanPanel input[name="interest_rate"]':realestate.loan.interest_rate,
+                            '#loanPanel input[name="repay_commission"]':realestate.loan.repay_commission,
+                            '#loanPanel input[name="unredeem_period"]':realestate.loan.unredeem_period,
+                            '#loanPanel input[name="repay_period"]':realestate.loan.repay_period,
+                            '#loanPanel select[name="repay_method_id"]':realestate.loan.repay_method_id,
+                            '#loanPanel input[name="bank"]':realestate.loan.bank,
+                            '#loanPanel input[name="account_no"]':realestate.loan.account_no,
+                            '#loanPanel input[name="options"]':realestate.loan.options,
                         });
                     }
 

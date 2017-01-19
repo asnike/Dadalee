@@ -56,7 +56,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.monthlyFee') }}</label>
-                                <div class="col-md-4"><input name="monthly_fee" type="text" class="form-control"></div>
+                                <div class="col-md-4"><input name="monthlyfee" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.investment') }}</label>

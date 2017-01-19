@@ -51,17 +51,27 @@ Route::group(['prefix' => 'auth', 'as' => 'session.'], function(){
 });
 Auth::routes();
 
-Route::resource('realestates', 'RealEstatesController');
-Route::group(['prefix'=>'realestate', 'as'=>'realestate.'], function(){
-    Route::patch('{id}/earning', [
+
+Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
+    Route::get('tradeprice', [
+        'as'=>'trade.price',
+        'uses'=>'RealEstatesController@tradePrice'
+    ]);
+    Route::put('{id}/earning', [
         'as'=>'earning.update',
         'uses'=>'RealEstatesController@earning'
     ]);
-    Route::patch('{id}/loan', [
+    Route::put('{id}/loan', [
         'as'=>'loan.update',
         'uses'=>'RealEstatesController@loan'
     ]);
+    Route::put('{id}/tenant', [
+        'as'=>'tenant.update',
+        'uses'=>'RealEstatesController@tenant'
+    ]);
 });
+Route::resource('realestates', 'RealEstatesController');
+
 
 Route::resource('pricetags', 'PriceTagsController');
 
@@ -69,3 +79,9 @@ Route::get('repaymethods',[
     'as'=>'repay.methods',
     'uses'=>'RepayMethodsController@index',
 ]);
+
+Route::get('tradeprice', [
+    'as'=>'trade.price',
+    'uses'=>'RealEstatesController@tradePrice'
+]);
+

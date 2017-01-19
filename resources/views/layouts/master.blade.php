@@ -31,6 +31,7 @@
   @include('layouts.partial.footer')
 
   <script src="{{ elixir("js/app.js") }}"></script>
+  @include('layouts.partial.modal')
   @yield('script')
 </body>
 
