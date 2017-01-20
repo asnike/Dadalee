@@ -85,19 +85,26 @@ Route::get('tradeprice', [
     'uses'=>'RealEstatesController@tradePrice'
 ]);
 
-Route::group(['prefix'=>'admin', 'as'=>'admin.'], function() {
-    Route::group(['prefix' => 'auth', 'as' => 'session.'], function(){
-        Route::get('login', [
-            'as' => 'create',
-            'uses'=>'Auth\LoginController@showLoginForm'
-        ]);
-        Route::post('login', [
-            'as' => 'store',
-            'uses'=>'Auth\LoginController@login'
-        ]);
-        Route::get('logout', [
-            'as' => 'destroy',
-            'uses'=>'Auth\LoginController@logout'
-        ]);
-    });
+
+/*admin*/
+Route::group(['prefix' => 'admin/auth', 'as' => 'admin.session.'], function(){
+    Route::get('login', [
+        'as' => 'create',
+        'uses'=>'Auth\AdminLoginController@showLoginForm'
+    ]);
+    Route::post('login', [
+        'as' => 'store',
+        'uses'=>'Auth\AdminLoginController@login'
+    ]);
+    Route::get('logout', [
+        'as' => 'destroy',
+        'uses'=>'Auth\AdminLoginController@logout'
+    ]);
+});
+
+Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware'=>['admin']], function() {
+    Route::get('dashboard', [
+       'as'=>'dashboard',
+        'uses'=>'Admin\DashboardsController@index'
+    ]);
 });

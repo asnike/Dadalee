@@ -14,8 +14,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $casts = [
+        'is_admin'=>'boolean',
+    ];
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -29,5 +32,8 @@ class User extends Authenticatable
 
     public function realestates(){
         return $this->hasMany('App\RealEstate');
+    }
+    public function isAdmin(){
+        return $this->is_admin;
     }
 }

@@ -24,6 +24,20 @@ class DatabaseSeeder extends Seeder
         App\RealEstate::truncate();
         factory(App\RealEstate::class, 10)->create();
         $this->command->info('realestates table seeded');*/
+        App\User::truncate();
+        factory(App\User::class)->create([
+            'name'=>'asnike',
+            'email'=>'asnike@notefolio.net',
+            'password'=>bcrypt('111111'),
+            'is_admin'=>1,
+        ]);
+        factory(App\User::class)->create([
+            'name'=>'ruudnike',
+            'email'=>'ruudnike@gmail.com',
+            'password'=>bcrypt('111111'),
+            'is_admin'=>0,
+        ]);
+
         App\RepayMethod::truncate();
         factory(App\RepayMethod::class)->create([
             'name'=>'원리금균등상환',

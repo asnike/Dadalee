@@ -12135,18 +12135,12 @@ body {
   background: #fff;
 }
 
-.logo-txt {
-  font-size: 22px;
-  line-height: 42px;
-  padding-left: 15px;
-}
-
 .navbar-default {
   border-color: #ddd;
 }
 
 .contents {
-  margin-top: 50px;
+  margin-top: 64px;
 }
 
 .panel-default, .panel-default > .panel-heading {
@@ -12210,7 +12204,7 @@ body {
 }
 
 .login.panel, .register.panel {
-  margin: 0px 0 200px 0;
+  margin: 150px 0 200px 0;
 }
 
 .checkbox label::before {

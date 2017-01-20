@@ -20,15 +20,32 @@
 </head>
 
 <body>
-  @include('layouts.partial.navigation')
-
+  @include('admin.layouts.partial.navigation')
   @include('layouts.partial.flash_message')
+  <div class="container-fluid contents">
 
-  <div class="container contents">
-    @yield('content')
+    <div class="row">
+      @if(! auth()->check())
+        <div class="col-sm-12 col-md-12 main">
+          @yield('content')
+        </div>
+      @else
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          @yield('content')
+        </div>
+      @endif
+    </div>
   </div>
 
-  @include('layouts.partial.footer')
+  @include('admin.layouts.partial.footer')
 
   <script src="{{ elixir("js/app.js") }}"></script>
   @include('layouts.partial.modal')

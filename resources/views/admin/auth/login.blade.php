@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 <div class="container">
@@ -53,19 +53,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ trans('common.login') }}
                                 </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    {{ trans('common.forgetPassword') }}
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label"></label>
-                            <div class="col-md-6">
-                                <a class="btn btn-default btn-block btn-fb" href="{{ route('session.fb.login') }}">
-                                    <strong><i class="fa fa-facebook icon"></i> {{ trans('common.loginWithFacebook') }}</strong>
-                                </a>
                             </div>
                         </div>
                     </form>
