@@ -17,11 +17,6 @@
                     <a href="{{ route('admin.session.create') }}"><strong>{{ trans('common.login') }}</strong></a>
                 </li>
                 @else
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
-
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-user icon"></i> {{ auth()->user()->name }} <b class="caret"></b>

@@ -69,4 +69,7 @@ return [
 
     'realestate_add_success'=>'추가했습니다.',
     'realestate_edit_success'=>'수정했습니다.',
+    
+    'manageMember'=>'회원 관리',
+    'manageData'=>'데이터 관리',
 ];
