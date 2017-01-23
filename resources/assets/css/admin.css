@@ -12304,4 +12304,8 @@ body {
   }
 }
 
+.sidebar {
+  position: fixed !important;
+}
+
 /*# sourceMappingURL=admin.css.map */

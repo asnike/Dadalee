@@ -150,3 +150,7 @@ body{background:#fff;}
 .loader {
   @include loader02($align: middle, $color: #fff);
 }
+
+.sidebar{
+  position:fixed !important;
+}

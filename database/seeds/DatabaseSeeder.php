@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('111111'),
             'is_admin'=>0,
         ]);
+        factory(App\User::class, 20)->create();
+        $this->command->info('users table seeded');
 
         App\RepayMethod::truncate();
         factory(App\RepayMethod::class)->create([

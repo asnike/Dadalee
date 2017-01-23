@@ -72,4 +72,11 @@ return [
     
     'manageMember'=>'회원 관리',
     'manageData'=>'데이터 관리',
+
+    'usersList'=>'회원목록',
+
+    'edit'=>'편집',
+    'modify'=>'수정',
+    'del'=>'삭제',
+    'id'=>'id',
 ];

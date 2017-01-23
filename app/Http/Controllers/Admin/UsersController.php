@@ -13,9 +13,21 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = User::query();
+        if($request->input('id')){
+            $query->where('id', $request->input('id'));
+        }
+        if($request->input('email')){
+            $query->where('email', $request->input('email'));
+        }
+        if($request->input('name')){
+            $query->where('name', $request->input('name'));
+        }
+        $users = $query->paginate(15);
+
+        return view('admin.user.list', ['users'=>$users]);
     }
 
     /**
