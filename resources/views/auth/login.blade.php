@@ -41,10 +41,12 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> {{ trans('common.rememberMe') }}
+                                    <input id="remember" class="styled" type="checkbox" name="remember">
+                                    <label for="remember">
+                                        {{ trans('common.rememberMe') }}
                                     </label>
                                 </div>
+
                             </div>
                         </div>
 

@@ -12308,4 +12308,8 @@ body {
   position: fixed !important;
 }
 
+table.table td {
+  vertical-align: middle !important;
+}
+
 /*# sourceMappingURL=admin.css.map */

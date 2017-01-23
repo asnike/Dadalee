@@ -69,15 +69,15 @@
                         <form class="form-horizontal" action="">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.price') }}</label>
-                                <div class="col-md-4"><input name="price" type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="price" type="text" class="form-control" required onchange="Controller.calcEarning(event);"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.deposit') }}</label>
-                                <div class="col-md-4"><input name="deposit" type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="deposit" type="text" class="form-control" required onchange="Controller.calcEarning(event);"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.monthlyFee') }}</label>
-                                <div class="col-md-4"><input name="monthlyfee" type="text" class="form-control"></div>
+                                <div class="col-md-4"><input name="monthlyfee" type="text" class="form-control" onchange="Controller.calcEarning(event);"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.investment') }}</label>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestAmount') }}</label>
-                                <div class="col-md-4"><input name="interest_amount"  type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="interest_amount"  type="text" class="form-control" required onchange="Controller.calcRealEarning(event);"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.realErning') }}</label>
@@ -104,11 +104,11 @@
                         <form class="form-horizontal" action="">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.loanAmount') }}</label>
-                                <div class="col-md-4"><input name="amount" type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="amount" type="text" class="form-control" required onchange="Controller.calcEarning(event);"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestRate') }}</label>
-                                <div class="col-md-4"><input name="interest_rate" type="text" class="form-control" required></div>
+                                <div class="col-md-4"><input name="interest_rate" type="text" class="form-control" required onchange="Controller.calcEarning(event);"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.repayCommission') }}</label>

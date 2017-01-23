@@ -250,6 +250,30 @@
                     html[html.length] = template({value:repayMethods[i].id, name:repayMethods[i].name});
                 }
                 $('select[name="repay_method_id"]').html(html.join(''));
+            },
+            calcEarning = function (e) {
+                var price = +$('#earningPanel input[name="price"]').val(),
+                    deposit = +$('#earningPanel input[name="deposit"]').val(),
+                    monthlyfee = +$('#earningPanel input[name="monthlyfee"]').val(),
+
+
+                    loan = +$('#loanPanel input[name="amount"]').val(),
+                    interest_rate = +$('#loanPanel input[name="interest_rate"]').val(),
+                    investment = price - deposit - loan,
+                    interest_amount = loan*interest_rate/100/12,
+                    real_earning = monthlyfee - interest_amount;
+
+                $('#earningPanel input[name="investment"]').val(investment);
+                $('#earningPanel input[name="interest_amount"]').val(interest_amount);
+                $('#earningPanel input[name="real_earning"]').val(real_earning);
+
+            },
+            calcRealEarning = function(e){
+                var monthlyfee = +$('#earningPanel input[name="monthlyfee"]').val(),
+                    interest_amount = +$('#earningPanel input[name="interest_amount"]').val(),
+                    real_earning = monthlyfee - interest_amount;
+
+                $('#earningPanel input[name="real_earning"]').val(real_earning);
             };
             init();
             return {
@@ -257,6 +281,8 @@
                 searchCallback:searchCallback,
                 hideInfo:hideInfo,
                 openDetailModal:openDetailModal,
+                calcEarning:calcEarning,
+                calcRealEarning:calcRealEarning,
             }
         })();
     </script>

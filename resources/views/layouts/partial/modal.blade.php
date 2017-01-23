@@ -9,7 +9,7 @@
                 <p class="contents"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default">{{ trans('common.ok') }}</button>
+                <button type="button" class="btn btn-default btn-ok">{{ trans('common.ok') }}</button>
             </div>
         </div>
     </div>
@@ -25,8 +25,8 @@
                 <p class="contents"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">{{ trans('common.ok') }}</button>
-                <button type="button" class="btn btn-default">{{ trans('common.cancel') }}</button>
+                <button type="button" class="btn btn-success btn-ok">{{ trans('common.ok') }}</button>
+                <button type="button" class="btn btn-default btn-cancel">{{ trans('common.cancel') }}</button>
             </div>
         </div>
     </div>

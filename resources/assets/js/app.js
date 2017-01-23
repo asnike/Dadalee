@@ -98,8 +98,13 @@ var U = (function(){
     Modal = (function(){
         var alert = function (msg) {
             $('#alert .modal-body>.contents').html(msg);
+            $('#alert .btn-ok').off();
+            $('#alert .btn-ok').click(alertClose);
             $('#alert').modal();
         },
+        alertClose = function(){
+            function(){ $('#alert').modal('hide'); }
+        }
         confirm = function(opt) {
             $('#confirm .modal-body>.contents').html(opt.msg);
             $('#confirm').modal();

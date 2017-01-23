@@ -20,8 +20,7 @@ elixir((mix) => {
         'app.css'
     ], 'public/css/app.css')
     .styles([
-    'admin.css',
-    'theme.css'
+    'admin.css', 'theme.css'
     ], 'public/css/admin.css')
     .scripts([
         '../vendor/jquery/dist/jquery.js',
