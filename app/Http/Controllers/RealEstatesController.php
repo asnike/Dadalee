@@ -26,7 +26,7 @@ class RealEstatesController extends Controller
     {
         //
         header('Vary:X-Requested-With');
-        $realestates = RealEstate::where('user_id', auth()->id())->where('market', 0)->get();
+        $realestates = RealEstate::with(['earningRate'])->where('user_id', auth()->id())->where('market', 0)->get();
         if($request->ajax()){
             return response()->json([
                 'result'=>1,
@@ -55,9 +55,15 @@ class RealEstatesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name'=>'required|max:50',
+            'address'=>'required|max:255',
+        ]);
+
         $data = $request->all();
         $data['user_id'] = auth()->id();
-        $data['own'] = $request->has('own');
+        $data['own'] = $request->input('own') == 'true' ? 1 : 0;
+
         $realestate = RealEstate::create($data);
 
         return response()->json([
@@ -109,6 +115,15 @@ class RealEstatesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name'=>'required|max:50',
+            'address'=>'required|max:255',
+            'floor'=>'max:10',
+            'completed_at'=>'max:15',
+            'exclusive_size'=>'max:10',
+            'memo'=>'max:500',
+        ]);
+
         $data = $request->all();
         $data['user_id'] = auth()->id();
         $data['own'] = $request->has('own');
@@ -147,6 +162,19 @@ class RealEstatesController extends Controller
     }
 
     public function earning(Request $request, $id){
+        $this->validate($request, [
+            'price'=>'required|max:20',
+            'deposit'=>'required|max:20',
+            'monthlyfee'=>'max:10',
+            'investment'=>'max:20',
+            'mediation_cost'=>'max:10',
+            'judicial_cost'=>'max:20',
+            'tax'=>'max:20',
+            'etc_cost'=>'max:20',
+            'interest_amount'=>'required|max:5',
+            'real_earning'=>'max:20',
+        ]);
+
         $realestate = RealEstate::findOrFail($id);
         $earningRate = EarningRate::updateOrCreate(['realestate_id'=>$id], $request->except(['_method']));
 
@@ -161,6 +189,17 @@ class RealEstatesController extends Controller
     }
 
     public function loan(Request $request, $id){
+        $this->validate($request, [
+            'amount'=>'required|max:20',
+            'interest_rate'=>'required|max:5',
+            'repay_commission'=>'required|max:5',
+            'unredeem_period'=>'max:10',
+            'repay_period'=>'required|max:10',
+            'bank'=>'max:10',
+            'account_no'=>'max:20',
+            'options'=>'max:200',
+        ]);
+
         $realestate = RealEstate::findOrFail($id);
         $loan = Loan::updateOrCreate(['realestate_id'=>$id], $request->except(['_method']));
 

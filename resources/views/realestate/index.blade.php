@@ -37,7 +37,7 @@
                 }, '/realestates/' + selectedData.id, data);
             },
             earningInfoEdit = function(e){
-                var data = U.Form.getValueWithForm('#earningPanel');
+                var data = U.Form.getValueWithForm('#earningPanel', function(val){ return numeral(val).value(); });
                 data = $.extend(data, {method:'POST','_method':'put'});
                 console.log('data : ',data);
                 U.http(function(data){
@@ -115,12 +115,14 @@
                             'id': realestate.id,
                             'name': realestate.name,
                             'address': realestate.address,
+                            'earningRate': realestate.earningrates.rate,
                         });
                     }else{
                         attensionHtml += template({
                             'id': realestate.id,
                             'name': realestate.name,
                             'address': realestate.address,
+                            'earningRate': realestate.earningrates.rate,
                         });
                     }
                 }
@@ -218,17 +220,21 @@
                     });
                     if(realestate.earning_rate){
                         U.Form.setTextWithForm({
-                            '#earningPanel input[name="price"]':realestate.earning_rate.price,
-                            '#earningPanel input[name="deposit"]':realestate.earning_rate.deposit,
-                            '#earningPanel input[name="monthlyfee"]':realestate.earning_rate.monthlyfee,
-                            '#earningPanel input[name="investment"]':realestate.earning_rate.investment,
-                            '#earningPanel input[name="interest_amount"]':realestate.earning_rate.interest_amount,
-                            '#earningPanel input[name="real_earning"]':realestate.earning_rate.real_earning,
+                            '#earningPanel input[name="price"]':numeral(realestate.earning_rate.price).format('0,0'),
+                            '#earningPanel input[name="deposit"]':numeral(realestate.earning_rate.deposit).format('0,0'),
+                            '#earningPanel input[name="monthlyfee"]':numeral(realestate.earning_rate.monthlyfee).format('0,0'),
+                            '#earningPanel input[name="investment"]':numeral(realestate.earning_rate.investment).format('0,0'),
+                            '#earningPanel input[name="mediation_cost"]':numeral(realestate.earning_rate.mediation_cost).format('0,0'),
+                            '#earningPanel input[name="judicial_cost"]':numeral(realestate.earning_rate.judicial_cost).format('0,0'),
+                            '#earningPanel input[name="tax"]':numeral(realestate.earning_rate.tax).format('0,0'),
+                            '#earningPanel input[name="etc_cost"]':numeral(realestate.earning_rate.etc_cost).format('0,0'),
+                            '#earningPanel input[name="interest_amount"]':numeral(realestate.earning_rate.interest_amount).format('0,0'),
+                            '#earningPanel input[name="real_earning"]':numeral(realestate.earning_rate.real_earning).format('0,0'),
                         });
                     }
                     if(realestate.loan){
                         U.Form.setTextWithForm({
-                            '#loanPanel input[name="amount"]':realestate.loan.amount,
+                            '#loanPanel input[name="amount"]':numeral(realestate.loan.amount).format('0,0'),
                             '#loanPanel input[name="interest_rate"]':realestate.loan.interest_rate,
                             '#loanPanel input[name="repay_commission"]':realestate.loan.repay_commission,
                             '#loanPanel input[name="unredeem_period"]':realestate.loan.unredeem_period,
@@ -252,14 +258,18 @@
                 $('select[name="repay_method_id"]').html(html.join(''));
             },
             calcEarning = function (e) {
-                var price = +$('#earningPanel input[name="price"]').val(),
-                    deposit = +$('#earningPanel input[name="deposit"]').val(),
-                    monthlyfee = +$('#earningPanel input[name="monthlyfee"]').val(),
+                var price = numeral($('#earningPanel input[name="price"]').val()).value(),
+                    deposit = numeral($('#earningPanel input[name="deposit"]').val()).value(),
+                    monthlyfee = numeral($('#earningPanel input[name="monthlyfee"]').val()).value(),
 
 
-                    loan = +$('#loanPanel input[name="amount"]').val(),
+                    loan = numeral($('#loanPanel input[name="amount"]').val()).value(),
+                    mediation_cost = numeral($('#loanPanel input[name="mediation_cost"]').val()).value(),
+                    judicial_cost = numeral($('#loanPanel input[name="judicial_cost"]').val()).value(),
+                    tax = numeral($('#loanPanel input[name="tax"]').val()).value(),
+                    etc_cost = numeral($('#loanPanel input[name="etc_cost"]').val()).value(),
                     interest_rate = +$('#loanPanel input[name="interest_rate"]').val(),
-                    investment = price - deposit - loan,
+                    investment = price - deposit - loan + mediation_cost + judicial_cost + tax + etc_cost,
                     interest_amount = loan*interest_rate/100/12,
                     real_earning = monthlyfee - interest_amount;
 
@@ -274,6 +284,12 @@
                     real_earning = monthlyfee - interest_amount;
 
                 $('#earningPanel input[name="real_earning"]').val(real_earning);
+            },
+            removeFormat = function(e){
+                $(e.target).val(numeral($(e.target).val()).value());
+            },
+            addFormat = function(e){
+                $(e.target).val(numeral($(e.target).val()).format('0,0'));
             };
             init();
             return {
@@ -283,6 +299,8 @@
                 openDetailModal:openDetailModal,
                 calcEarning:calcEarning,
                 calcRealEarning:calcRealEarning,
+                removeFormat:removeFormat,
+                addFormat:addFormat,
             }
         })();
     </script>

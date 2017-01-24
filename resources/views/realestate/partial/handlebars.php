@@ -13,6 +13,7 @@
         <div class="info">
             <h5>{{ name }}</h5>
             <span class="addr">{{ address }}</span>
+            <span class="rate">{{ earningRate }}</span>
         </div>
         
         <div class="tools">

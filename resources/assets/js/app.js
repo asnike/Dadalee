@@ -62,7 +62,7 @@ var U = (function(){
                 setText(key, data[key]);
             }
         },
-        getValueWithForm = function(sel){
+        getValueWithForm = function(sel, filter){
             var targets, data, val, el, t0;
             targets = (t0 = $(sel + ' input[type]')).length > 0 ? t0 : [];
             if((t0 = $(sel + ' textarea')).length > 0) targets.splice(targets.length, 0, t0);
@@ -86,7 +86,7 @@ var U = (function(){
                     case 'TEXTAREA':val = $(sel).val();
                         break;
                 }
-                if(val) data[el.name] = val;
+                if(val) data[el.name] = filter ? filter(val):val;
             }
             return data;
         };
@@ -103,8 +103,8 @@ var U = (function(){
             $('#alert').modal();
         },
         alertClose = function(){
-            function(){ $('#alert').modal('hide'); }
-        }
+            $('#alert').modal('hide');
+        },
         confirm = function(opt) {
             $('#confirm .modal-body>.contents').html(opt.msg);
             $('#confirm').modal();

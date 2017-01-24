@@ -29,6 +29,7 @@ elixir((mix) => {
         '../vendor/handlebars/handlebars.js',
         '../vendor/ladda-bootstrap/dist/spin.js',
         '../vendor/ladda-bootstrap/dist/ladda.js',
+        '../vendor/numeral/src/numeral.js',
         'app.js'
     ], 'public/js/app.js')
     .version([
