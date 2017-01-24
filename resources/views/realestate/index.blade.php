@@ -115,14 +115,14 @@
                             'id': realestate.id,
                             'name': realestate.name,
                             'address': realestate.address,
-                            'earningRate': realestate.earningrates.rate,
+                            'earningRate': 0,
                         });
                     }else{
                         attensionHtml += template({
                             'id': realestate.id,
                             'name': realestate.name,
                             'address': realestate.address,
-                            'earningRate': realestate.earningrates.rate,
+                            'earningRate': 0,
                         });
                     }
                 }
@@ -217,6 +217,10 @@
                         '#basicPanel input[name="name"]':realestate.name,
                         '#basicPanel input[name="address"]':realestate.address,
                         '#basicPanel input[name="own"]':realestate.own,
+                        '#basicPanel input[name="floor"]':realestate.floor,
+                        '#basicPanel input[name="completed_at"]':realestate.completed_at,
+                        '#basicPanel input[name="exclusive_size"]':realestate.exclusive_size,
+                        '#basicPanel textarea[name="memo"]':realestate.memo,
                     });
                     if(realestate.earning_rate){
                         U.Form.setTextWithForm({
@@ -279,11 +283,11 @@
 
             },
             calcRealEarning = function(e){
-                var monthlyfee = +$('#earningPanel input[name="monthlyfee"]').val(),
-                    interest_amount = +$('#earningPanel input[name="interest_amount"]').val(),
+                var monthlyfee = numeral($('#earningPanel input[name="monthlyfee"]').val()).value(),
+                    interest_amount = numeral($('#earningPanel input[name="interest_amount"]').val()).value(),
                     real_earning = monthlyfee - interest_amount;
 
-                $('#earningPanel input[name="real_earning"]').val(real_earning);
+                $('#earningPanel input[name="real_earning"]').val(numeral(real_earning).format('0,0'));
             },
             removeFormat = function(e){
                 $(e.target).val(numeral($(e.target).val()).value());

@@ -22,6 +22,7 @@
     "handlebars": "^4.0.5",
     "awesome-bootstrap-checkbox": "^0.3.7",
     "ladda-bootstrap": "^0.1.0",
-    "spinthatshit": "SpinThatShit#^1.0.3"
+    "spinthatshit": "SpinThatShit#^1.0.3",
+    "numeral": "^2.0.4"
   }
 }

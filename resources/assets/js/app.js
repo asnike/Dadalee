@@ -53,7 +53,7 @@ var U = (function(){
                break;
                case 'DIV':$(sel).html(val);
                break;
-               case 'TEXTAREA':$(sel).val(val);
+               case 'TEXTAREA':$(sel).val(val), console.log('ddkddkdkdk');
                break;
             }
         },
@@ -65,7 +65,7 @@ var U = (function(){
         getValueWithForm = function(sel, filter){
             var targets, data, val, el, t0;
             targets = (t0 = $(sel + ' input[type]')).length > 0 ? t0 : [];
-            if((t0 = $(sel + ' textarea')).length > 0) targets.splice(targets.length, 0, t0);
+            if((t0 = $(sel + ' textarea')).length > 0) targets.splice(targets.length, 0, t0[0]);
 
             for(data = {}, i = 0, j = targets.length ; i < j ; i++){
                 el = targets[i];
@@ -75,19 +75,21 @@ var U = (function(){
                     case 'INPUT':{
                         if(el.type == 'checkbox'){
                             val = [];
-                            $(sel + ' :checkbox[name="'+el.name+'"]:checked').each(function(idx){
-                                val[idx] = $(this).val();
+                            t0 = $(sel + ' :checkbox[name="'+el.name+'"]:checked');
+                            t0.each(function(idx){
+                                t0.length > 1 ? val[idx] = $(this).val() : val = $(this).val();
                             });
                         }else if(el.type == 'radio'){
                             val = $(sel + ' :radio[name="'+el.name+'"]:checked').val();
                         }else val = $(sel + ' [name="'+el.name+'"]').val();
                     }
                         break;
-                    case 'TEXTAREA':val = $(sel).val();
+                    case 'TEXTAREA':val = $(sel + ' textarea[name="'+el.name+'"]').val();
                         break;
                 }
                 if(val) data[el.name] = filter ? filter(val):val;
             }
+            console.log('data!!! : ', data);
             return data;
         };
         return{

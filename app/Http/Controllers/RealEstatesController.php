@@ -118,9 +118,9 @@ class RealEstatesController extends Controller
         $this->validate($request, [
             'name'=>'required|max:50',
             'address'=>'required|max:255',
-            'floor'=>'max:10',
+            'floor'=>'numeric|max:10',
             'completed_at'=>'max:15',
-            'exclusive_size'=>'max:10',
+            'exclusive_size'=>'numeric',
             'memo'=>'max:500',
         ]);
 
@@ -171,7 +171,7 @@ class RealEstatesController extends Controller
             'judicial_cost'=>'max:20',
             'tax'=>'max:20',
             'etc_cost'=>'max:20',
-            'interest_amount'=>'required|max:5',
+            'interest_amount'=>'required|max:20',
             'real_earning'=>'max:20',
         ]);
 

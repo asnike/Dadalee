@@ -88,6 +88,6 @@ return [
     'tenantPayday'=>'월세납입일',
     'accountNo'=>'계좌번호',
     'bank'=>'은행',
-    'etcCost'=>'기타비용',
+    'etc_cost'=>'기타비용',
     'tenant'=>'세입자',
 ];

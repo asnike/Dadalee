@@ -15,7 +15,11 @@ class EarningRate extends Model
         'monthlyfee',
         'investment',
         'interest_amount',
-        'real_earning'
+        'real_earning',
+        'mediation_cost',
+        'judicial_cost',
+        'tax',
+        'etc_cost',
     ];
     public function realestate(){
         return $this->belongsTo('App\RealEstate');

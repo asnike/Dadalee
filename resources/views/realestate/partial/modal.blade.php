@@ -105,17 +105,13 @@
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestAmount') }}</label>
-                                <div class="col-md-4"><input name="interest_amount" maxlength="5" type="text" class="form-control" required onchange="Controller.calcRealEarning(event);"></div>
+                                <div class="col-md-4"><input name="interest_amount" maxlength="20" type="text" class="form-control" required onchange="Controller.calcRealEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.realEarning') }}</label>
                                 <div class="col-md-4"><input name="real_earning" maxlength="20" type="text" class="form-control" readonly></div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="">{{ trans('common.etcCost') }}</label>
-                                <div class="col-md-4"><input name="etc_cost" maxlength="20" type="text" class="form-control" readonly></div>
-                            </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>

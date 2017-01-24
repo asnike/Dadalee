@@ -17,6 +17,10 @@ class RealEstate extends Model
         'lat',
         'lng',
         'user_id',
+        'floor',
+        'completed_at',
+        'exclusive_size',
+        'memo',
         'own'
     ];
 
