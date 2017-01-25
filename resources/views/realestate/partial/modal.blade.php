@@ -19,14 +19,14 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="basicPanel">
-                        <form class="form-horizontal" action="">
+                        <form class="form-horizontal" method="post" onsubmit="return Controller.basicInfoEdit();">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.name') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" name="name" maxlength="50"></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="name" maxlength="50" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.address') }}</label>
-                                <div class="col-md-6"><input readonly onfocus="daumAddressOpen()" type="text" class="form-control" name="address" maxlength="255"></div>
+                                <div class="col-md-6"><input readonly onfocus="daumAddressOpen()" type="text" class="form-control" name="address" maxlength="255" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
@@ -45,7 +45,14 @@
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.built') }}</label>
-                                <div class="col-md-4"><input type="text" class="form-control" name="completed_at" maxlength="15"></div>
+                                <div class="col-md-4">
+                                    <div class='input-group date' id="datetimepicker">
+                                        <input type="text" class="form-control" name="completed_at" maxlength="15">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.exclusiveSize') }}</label>
@@ -61,13 +68,13 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <div class="btn btn-success btn-basic-edit">{{ trans('common.save') }}</div>
+                                    <button type="submit" class="btn btn-success btn-basic-edit">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="earningPanel">
-                        <form class="form-horizontal" action="">
+                        <form class="form-horizontal" method="post" onsubmit="return Controller.earningInfoEdit();">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.price') }}</label>
                                 <div class="col-md-4"><input name="price" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
@@ -95,7 +102,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.tax') }}</label>
-                                <div class="col-md-4"><input name="tax" type="text" maxlength="20" class="form-control" onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="tax" type="text" maxlength="20" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.etc_cost') }}</label>
@@ -116,14 +123,14 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <div class="btn btn-success btn-earning-edit">{{ trans('common.save') }}</div>
+                                    <button type="submit" class="btn btn-success btn-earning-edit">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>
 
                     </div>
                     <div role="tabpanel" class="tab-pane" id="loanPanel">
-                        <form class="form-horizontal" action="">
+                        <form class="form-horizontal" method="post" onsubmit="return Controller.loanInfoEdit();">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.loanAmount') }}</label>
                                 <div class="col-md-4"><input name="amount" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
@@ -169,14 +176,14 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <div class="btn btn-success btn-loan-edit">{{ trans('common.save') }}</div>
+                                    <button type="submit" class="btn btn-success btn-loan-edit">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="tenantPanel">
-                        <form class="form-horizontal" action="">
+                        <form class="form-horizontal" method="post" onsubmit="return Controller.tenantInfoEdit();">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.tenantName') }}</label>
                                 <div class="col-md-4"><input name="name" type="text" class="form-control" required></div>

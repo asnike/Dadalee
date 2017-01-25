@@ -20,6 +20,7 @@ class EarningRate extends Model
         'judicial_cost',
         'tax',
         'etc_cost',
+        'rate',
     ];
     public function realestate(){
         return $this->belongsTo('App\RealEstate');

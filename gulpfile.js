@@ -30,6 +30,9 @@ elixir((mix) => {
         '../vendor/ladda-bootstrap/dist/spin.js',
         '../vendor/ladda-bootstrap/dist/ladda.js',
         '../vendor/numeral/src/numeral.js',
+        '../vendor/moment/moment.js',
+        '../vendor/moment/locale/ko.js',
+        '../vendor/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
         'app.js'
     ], 'public/js/app.js')
     .version([

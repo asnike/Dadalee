@@ -19,6 +19,7 @@ class AddFieldsOnEarningrateTable extends Migration
             $table->integer('tax')->after('investment');
             $table->integer('judicial_cost')->after('investment')->nullable();
             $table->integer('mediation_cost')->after('investment')->nullable();
+            $table->integer('rate')->after('investment');
         });
     }
 

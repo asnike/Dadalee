@@ -109,7 +109,17 @@ var U = (function(){
         },
         confirm = function(opt) {
             $('#confirm .modal-body>.contents').html(opt.msg);
+            $('#confirm .btn-ok').off();
+            $('#confirm .btn-cancel').off();
+            $('#confirm .btn-ok').click(function(){
+                if(typeof opt.callback == 'function') opt.callback();
+                confirmClose();
+            });
+            $('#confirm .btn-cancel').click(confirmClose);
             $('#confirm').modal();
+        },
+        confirmClose = function(){
+            $('#alert').modal('hide');
         },
         blockOpen = function(){
             $('#block').fadeIn();
@@ -122,6 +132,7 @@ var U = (function(){
             confirm:confirm,
             blockOpen:blockOpen,
             blockClose:blockClose,
+            confirmClose:confirmClose,
         }
     })();
     return {

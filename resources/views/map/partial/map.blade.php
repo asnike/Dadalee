@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <div id="map" style="width:100%;min-height:768px;border:1px solid #ddd;"></div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" style="padding:15px 8px;">
             <div>
                 <div class="clearfix">
                     <div class="btn-group btn-tab pull-right">
@@ -22,7 +22,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="own-tab">
-                        <br>
+
                         <ul class="list-group realestate-list realestate-own-list">
                             @foreach($realestates as $realestate)
                                 @if($realestate->own)
@@ -35,7 +35,7 @@
                         </ul>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="attension-tab">
-                        <br>
+
                         <ul class="list-group realestate-list realestate-attension-list">
                             @foreach($realestates as $realestate)
                                 @if($realestate->own)

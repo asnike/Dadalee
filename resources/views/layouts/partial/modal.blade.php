@@ -19,7 +19,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{ trans('common.alert') }}</h4>
+                <h4 class="modal-title">{{ trans('common.confirm') }}</h4>
             </div>
             <div class="modal-body">
                 <p class="contents"></p>

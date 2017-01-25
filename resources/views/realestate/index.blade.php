@@ -12,6 +12,11 @@
                 initMap();
                 getRealestates();
                 initDetailModal();
+
+                $('#datetimepicker').datetimepicker({format:'YYYY-MM-DD', icons:{
+                    previous: 'fa fa-arrow-left',
+                    next: 'fa fa-arrow-right',
+                }});
             },
             initDetailModal = function(){
                 $('.btn-tab').click(function(e){
@@ -24,9 +29,9 @@
                     $('#realestate-detail').modal('hide');
                 });
 
-                $('.btn-basic-edit').click(basicInfoEdit);
+                /*$('.btn-basic-edit').click(basicInfoEdit);
                 $('.btn-earning-edit').click(earningInfoEdit);
-                $('.btn-loan-edit').click(loanInfoEdit);
+                $('.btn-loan-edit').click(loanInfoEdit);*/
             },
             basicInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#basicPanel');
@@ -35,22 +40,39 @@
                 U.http(function(data){
                     U.Modal.alert(data.msg);
                 }, '/realestates/' + selectedData.id, data);
+
+                return false;
             },
             earningInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#earningPanel', function(val){ return numeral(val).value(); });
                 data = $.extend(data, {method:'POST','_method':'put'});
+                data.rate = data.real_earning?data.real_earning:0*12/data.investment?data.investment:1;
                 console.log('data : ',data);
                 U.http(function(data){
                     U.Modal.alert(data.msg);
                 }, '/realestates/' + selectedData.id + '/earning', data);
+
+                return false;
             },
             loanInfoEdit = function(e){
-                var data = U.Form.getValueWithForm('#earningPanel');
-                    data = $.extend(data, {method:'POST','_method':'patch'});
+                var data = U.Form.getValueWithForm('#loanPanel', function(val){ return numeral(val).value(); });
+                    data = $.extend(data, {method:'POST','_method':'put'});
                 console.log('data : ',data);
                 U.http(function(data){
                     U.Modal.alert(data.msg);
                 }, '/realestates/' + selectedData.id + '/loan', data);
+
+                return false;
+            },
+            tenantInfoEdit = function(e){
+                var data = U.Form.getValueWithForm('#tenantPanel');
+                data = $.extend(data, {method:'POST','_method':'put'});
+                console.log('data : ',data);
+                U.http(function(data){
+                    U.Modal.alert(data.msg);
+                }, '/realestates/' + selectedData.id + '/tenant', data);
+
+                return false;
             },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
@@ -91,7 +113,8 @@
                 daum.maps.event.addListener(marker, 'click', markerData.click);
 
             },
-            getRealestates = function(){
+            getRealestates = function(data){
+                if(data && data.msg) U.Modal.alert(data.msg);
                 U.http(getRealestatesSuccess, '/realestates', {method:'GET'});
             },
             getRealestatesSuccess = function(data){
@@ -126,6 +149,9 @@
                         });
                     }
                 }
+                var emptyTmpl = Handlebars.compile($('#realestate-list-no-item').html());
+                if(ownHtml == '') ownHtml = emptyTmpl();
+                if(attensionHtml == '') attensionHtml = emptyTmpl();
 
                 $('.realestate-own-list>.list-group-item').off();
                 $('.realestate-own-list').html(ownHtml);
@@ -137,9 +163,11 @@
 
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').off();
                 $('.realestate-list>.list-group-item>.tools>.btn-price').off();
+                $('.realestate-list>.list-group-item>.tools>.btn-del').off();
                 $('.realestate-list>.list-group-item').click(focusRealestate);
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').click(openDetailModal);
                 $('.realestate-list>.list-group-item>.tools>.btn-price').click(openPriceModal);
+                $('.realestate-list>.list-group-item>.tools>.btn-del').click(delConfirm);
 
 
             },
@@ -294,6 +322,19 @@
             },
             addFormat = function(e){
                 $(e.target).val(numeral($(e.target).val()).format('0,0'));
+            },
+            delConfirm = function(e){
+                var id = $(this).attr('data-id');
+
+                U.Modal.confirm({msg:'삭제하시겠습니까?', callback:function(){del(id);}});
+            },
+            del = function(id){
+                U.http(delEnd, '/realestates/' + id, {method:'POST','_method':'delete'})
+            },
+            delEnd = function(data){
+                if(data.result){
+                    U.Modal.confirmClose();
+                }
             };
             init();
             return {
@@ -305,6 +346,9 @@
                 calcRealEarning:calcRealEarning,
                 removeFormat:removeFormat,
                 addFormat:addFormat,
+                basicInfoEdit:basicInfoEdit,
+                earningInfoEdit:earningInfoEdit,
+                loanInfoEdit:loanInfoEdit,
             }
         })();
     </script>

@@ -15,7 +15,9 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "bootstrap-sass": "^3.3.7",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.45",
+    "moment": "^2.17.1"
   },
   "devDependencies": {
     "select2": "^4.0.3",
@@ -23,6 +25,7 @@
     "awesome-bootstrap-checkbox": "^0.3.7",
     "ladda-bootstrap": "^0.1.0",
     "spinthatshit": "SpinThatShit#^1.0.3",
-    "numeral": "^2.0.4"
+    "numeral": "^2.0.4",
+    "bootstrap-datetimepicker": "^0.0.11"
   }
 }

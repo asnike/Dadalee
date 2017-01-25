@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row realestate-add-form">
 
     <form action="" class="search-form" onsubmit="return Controller.onSubmit();" style="margin: 0;">
         <div class="fomr-group clearfix">
@@ -8,12 +8,12 @@
                 <div class="checkbox">
                     <input id="own" class="styled" type="checkbox">
                     <label for="own">
-                        소유
+                        {{ trans('common.own') }}
                     </label>
                 </div>
 
             </div>
-            <div class="col-md-2"><button type="submit" class="btn btn-primary">{{ trans('common.realestateAdd') }}</button></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-primary btn-block">{{ trans('common.realestateAdd') }}</button></div>
         </div>
     </form>
 

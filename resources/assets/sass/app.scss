@@ -19,6 +19,8 @@
 
 @import "../vendor/spinthatshit/src/loaders.scss";
 
+@import "../vendor/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
+
 
 
 body {
@@ -116,7 +118,12 @@ body{background:#fff;}
   padding-right: 8px;
 }
 
+.realestate-add-form{
+  border-bottom:1px solid #ddd;
+}
 
+
+.realestate-list{margin-top:15px;}
 .realestate-list .addr{font-size:12px;}
 .realestate-list .info{float:left;}
 .realestate-list .tools{float:right;}

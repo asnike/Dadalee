@@ -65,7 +65,7 @@ return [
     'built'=>'보존등기',
     'exclusiveSize'=>'전용면적',
     'memo'=>'메모',
-
+    'addSuccess'=>'추가했습니다.',
 
     'realestate_add_success'=>'추가했습니다.',
     'realestate_edit_success'=>'수정했습니다.',
@@ -79,6 +79,7 @@ return [
     'modify'=>'수정',
     'del'=>'삭제',
     'id'=>'id',
+    'cancel'=>'취소',
     
     'mediation_cost'=>'중개수수료',
     'judicial_cost'=>'법무비',
