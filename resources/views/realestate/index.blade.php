@@ -6,7 +6,7 @@
 
     <script>
         var Controller = (function(){
-            var map, realestates, markers = [], searchedInfo = {}, selectedData = {},
+            var map, realestates, markers = [], searchedInfo = {}, addrInfo = {}, selectedData = {},
                 repayMethods,
             init = function(){
                 initMap();
@@ -90,17 +90,23 @@
                     U.http(getRealestates, '/realestates', {
                         method:'POST',
                         name:name,
-                        address:searchedInfo.title + (searchedInfo.buildingAddress ? searchedInfo.buildingAddress : ''),
+                        address:searchedInfo.title + ' ' + (searchedInfo.buildingAddress ? searchedInfo.buildingAddress : ''),
                         lat:searchedInfo.lat,
                         lng:searchedInfo.lng,
                         own:own,
+                        sigungu:searchedInfo.localName_1 + ' ' + searchedInfo.localName_2 + ' ' + searchedInfo.localName_3,
+                        sigungu_code:addrInfo.sigunguCode,
+                        main_address:searchedInfo.mainAddress,
+                        new_address:searchedInfo.newAddress,
+                        building_name:addrInfo.buildingName,
                     });
                 }
                 return false;
             },
-            searchCallback = function(result){
-                console.log('result : ', result);
+            searchCallback = function(result, data){
+                console.log('result : ', result, data);
                 searchedInfo = result;
+                addrInfo = data;
             },
             setMarker = function(data, moveCenter){
                 var coords = new daum.maps.LatLng(data.lat, data.lng);

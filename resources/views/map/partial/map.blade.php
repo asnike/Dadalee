@@ -92,7 +92,7 @@
                     console.log(data);
                     console.log(fullAddr);
 
-                    addr2coord(data.jibunAddress);
+                    addr2coord(data);
 
                     element_layer.style.display = 'none';
                 },
@@ -116,14 +116,16 @@
             element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
         }
 
-        function addr2coord(addr) {
+        function addr2coord(data) {
             var geocoder = new daum.maps.services.Geocoder();
 
-            geocoder.addr2coord(addr, function (status, result) {
+            geocoder.addr2coord(data.jibunAddress, function (status, result) {
                 if (status === daum.maps.services.Status.OK) {
                     if (typeof Controller.searchCallback == 'function') {
-                        Controller.searchCallback(result.addr[0]);
+                        Controller.searchCallback(result.addr[0], data);
                     }
+                }else{
+                    console.log(status, result);
                 }
             });
         }

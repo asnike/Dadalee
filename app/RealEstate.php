@@ -14,6 +14,11 @@ class RealEstate extends Model
     protected $fillable = [
         'name',
         'address',
+        'sigungu',
+        'sigungu_code',
+        'main_address',
+        'new_address',
+        'building_name',
         'lat',
         'lng',
         'user_id',
