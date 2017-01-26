@@ -33,7 +33,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="{{ route('admin.users.index') }}">{{ trans('common.manageMember') }}</a></li>
-                <li><a href="#">{{ trans('common.manageData') }}</a></li>
+                <li><a href="{{ route('admin.prices.index') }}">{{ trans('common.manageData') }}</a></li>
 
             </ul>
         </div>

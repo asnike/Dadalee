@@ -108,4 +108,5 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware'=>['admin']], functi
         'uses'=>'Admin\DashboardsController@index'
     ]);
     Route::resource('users', 'Admin\UsersController');
+    Route::resource('prices', 'Admin\ActualPricesController');
 });
