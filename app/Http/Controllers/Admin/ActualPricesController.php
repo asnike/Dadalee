@@ -40,10 +40,13 @@ class ActualPricesController extends Controller
     public function store(Request $request)
     {
         //
-        $path = $request->file('excel')->store('excels');
-        Storage::
-        Excel::load($path, function($reader){
-            dd($reader->take(10)->toObject());
+        $path = $request->file('excel')->storeAs('excels', 'data.xlsx', 'public');
+        //dd(Storage::url('app/public/excels/data.xlsx'));
+        //exit;
+        Excel::load(Storage::url('app/public/excels/data.xlsx'), function($reader){
+            $data = $reader->take(10)->dd();
+
+
         });
     }
 
