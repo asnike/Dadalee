@@ -21,8 +21,8 @@ class CreateActualPriceTable extends Migration
             $table->string('building_name');
             $table->float('exclusive_size');
             $table->float('land_size');
-            $table->integer('yearmonth');
-            $table->integer('day');
+            $table->string('yearmonth');
+            $table->string('day');
             $table->integer('price');
             $table->integer('floor');
             $table->date('completed_at');

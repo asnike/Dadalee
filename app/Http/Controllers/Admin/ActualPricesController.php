@@ -37,6 +37,11 @@ class ActualPricesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    private function numeric($a) {
+        $a = str_replace(",", "", $a);
+        return $a;
+    }
     public function store(Request $request)
     {
         //
@@ -44,7 +49,24 @@ class ActualPricesController extends Controller
         //dd(Storage::url('app/public/excels/data.xlsx'));
         //exit;
         Excel::load(Storage::url('app/public/excels/data.xlsx'), function($reader){
-            $data = $reader->take(10)->dd();
+            $data = $reader->toObject();
+
+            foreach ($data as $row){
+                ActualPrice::create([
+                    'sigungu'=>$row[1],
+                    'main_no'=>$row[2],
+                    'sub_no'=>$row[3],
+                    'building_name'=>$row[4],
+                    'exclusive_size'=>$row[5],
+                    'land_size'=>$row[6],
+                    'yearmonth'=>$row[7],
+                    'day'=>$row[8],
+                    'price'=>$this->numeric($row[9]),
+                    'floor'=>$row[10],
+                    'completed_at'=>$row[11],
+                    'new_address'=>$row[12],
+                ]);
+            }
 
 
         });
