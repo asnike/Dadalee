@@ -66,6 +66,7 @@ var U = (function(){
             var targets, data, val, el, t0;
             targets = (t0 = $(sel + ' input[type]')).length > 0 ? t0 : [];
             if((t0 = $(sel + ' textarea')).length > 0) targets.splice(targets.length, 0, t0[0]);
+            if((t0 = $(sel + ' select')).length > 0) targets.splice(targets.length, 0, t0[0]);
 
             for(data = {}, i = 0, j = targets.length ; i < j ; i++){
                 el = targets[i];
@@ -85,6 +86,8 @@ var U = (function(){
                     }
                         break;
                     case 'TEXTAREA':val = $(sel + ' textarea[name="'+el.name+'"]').val();
+                        break;
+                    case 'SELECT':val = $(sel + ' select[name="'+el.name+'"]').val();
                         break;
                 }
                 if(val) data[el.name] = filter ? filter(val):val;
@@ -134,13 +137,29 @@ var U = (function(){
             blockClose:blockClose,
             confirmClose:confirmClose,
         }
+    })(),
+    Format = (function(){
+        var percent = function(e){
+            $(e.target).val(numeral($(e.target).val()).format('0.00%'));
+        },
+        comma = function(e){
+            $(e.target).val(numeral($(e.target).val()).format('0,0'));
+        },
+        remove = function(e){
+            $(e.target).val(numeral($(e.target).val()).value());
+        };
+        return {
+            percent:percent,
+            remove:remove,
+            comma:comma,
+        }
     })();
     return {
         Form:Form,
         Modal:Modal,
+        Format:Format,
 
         http:http,
         global:global,
-
     }
 })();

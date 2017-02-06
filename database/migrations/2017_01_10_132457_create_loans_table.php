@@ -18,8 +18,8 @@ class CreateLoansTable extends Migration
             $table->integer('realestate_id')->unsigned();
 
             $table->integer('amount');
-            $table->float('interest_rate');
-            $table->float('repay_commission');
+            $table->decimal('interest_rate');
+            $table->decimal('repay_commission');
             $table->integer('unredeem_period')->default(0);
             $table->integer('repay_period');
             $table->integer('repay_method_id')->unsigned();

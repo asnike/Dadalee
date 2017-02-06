@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success btn-basic-edit">{{ trans('common.save') }}</button>
+                                    <button type="submit" class="btn btn-success btn-basic-edit btn-block">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -77,15 +77,15 @@
                         <form class="form-horizontal" method="post" onsubmit="return Controller.earningInfoEdit();">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.price') }}</label>
-                                <div class="col-md-4"><input name="price" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="price" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.deposit') }}</label>
-                                <div class="col-md-4"><input name="deposit" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="deposit" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.monthlyFee') }}</label>
-                                <div class="col-md-4"><input name="monthlyfee" maxlength="10" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="monthlyfee" maxlength="10" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.investment') }}</label>
@@ -94,25 +94,25 @@
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.mediation_cost') }}</label>
-                                <div class="col-md-4"><input name="mediation_cost" maxlength="20" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="mediation_cost" maxlength="20" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.judicial_cost') }}</label>
-                                <div class="col-md-4"><input name="judicial_cost" maxlength="10" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="judicial_cost" maxlength="10" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.tax') }}</label>
-                                <div class="col-md-4"><input name="tax" type="text" maxlength="20" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="tax" type="text" maxlength="20" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.etc_cost') }}</label>
-                                <div class="col-md-4"><input name="etc_cost" maxlength="20" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="etc_cost" maxlength="20" type="text" class="form-control" onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
 
 
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestAmount') }}</label>
-                                <div class="col-md-4"><input name="interest_amount" maxlength="20" type="text" class="form-control" required onchange="Controller.calcRealEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="interest_amount" maxlength="20" type="text" class="form-control" required onchange="Controller.calcRealEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.realEarning') }}</label>
@@ -123,7 +123,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success btn-earning-edit">{{ trans('common.save') }}</button>
+                                    <button type="submit" class="btn btn-success btn-earning-edit btn-block">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -133,11 +133,11 @@
                         <form class="form-horizontal" method="post" onsubmit="return Controller.loanInfoEdit();">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.loanAmount') }}</label>
-                                <div class="col-md-4"><input name="amount" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="Controller.removeFormat(event)" onblur="Controller.addFormat(event)"></div>
+                                <div class="col-md-4"><input name="amount" maxlength="20" type="text" class="form-control" required onchange="Controller.calcEarning(event);" onfocus="U.Format.remove(event)" onblur="U.Format.comma(event)"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.interestRate') }}</label>
-                                <div class="col-md-4"><input name="interest_rate" maxlength="5" type="text" class="form-control" required onchange="Controller.calcEarning(event);"></div>
+                                <div class="col-md-4"><input name="interest_rate" maxlength="5" type="text" class="form-control" required></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.repayCommission') }}</label>
@@ -165,7 +165,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.accountNo') }}</label>
-                                <div class="col-md-4"><input maxlength="20" name="account_no" type="text" class="form-control" readonly></div>
+                                <div class="col-md-4"><input maxlength="20" name="account_no" type="text" class="form-control"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="">{{ trans('common.optionDeal') }}</label>
@@ -176,7 +176,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success btn-loan-edit">{{ trans('common.save') }}</button>
+                                    <button type="submit" class="btn btn-success btn-loan-edit btn-block">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -209,7 +209,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2" for=""></label>
                                 <div class="col-md-4">
-                                    <div class="btn btn-success btn-loan-edit">{{ trans('common.save') }}</div>
+                                    <button type="submit" class="btn btn-success btn-loan-edit btn-block">{{ trans('common.save') }}</button>
                                 </div>
                             </div>
                         </form>

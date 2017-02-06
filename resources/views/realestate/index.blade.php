@@ -17,6 +17,20 @@
                     previous: 'fa fa-arrow-left',
                     next: 'fa fa-arrow-right',
                 }});
+                new Cleave('#loanPanel input[name="interest_rate"]', {
+                    blocks:[1,2],
+                    delimiters:['.'],
+                    numericOnly:true,
+                });
+                new Cleave('#loanPanel input[name="repay_commission"]', {
+                    blocks:[1,2],
+                    delimiters:['.'],
+                    numericOnly:true,
+                });
+
+                new Cleave('#loanPanel input[name="account_no"]', {
+                    numericOnly:true,
+                });
             },
             initDetailModal = function(){
                 $('.btn-tab').click(function(e){
@@ -28,10 +42,6 @@
                     U.global.isDetailModalOpened = false;
                     $('#realestate-detail').modal('hide');
                 });
-
-                /*$('.btn-basic-edit').click(basicInfoEdit);
-                $('.btn-earning-edit').click(earningInfoEdit);
-                $('.btn-loan-edit').click(loanInfoEdit);*/
             },
             basicInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#basicPanel');
@@ -55,7 +65,10 @@
                 return false;
             },
             loanInfoEdit = function(e){
-                var data = U.Form.getValueWithForm('#loanPanel', function(val){ return numeral(val).value(); });
+                var data = U.Form.getValueWithForm('#loanPanel', function(val){
+                    if(isNaN(+val)) return val;
+                    return numeral(val).value();
+                });
                     data = $.extend(data, {method:'POST','_method':'put'});
                 console.log('data : ',data);
                 U.http(function(data){
@@ -280,7 +293,7 @@
                             '#loanPanel select[name="repay_method_id"]':realestate.loan.repay_method_id,
                             '#loanPanel input[name="bank"]':realestate.loan.bank,
                             '#loanPanel input[name="account_no"]':realestate.loan.account_no,
-                            '#loanPanel input[name="options"]':realestate.loan.options,
+                            '#loanPanel textarea[name="options"]':realestate.loan.options,
                         });
                     }
 
@@ -355,6 +368,7 @@
                 basicInfoEdit:basicInfoEdit,
                 earningInfoEdit:earningInfoEdit,
                 loanInfoEdit:loanInfoEdit,
+                tenantInfoEdit:tenantInfoEdit,
             }
         })();
     </script>
