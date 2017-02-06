@@ -27,6 +27,8 @@ class CreateActualPriceTable extends Migration
             $table->integer('floor');
             $table->date('completed_at');
             $table->string('new_address');
+            $table->string('lng')->nullable();
+            $table->string('lat')->nullable();
             $table->timestamps();
         });
     }

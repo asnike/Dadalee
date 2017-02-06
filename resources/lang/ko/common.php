@@ -22,8 +22,8 @@ return [
     'rememberMe'=>'로그인 정보 저장',
     'forgetPassword'=>'비밀번호 찾기',
 
-    'manageRealestate'=>'Manage',
-    'priceMap'=>'Map',
+    'manageRealestate'=>'물건관리',
+    'priceMap'=>'시세지도',
 
     'search'=>'검색',
     'address'=>'주소',

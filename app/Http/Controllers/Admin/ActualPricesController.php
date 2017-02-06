@@ -67,7 +67,7 @@ class ActualPricesController extends Controller
                     'new_address'=>$row[12],
                 ]);
             }
-
+            redirect(route('admin.prices.index'));
 
         });
     }
@@ -115,5 +115,24 @@ class ActualPricesController extends Controller
     public function destroy(ActualPrice $actualPrice)
     {
         //
+    }
+    public function geocoding(Request $request){
+        $this->validate($request, [
+            'id'=>'required',
+            'lng'=>'required',
+            'lat'=>'required',
+        ]);
+
+        $data = $request->all();
+        $actualPrice = ActualPrice::findOrFail($request->id);
+        $actualPrice->update($data);
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'realestate'=>$actualPrice,
+            ],
+            'msg'=>trans('common.realestate_add_success')
+        ]);
     }
 }

@@ -109,4 +109,8 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware'=>['admin']], functi
     ]);
     Route::resource('users', 'Admin\UsersController');
     Route::resource('prices', 'Admin\ActualPricesController');
+    Route::post('prices/geocoding', [
+        'as'=>'geocoding',
+        'uses'=>'Admin\ActualPricesController@geocoding'
+    ]);
 });

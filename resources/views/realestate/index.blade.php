@@ -4,7 +4,7 @@
 
 @section('script')
 
-    <script>
+        <script>
         var Controller = (function(){
             var map, realestates, markers = [], searchedInfo = {}, addrInfo = {}, selectedData = {},
                 repayMethods,

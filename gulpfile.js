@@ -33,6 +33,7 @@ elixir((mix) => {
         '../vendor/moment/moment.js',
         '../vendor/moment/locale/ko.js',
         '../vendor/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+        '../vendor/jquery.cookie/jquery.cookie.js',
         'app.js'
     ], 'public/js/app.js')
     .version([

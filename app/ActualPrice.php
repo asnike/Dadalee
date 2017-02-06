@@ -19,6 +19,8 @@ class ActualPrice extends Model
         'price',
         'floor',
         'completed_at',
+        'lng',
+        'lat',
         'new_address',
     ];
     protected $table = 'actualprices';
