@@ -17,9 +17,9 @@
         </div>
 
         <div class="tools">
-            <div class="btn btn-info btn-sm btn-detail ladda-button" data-id="{{ id }}" data-style="zoom-in" data-size="1"><span class="ladda-label"><i class="fa fa-pencil-square-o"></i> 상세</span></div>
+            <div class="btn btn-info btn-xs btn-detail ladda-button" data-id="{{ id }}" data-style="zoom-in" data-size="1"><span class="ladda-label"><i class="fa fa-pencil-square-o"></i> 상세</span></div>
 
-            <div class="btn btn-danger btn-sm btn-del" data-id="{{ id }}"><i class="fa fa-trash-o"></i> 삭제</div>
+            <div class="btn btn-danger btn-xs btn-del" data-id="{{ id }}"><i class="fa fa-trash-o"></i> 삭제</div>
         </div>
     </li>
 </script>

@@ -21,10 +21,21 @@
                     </form>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ trans('common.geocoding') }}</div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-geocoding">{{ trans('common.geocoding') }}</button>
+                    </div>
+                </div>
+            </div>
+
             <table class="table table-hover table-striped table-bordered table-condensed">
                 <thead>
                 <th>{{ trans('common.id') }}</th>
-                <th>{{ trans('common.sigungu') }}</th>
+                <th>{{ trans('common.building_name') }}</th>
                 <th>{{ trans('common.mainNo') }}</th>
                 <th>{{ trans('common.subNo') }}</th>
                 </thead>
@@ -32,7 +43,7 @@
                 @foreach($prices as $price)
                     <tr>
                         <td>{{ $price->id }}</td>
-                        <td>{{ $price->sigungu }}</td>
+                        <td>{{ $price->building_name }}</td>
                         <td>{{ $price->main_no }}</td>
                         <td>{{ $price->sub_no }}</td>
                     </tr>
@@ -43,4 +54,70 @@
             {{--<div class="text-center">{{ $prices->links() }}</div>--}}
         </div>
     </div>
+
+    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=ec5b7e847efe7670751fbc7fd1aa5e4a&libraries=services"></script>
+@endsection
+
+@section('script')
+    <script>
+        (function(){
+            var geocoder = new daum.maps.services.Geocoder(),
+                prices = JSON.parse({!! json_encode(json_encode($prices)) !!}),
+                geoCache = {},
+                currCnt = 0, totalCnt = 0,
+            init = function(){
+                totalCnt = prices.length;
+                $('.btn-geocoding').click(geocodingStart);
+            },
+            geocodingStart = function(){
+                var t0;
+                t0 = prices[currCnt];
+                if(t0.lng && t0.lat){
+                    currCnt++;
+                    geocodingStart();
+                    return;
+                }
+                geocoding(t0.sigungu + ' ' + +t0.main_no  + '-' + +t0.sub_no);
+
+            },
+            geocoding = function(address){
+                var t0;
+                if(t0 = geoCache[address]){
+                    return saveGeocodeExist(t0);
+                }
+                setTimeout(function(){
+                    geocoder.addr2coord(address, function(status, result) {
+                        if(status === daum.maps.services.Status.OK) {
+                            saveGeocode(result);
+                        }
+                    });
+                }, 1000);
+            },
+            saveGeocode = function(result){
+                var id = prices[currCnt].id,
+                    lng = result.addr[0].lng,
+                    lat = result.addr[0].lat;
+
+                console.log(result);
+                data = {method:'POST', id:id, lng:lng, lat:lat};
+                ajaxCall(data);
+            },
+            saveGeocodeExist = function(data){
+               console.log(data);
+                data.method = 'POST';
+                ajaxCall(data);
+            },
+            ajaxCall = function(data){
+                console.log(data);
+                U.http(function(data){
+                    if(currCnt < totalCnt){
+                        currCnt++;
+                        geocodingStart();
+                    }
+                }, '/admin/prices/geocoding/', data);
+            };
+
+            init();
+        })();
+    </script>
 @endsection

@@ -25,8 +25,8 @@
           </li>
         @else
 
-          <li><a href="/realestates"><strong>{{ trans('common.manageRealestate') }}</strong></a></li>
-          <li><a href="/pricetags"><strong>{{ trans('common.priceMap') }}</strong></a></li>
+          <li><a href="/realestates">{{ trans('common.manageRealestate') }}</a></li>
+          <li><a href="/pricetags">{{ trans('common.priceMap') }}</a></li>
 
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

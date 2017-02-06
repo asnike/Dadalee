@@ -29,11 +29,10 @@ elixir((mix) => {
         '../vendor/handlebars/handlebars.js',
         '../vendor/ladda-bootstrap/dist/spin.js',
         '../vendor/ladda-bootstrap/dist/ladda.js',
-        '../vendor/numeral/numeral.js',
+        '../vendor/numeral/src/numeral.js',
         '../vendor/moment/moment.js',
         '../vendor/moment/locale/ko.js',
         '../vendor/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
-        '../vendor/cleave.js/dist/cleave.js',
         'app.js'
     ], 'public/js/app.js')
     .version([

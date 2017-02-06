@@ -37,13 +37,38 @@ class ActualPricesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    private function numeric($a) {
+        $a = str_replace(",", "", $a);
+        return $a;
+    }
     public function store(Request $request)
     {
         //
-        $path = $request->file('excel')->store('excels');
-        Storage::
-        Excel::load($path, function($reader){
-            dd($reader->take(10)->toObject());
+        $path = $request->file('excel')->storeAs('excels', 'data.xlsx', 'public');
+        //dd(Storage::url('app/public/excels/data.xlsx'));
+        //exit;
+        Excel::load(Storage::url('app/public/excels/data.xlsx'), function($reader){
+            $data = $reader->toObject();
+
+            foreach ($data as $row){
+                ActualPrice::create([
+                    'sigungu'=>$row[1],
+                    'main_no'=>$row[2],
+                    'sub_no'=>$row[3],
+                    'building_name'=>$row[4],
+                    'exclusive_size'=>$row[5],
+                    'land_size'=>$row[6],
+                    'yearmonth'=>$row[7],
+                    'day'=>$row[8],
+                    'price'=>$this->numeric($row[9]),
+                    'floor'=>$row[10],
+                    'completed_at'=>$row[11],
+                    'new_address'=>$row[12],
+                ]);
+            }
+            redirect(route('admin.prices.index'));
+
         });
     }
 
@@ -90,5 +115,24 @@ class ActualPricesController extends Controller
     public function destroy(ActualPrice $actualPrice)
     {
         //
+    }
+    public function geocoding(Request $request){
+        $this->validate($request, [
+            'id'=>'required',
+            'lng'=>'required',
+            'lat'=>'required',
+        ]);
+
+        $data = $request->all();
+        $actualPrice = ActualPrice::findOrFail($request->id);
+        $actualPrice->update($data);
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'realestate'=>$actualPrice,
+            ],
+            'msg'=>trans('common.realestate_add_success')
+        ]);
     }
 }
