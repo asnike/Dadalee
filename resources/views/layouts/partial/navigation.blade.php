@@ -27,6 +27,7 @@
 
           <li><a href="/realestates">{{ trans('common.manageRealestate') }}</a></li>
           <li><a href="/pricetags">{{ trans('common.priceMap') }}</a></li>
+              <li><a href="/actualprices">{{ trans('common.actualPrice') }}</a></li>
 
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

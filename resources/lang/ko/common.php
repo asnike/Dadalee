@@ -91,4 +91,6 @@ return [
     'bank'=>'은행',
     'etc_cost'=>'기타비용',
     'tenant'=>'세입자',
+    
+    'actualPrice'=>'실거래가',
 ];

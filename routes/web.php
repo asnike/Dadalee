@@ -71,9 +71,8 @@ Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
     ]);
 });
 Route::resource('realestates', 'RealEstatesController');
-
-
 Route::resource('pricetags', 'PriceTagsController');
+Route::resource('actualprices', 'ActualPricesController');
 
 Route::get('repaymethods',[
     'as'=>'repay.methods',
