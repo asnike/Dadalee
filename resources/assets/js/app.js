@@ -25,16 +25,21 @@ var U = (function(){
 
     },
     http = function(end, url, data){
-        var type = data.method;
+        var type = data.method,
+            header = {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            };
         delete data.method;
+        if(data['notUseCSRF']){
+            delete data['notUseCSRF'];
+            delete header['X-CSRF-TOKEN'];
+        }
         console.log('http data:', data);
         U.Modal.blockOpen();
         $.ajax({
             type:type,
             url:url,
-            headers:{
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
+            headers:header,
             data:data
         }).done(function(data){
             U.Modal.blockClose();

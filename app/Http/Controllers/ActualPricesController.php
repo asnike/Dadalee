@@ -12,6 +12,24 @@ class ActualPricesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function contain(Request $request, $latlng){
+        $range = explode(',', $latlng);
+        /*$result = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
+            ->whereBetween('lng', [$range[1], $range[3]])
+            ->toSql();
+        dd($result);
+        exit;*/
+
+        $actualPrices = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
+            ->whereBetween('lng', [$range[1], $range[3]])
+            ->get();
+
+        return response()->json([
+            'result' => 1,
+            'lists' => $actualPrices
+        ]);
+    }
+
     public function index(Request $request)
     {
         //

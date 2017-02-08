@@ -74,6 +74,11 @@ Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');
 Route::resource('actualprices', 'ActualPricesController');
 
+Route::get('actualprices/contain/{latlng}', [
+    'as'=>'contain',
+    'uses'=>'ActualPricesController@contain'
+]);
+
 Route::get('repaymethods',[
     'as'=>'repay.methods',
     'uses'=>'RepayMethodsController@index',

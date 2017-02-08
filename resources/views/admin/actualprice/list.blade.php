@@ -61,7 +61,8 @@
 @section('script')
     <script>
         (function(){
-            var geocoder = new daum.maps.services.Geocoder(),
+            var YOUR_API_KEY = 'AIzaSyDp7NxG06QPH1aXl0vS8-t9cZUMajMhS48',
+                geocoder = new daum.maps.services.Geocoder(),
                 prices = JSON.parse({!! json_encode(json_encode($prices)) !!}),
                 geoCache = {},
                 currCnt = 0, totalCnt = 0,
@@ -86,24 +87,33 @@
                     return saveGeocodeExist(t0);
                 }
                 setTimeout(function(){
-                    geocoder.addr2coord(address, function(status, result) {
+                    /*geocoder.addr2coord(address, function(status, result) {
                         if(status === daum.maps.services.Status.OK) {
-                            saveGeocode(result);
+                            saveGeocode(result.addr[0]);
                         }
-                    });
+                    });*/
+                    U.http(function(data){
+                        if(data.status == 'OK'){
+                            saveGeocode(data.results[0].geometry.location);
+                        }
+                    }, 'https://maps.googleapis.com/maps/api/geocode/json?key='+YOUR_API_KEY+'&address=' + address, {method:'GET', 'notUseCSRF':true});
+
                 }, 1000);
             },
             saveGeocode = function(result){
-                var id = prices[currCnt].id,
-                    lng = result.addr[0].lng,
-                    lat = result.addr[0].lat;
+                var t0 = prices[currCnt],
+                    id = t0.id,
+                    lng = result.lng,
+                    lat = result.lat;
 
                 console.log(result);
-                data = {method:'POST', id:id, lng:lng, lat:lat};
+
+                geoCache[t0.sigungu + ' ' + +t0.main_no  + '-' + +t0.sub_no] = data = {method:'POST', id:id, lng:lng, lat:lat};
                 ajaxCall(data);
             },
             saveGeocodeExist = function(data){
-               console.log(data);
+                console.log(data);
+                data.id = prices[currCnt].id;
                 data.method = 'POST';
                 ajaxCall(data);
             },
