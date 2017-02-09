@@ -1,7 +1,6 @@
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 
 
@@ -24,7 +23,7 @@
 
 
 body {
-  font-family: 'Noto Sans KR',Dotum,'돋움',Helvetica,AppleSDGothicNeo,sans-serif;
+  font-family: 'Malgun gothic',Dotum,'돋움',Helvetica,AppleSDGothicNeo,sans-serif;
 }
 body{background:#fff;}
 
@@ -160,4 +159,49 @@ body{background:#fff;}
 
 .loader {
   @include loader02($align: middle, $color: #fff);
+}
+
+.marker{
+  position: relative;bottom:20px;
+}
+.marker-content{
+  background: #4E8300;border:1px solid #406100; border-radius: 5px;padding:4px;
+}
+.marker-content:before{
+  width:10px;
+  height:10px;
+  display:block;
+  content:'';
+  opacity:1;
+  position:absolute;
+  background:#4E8300;
+  border:1px solid #406100;
+  border-color:transparent transparent #406100 #406100;
+  bottom:-5px;
+  left:10px;
+  transform:rotate(-45deg);
+  color:#fff;
+  /*z-index:100;*/
+}
+
+.marker>.marker-content>.name{
+  font-size:12px;font-weight: bold;
+  color:#fff;
+}
+
+.marker>.marker-content>.price{
+  font-size:12px;color:#fff;
+}
+
+.marker>.marker-content>.size{
+  font-size:9px;background:#fff;border:1px solid #333;
+  color: #333;padding:0px 3px;border-radius:15px;
+  position: absolute;
+  left:-10px;top:-10px;
+}
+
+.marker>.marker-content>.year{
+  font-size: 9px;background:#fff;border:1px solid #333;
+  color:#333;padding:0px 3px;border-radius:15px;
+  position:absolute;bottom: -8px;right: -20px;
 }

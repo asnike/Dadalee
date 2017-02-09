@@ -5,7 +5,10 @@
     <script>
         var Controller = (function(){
             var map,
+                currZIndex,
                 clusterer,
+                markers = [],
+                events = [],
             init = function(){
                 initMap();
             },
@@ -41,12 +44,12 @@
                 setMarkers(data.lists);
             },
             setMarkers = function(prices){
-                var markers, last = {}, i, j;
+                var marker, last = {}, i, j;
 
-                for(markers = [], i = 0, j = prices.length ; i < j ; i++){
+                for(markers = [], events = [], i = 0, j = prices.length ; i < j ; i++){
                     data = prices[i];
                     if(data.main_no != last.main_no && data.sub_no != last.sub_no){
-                        markers[markers.length] = makeCustomOverlay(data);//makeBasicMarker(data);
+                        marker = markers[markers.length] = makeCustomOverlay(data, i);//makeBasicMarker(data);
                         last = data;
                     }
                 }
@@ -58,18 +61,24 @@
                     position : new daum.maps.LatLng(data.lat, data.lng)
                 });
             }
-            makeCustomOverlay = function(data){
-                var content =
-                    '<div style="background: #fff;border:1px solid #9d9d9d; border-radius: 5px;padding:4px;">'+
-                        '<span style="font-size:12px;">'+ data.building_name +'</span>'+
-                    '</div>',
+            makeCustomOverlay = function(data, idx){
+                var template = Handlebars.compile($('#marker-template').html()),
+                    content = template({
+                        name:data.building_name,
+                        price:numeral(data.price).format('0,0'),
+                        size:data.exclusive_size,
+                        year:data.completed_at,
+                    });
+
                 position = new daum.maps.LatLng(data.lat, data.lng),
                 customOverlay = new daum.maps.CustomOverlay({
                     position: position,
                     content: content,
-                    xAnchor: 0.3,
-                    yAnchor: 0.91
+                    xAnchor: 0.1,
+                    yAnchor: 1,
+                    zIndex: idx
                 });
+                currZIndex = idx;
 
                 return customOverlay;
             };
@@ -77,3 +86,5 @@
         })();
     </script>
 @stop
+
+@include('actualprice.partial.handlebars')

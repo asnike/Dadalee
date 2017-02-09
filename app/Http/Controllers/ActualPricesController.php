@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ActualPrice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ActualPricesController extends Controller
 {
@@ -14,15 +15,14 @@ class ActualPricesController extends Controller
      */
     public function contain(Request $request, $latlng){
         $range = explode(',', $latlng);
-        /*$result = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
-            ->whereBetween('lng', [$range[1], $range[3]])
-            ->toSql();
-        dd($result);
-        exit;*/
 
-        $actualPrices = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
-            ->whereBetween('lng', [$range[1], $range[3]])
-            ->get();
+        $actualPrices = Redis::get($latlng);
+        if(!$actualPrices){
+            $actualPrices = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
+                ->whereBetween('lng', [$range[1], $range[3]])
+                ->get();
+            Redis::set($latlng, $actualPrices);
+        }
 
         return response()->json([
             'result' => 1,
