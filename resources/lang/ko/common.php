@@ -93,4 +93,8 @@ return [
     'tenant'=>'세입자',
     
     'actualPrice'=>'실거래가',
+    'tradeYearMonth'=>'거래년월',
+    'tradeDay'=>'거래일',
+    'tradePrice'=>'거래가',
+    'notSelectedRealestate'=>'선택된 물건이 없습니다.'
 ];

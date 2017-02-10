@@ -11,6 +11,7 @@
                 events = [],
             init = function(){
                 initMap();
+
             },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
@@ -24,7 +25,7 @@
                 clusterer = new daum.maps.MarkerClusterer({
                     map:map,
                     averageCenter:true,
-                    minLevel:4
+                    minLevel:2
                 });
             },
             mapBoundChange = function(){
@@ -46,6 +47,7 @@
             setMarkers = function(prices){
                 var marker, last = {}, i, j;
 
+                $('.marker-content').attr('onclick', null).unbind('click');
                 for(markers = [], events = [], i = 0, j = prices.length ; i < j ; i++){
                     data = prices[i];
                     if(data.main_no != last.main_no && data.sub_no != last.sub_no){
@@ -68,6 +70,9 @@
                         price:numeral(data.price).format('0,0'),
                         size:data.exclusive_size,
                         year:data.completed_at,
+                        main_no:data.main_no,
+                        sub_no:data.sub_no,
+                        id:data.id,
                     });
 
                 position = new daum.maps.LatLng(data.lat, data.lng),
@@ -81,6 +86,42 @@
                 currZIndex = idx;
 
                 return customOverlay;
+            },
+            markerClick = function(target){
+                var id = $(target).attr('data-id'),
+                    mainNo = $(target).attr('data-main-no'),
+                    subNo = $(target).attr('data-sub-no');
+                console.log('click ', id, mainNo, subNo, target, this);
+                $('.marker-content.selected').removeClass('selected');
+                $(target).addClass('selected');
+                getPriceHistory(mainNo+','+subNo);
+            },
+            getPriceHistory = function(bunji){
+                U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
+            },
+            getPriceHistoryEnd = function(data){
+                $('#selectedName').html(data.actualprices[0].building_name);
+                $('#selectedAddr').html(data.actualprices[0].sigungu + ' '
+                    + +data.actualprices[0].main_no + '-'
+                    + +data.actualprices[0].sub_no);
+                console.log('get history : ', data);
+                var html = '', i, j, template = Handlebars.compile($('#actual-price').html()), content;
+                for(i = 0, j = data.actualprices.length ; i < j ; i++){
+                    item = data.actualprices[i];
+                    html += template({
+                        size:item.exclusive_size,
+                        year:item.yearmonth.substr(0, 4),
+                        month:item.yearmonth.substr(4, 2),
+                        day:item.day,
+                        price:numeral(item.price).format('0,0'),
+                    });
+                }
+                $('#actualPrices').html(html);
+                $('#actualPricesTable').DataTable({
+                    paging:false,
+                    info:false,
+                    retrieve: true,
+                });
             };
             init();
         })();

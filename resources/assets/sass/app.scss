@@ -22,6 +22,7 @@
 
 
 
+
 body {
   font-family: 'Malgun gothic',Dotum,'돋움',Helvetica,AppleSDGothicNeo,sans-serif;
 }
@@ -165,8 +166,19 @@ body{background:#fff;}
   position: relative;bottom:20px;
 }
 .marker-content{
-  background: #4E8300;border:1px solid #406100; border-radius: 5px;padding:4px;
+  background: #4E8300;border:1px solid #406100; border-radius: 5px;padding:7px 4px 7px 4px;
+  cursor:pointer;
+  box-shadow:1px 1px 1px 0px rgba(50, 50, 50, 0.75);
 }
+.marker-content.selected, .marker-content.selected:before{
+  background: #cb4649;
+  border-color: #923436;
+
+}
+.marker-content.selected:before{
+  border-color:transparent transparent #923436 #923436;
+}
+
 .marker-content:before{
   width:10px;
   height:10px;
@@ -194,14 +206,30 @@ body{background:#fff;}
 }
 
 .marker>.marker-content>.size{
-  font-size:9px;background:#fff;border:1px solid #333;
-  color: #333;padding:0px 3px;border-radius:15px;
+  font-size:9px;background:#fff;border:1px solid #555;
+  color: #555;padding:0px 3px;border-radius:15px;
   position: absolute;
   left:-10px;top:-10px;
 }
 
 .marker>.marker-content>.year{
-  font-size: 9px;background:#fff;border:1px solid #333;
-  color:#333;padding:0px 3px;border-radius:15px;
-  position:absolute;bottom: -8px;right: -20px;
+  font-size: 9px;background:#fff;border:1px solid #555;
+  color:#555;padding:0px 3px;border-radius:15px;
+  position:absolute;bottom: -8px;right: -8px;
+  box-shadow:1px 1px 1px 0px rgba(50, 50, 50, 0.75);
+}
+
+.actual-price-info{
+
+}
+
+.actual-price-info > .actual-price-info-header{
+  background:#4E8300;
+  color:#fff;
+  padding:10px;
+}
+
+.actual-price-info > .actual-price-info-body{
+  padding:10px;
+  border:1px solid #ddd;
 }

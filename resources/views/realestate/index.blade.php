@@ -214,6 +214,7 @@
             },
             focusRealestate = function(e){
                 var i, j, id = $(this).attr('data-id'), idx, coords;
+                if(!id) return;
                 for(i = 0, j = realestates.length ; i < j ; i++){
                     if(realestates[i].id == id){
                         idx = i;

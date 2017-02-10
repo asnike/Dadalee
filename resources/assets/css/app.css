@@ -12632,7 +12632,18 @@ body {
   background: #4E8300;
   border: 1px solid #406100;
   border-radius: 5px;
-  padding: 4px;
+  padding: 7px 4px 7px 4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.75);
+}
+
+.marker-content.selected, .marker-content.selected:before {
+  background: #cb4649;
+  border-color: #923436;
+}
+
+.marker-content.selected:before {
+  border-color: transparent transparent #923436 #923436;
 }
 
 .marker-content:before {
@@ -12667,8 +12678,8 @@ body {
 .marker > .marker-content > .size {
   font-size: 9px;
   background: #fff;
-  border: 1px solid #333;
-  color: #333;
+  border: 1px solid #555;
+  color: #555;
   padding: 0px 3px;
   border-radius: 15px;
   position: absolute;
@@ -12679,13 +12690,25 @@ body {
 .marker > .marker-content > .year {
   font-size: 9px;
   background: #fff;
-  border: 1px solid #333;
-  color: #333;
+  border: 1px solid #555;
+  color: #555;
   padding: 0px 3px;
   border-radius: 15px;
   position: absolute;
   bottom: -8px;
-  right: -20px;
+  right: -8px;
+  box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.75);
+}
+
+.actual-price-info > .actual-price-info-header {
+  background: #4E8300;
+  color: #fff;
+  padding: 10px;
+}
+
+.actual-price-info > .actual-price-info-body {
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
 /*# sourceMappingURL=app.css.map */

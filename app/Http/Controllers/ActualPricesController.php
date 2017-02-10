@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Redis;
 
 class ActualPricesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,12 +21,13 @@ class ActualPricesController extends Controller
         $range = explode(',', $latlng);
 
         $actualPrices = Redis::get($latlng);
-        if(!$actualPrices){
+        /*if(!$actualPrices){*/
             $actualPrices = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
                 ->whereBetween('lng', [$range[1], $range[3]])
+                ->orderBy('yearmonth', 'desc')
                 ->get();
-            Redis::set($latlng, $actualPrices);
-        }
+            /*Redis::set($latlng, $actualPrices);
+        }*/
 
         return response()->json([
             'result' => 1,
@@ -73,9 +78,18 @@ class ActualPricesController extends Controller
      * @param  \App\ActualPrice  $actualPrice
      * @return \Illuminate\Http\Response
      */
-    public function show(ActualPrice $actualPrice)
+    public function show($no)
     {
         //
+        $bunji = explode(',', $no);
+        $actualprices = ActualPrice::where('main_no', $bunji[0])
+            ->where('sub_no', $bunji[1])
+            ->orderBy('yearmonth', 'desc')
+            ->get();
+        return response()->json([
+            'result'=>1,
+            'actualprices'=>$actualprices
+        ]);
     }
 
     /**

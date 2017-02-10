@@ -10,46 +10,70 @@
             <div id="map" style="width:100%;min-height:768px;border:1px solid #ddd;"></div>
         </div>
         <div class="col-md-4" style="padding:15px 8px;">
-            <div>
-                <div class="clearfix">
-                    <div class="btn-group btn-tab pull-right">
-                        <a href="#own-tab" class="btn btn-default active" data-toggle="tab">{{ trans('common.own') }}</a>
-                        <a href="#attension-tab" class="btn btn-default" data-toggle="tab">{{ trans('common.attension') }}</a>
+            @if($type == 'actualprice')
+                <div class="actual-price-info">
+                    <div class="actual-price-info-header">
+                        <h4 id="selectedName"></h4>
+                        <h5 id="selectedAddr"></h5>
+                    </div>
+                    <div class="actual-price-info-body">
+                        <table class="table table-striped table-bordered table-condensed" id="actualPricesTable">
+                            <thead>
+                            <tr>
+                                <th>{{ trans('common.exclusiveSize') }}</th>
+                                <th>{{ trans('common.tradeYearMonth') }}</th>
+                                <th>{{ trans('common.tradeDay') }}</th>
+                                <th>{{ trans('common.tradePrice') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody id="actualPrices">
+                            <tr><td colspan="4">{{ trans('common.notSelectedRealestate') }}</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="own-tab">
-
-                        <ul class="list-group realestate-list realestate-own-list">
-                            @foreach($realestates as $realestate)
-                                @if($realestate->own)
-                                    <li class="list-group-item" data-id="{{ $realestate->id }}">
-                                        <span>{{ $realestate->name }}</span>
-                                        <div class="addr">{{ $realestate->address }}</div>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
+            @else
+                <div>
+                    <div class="clearfix">
+                        <div class="btn-group btn-tab pull-right">
+                            <a href="#own-tab" class="btn btn-default active" data-toggle="tab">{{ trans('common.own') }}</a>
+                            <a href="#attension-tab" class="btn btn-default" data-toggle="tab">{{ trans('common.attension') }}</a>
+                        </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="attension-tab">
 
-                        <ul class="list-group realestate-list realestate-attension-list">
-                            @foreach($realestates as $realestate)
-                                @if($realestate->own)
-                                    <li class="list-group-item" data-id="{{ $realestate->id }}">
-                                        <span>{{ $realestate->name }}</span>
-                                        <div class="addr">{{ $realestate->address }}</div>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="own-tab">
+
+                            <ul class="list-group realestate-list realestate-own-list">
+                                @foreach($realestates as $realestate)
+                                    @if($realestate->own)
+                                        <li class="list-group-item" data-id="{{ $realestate->id }}">
+                                            <span>{{ $realestate->name }}</span>
+                                            <div class="addr">{{ $realestate->address }}</div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="attension-tab">
+
+                            <ul class="list-group realestate-list realestate-attension-list">
+                                @foreach($realestates as $realestate)
+                                    @if($realestate->own)
+                                        <li class="list-group-item" data-id="{{ $realestate->id }}">
+                                            <span>{{ $realestate->name }}</span>
+                                            <div class="addr">{{ $realestate->address }}</div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
+
                 </div>
-
-            </div>
+            @endif
 
 
         </div>

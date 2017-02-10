@@ -127,13 +127,15 @@ var U = (function(){
             $('#confirm').modal();
         },
         confirmClose = function(){
-            $('#alert').modal('hide');
+            $('#confirm').modal('hide');
         },
         blockOpen = function(){
             $('#block').fadeIn();
+            $('body').css({'overflow':'hidden'});
         },
         blockClose = function(){
             $('#block').fadeOut();
+            $('body').css({'overflow':'auto'});
         };
         return {
             alert:alert,
