@@ -17,7 +17,7 @@ elixir((mix) => {
     mix.sass('app.scss', 'resources/assets/css')
     .sass('admin.scss', 'resources/assets/css')
     .styles([
-        'app.css', '../vendor/datatables.net-bs/css/dataTables.bootstrap.css'
+        '../vendor/bootstrap-table/dist/bootstrap-table.css','app.css'
     ], 'public/css/app.css')
     .styles([
     'admin.css', 'theme.css'
@@ -34,8 +34,7 @@ elixir((mix) => {
         '../vendor/moment/locale/ko.js',
         '../vendor/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
         '../vendor/cleave.js/dist/cleave.js',
-        '../vendor/datatables.net/js/jquery.dataTables.js',
-        '../vendor/datatables.net-bs/js/dataTables.bootstrap.js',
+        '../vendor/bootstrap-table/dist/bootstrap-table.js',
         'app.js'
     ], 'public/js/app.js')
     .version([
@@ -43,7 +42,6 @@ elixir((mix) => {
         'css/admin.css',
         'js/app.js'
     ])
-    .copy("resources/assets/vendor/font-awesome/fonts", 'public/build/fonts')
-    .copy("../vendor/bootstrap-sass/assets/fonts/bootstrap", 'public/build/fonts');
+    .copy("resources/assets/vendor/font-awesome/fonts", 'public/build/fonts');
 
 });

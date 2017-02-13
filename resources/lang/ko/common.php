@@ -96,5 +96,6 @@ return [
     'tradeYearMonth'=>'거래년월',
     'tradeDay'=>'거래일',
     'tradePrice'=>'거래가',
-    'notSelectedRealestate'=>'선택된 물건이 없습니다.'
+    'notSelectedRealestate'=>'선택된 물건이 없습니다.',
+    'rendPrice'=>'월세',
 ];

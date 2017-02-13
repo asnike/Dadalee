@@ -12711,4 +12711,17 @@ body {
   border: 1px solid #ddd;
 }
 
+.actual-price-info > .actual-price-info-body .table th,
+.actual-price-info > .actual-price-info-body .table td {
+  font-size: 12px;
+}
+
+.fixed-table-container {
+  border: 0;
+}
+
+.fixed-table-body {
+  height: inherit;
+}
+
 /*# sourceMappingURL=app.css.map */

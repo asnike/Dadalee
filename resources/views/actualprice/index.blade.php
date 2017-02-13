@@ -116,12 +116,9 @@
                         price:numeral(item.price).format('0,0'),
                     });
                 }
-                $('#actualPrices').html(html);
-                $('#actualPricesTable').DataTable({
-                    paging:false,
-                    info:false,
-                    retrieve: true,
-                });
+                //$('#actualPrices').html(html);
+                $('#actualPricesTable').bootstrapTable('destroy');
+                $('#actualPricesTable').bootstrapTable({data:data.actualprices});
             };
             init();
         })();

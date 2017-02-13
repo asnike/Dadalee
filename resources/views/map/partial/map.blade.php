@@ -17,7 +17,21 @@
                         <h5 id="selectedAddr"></h5>
                     </div>
                     <div class="actual-price-info-body">
+                        <h6>{{ trans('common.tradePrice') }}</h6>
                         <table class="table table-striped table-bordered table-condensed" id="actualPricesTable">
+                            <thead>
+                            <tr>
+                                <th data-field="exclusive_size" data-sortable="true">{{ trans('common.exclusiveSize') }}</th>
+                                <th data-field="yearmonth" data-sortable="true">{{ trans('common.tradeYearMonth') }}</th>
+                                <th data-field="day" data-sortable="true">{{ trans('common.tradeDay') }}</th>
+                                <th data-field="price" data-sortable="true">{{ trans('common.tradePrice') }}</th>
+                            </tr>
+                            </thead>
+
+                        </table>
+                        <hr>
+                        <h6>{{ trans('common.rendPrice') }}</h6>
+                        {{--<table class="table table-striped table-bordered table-condensed" id="rentPricesTable">
                             <thead>
                             <tr>
                                 <th>{{ trans('common.exclusiveSize') }}</th>
@@ -26,10 +40,10 @@
                                 <th>{{ trans('common.tradePrice') }}</th>
                             </tr>
                             </thead>
-                            <tbody id="actualPrices">
+                            <tbody id="rentPrices">
                             <tr><td colspan="4">{{ trans('common.notSelectedRealestate') }}</td></tr>
                             </tbody>
-                        </table>
+                        </table>--}}
                     </div>
                 </div>
             @else
