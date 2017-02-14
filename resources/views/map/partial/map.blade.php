@@ -18,6 +18,9 @@
                     </div>
                     <div class="actual-price-info-body">
                         <h6>{{ trans('common.tradePrice') }}</h6>
+                        <div style="margin-bottom:10px;">
+                            <span>{{ trans('common.exclusiveSize') }} </span><select style="width:150px;display: inline-block;" name="" class="form-control" id="tradeSize"></select>
+                        </div>
                         <table class="table table-striped table-bordered table-condensed" id="actualPricesTable">
                             <thead>
                             <tr>

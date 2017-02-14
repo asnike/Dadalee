@@ -12,12 +12,13 @@
             init = function(){
                 initMap();
 
+                $("select").select2();
             },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
                     mapOption = {
                         center: new daum.maps.LatLng(37.5635710006, 126.9755292634),
-                        level: 6
+                        level: 4
                     };
                 map = new daum.maps.Map(mapContainer, mapOption);
                 daum.maps.event.addListener(map, 'idle', mapBoundChange);
@@ -25,7 +26,7 @@
                 clusterer = new daum.maps.MarkerClusterer({
                     map:map,
                     averageCenter:true,
-                    minLevel:2
+                    minLevel:3
                 });
             },
             mapBoundChange = function(){
@@ -100,25 +101,37 @@
                 U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
             },
             getPriceHistoryEnd = function(data){
+                var selectData, sizes, i, j, key;
+
                 $('#selectedName').html(data.actualprices[0].building_name);
                 $('#selectedAddr').html(data.actualprices[0].sigungu + ' '
                     + +data.actualprices[0].main_no + '-'
                     + +data.actualprices[0].sub_no);
                 console.log('get history : ', data);
-                var html = '', i, j, template = Handlebars.compile($('#actual-price').html()), content;
-                for(i = 0, j = data.actualprices.length ; i < j ; i++){
-                    item = data.actualprices[i];
-                    html += template({
-                        size:item.exclusive_size,
-                        year:item.yearmonth.substr(0, 4),
-                        month:item.yearmonth.substr(4, 2),
-                        day:item.day,
-                        price:numeral(item.price).format('0,0'),
-                    });
+
+                for(selectData = [], sizes = {}, i = 0, j = data.actualprices.length ; i < j ; i++){
+                    sizes[data.actualprices[i].exclusive_size] = 1;
+                }
+                i = 0;
+                selectData[0] = {id:0, text:'전체'};
+                for(key in sizes){
+                    selectData[selectData.length] = {id:key, text:key};
+                    i++;
                 }
                 //$('#actualPrices').html(html);
                 $('#actualPricesTable').bootstrapTable('destroy');
                 $('#actualPricesTable').bootstrapTable({data:data.actualprices});
+
+
+                $('#tradeSize').select2('destroy');
+                $('#tradeSize').html('');
+                $('#tradeSize').select2({
+                    data:selectData
+                });
+                $('#tradeSize').on('select2:select', function (e) {
+                    var opt = $('#tradeSize').val() == 0 ? {} : {'exclusive_size':+$('#tradeSize').val()};
+                    $('#actualPricesTable').bootstrapTable('filterBy', opt);
+                });
             };
             init();
         })();

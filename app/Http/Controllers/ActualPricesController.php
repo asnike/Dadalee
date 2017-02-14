@@ -19,18 +19,21 @@ class ActualPricesController extends Controller
      */
     public function contain(Request $request, $latlng){
         $range = explode(',', $latlng);
-
-        $actualPrices = Redis::get($latlng);
+        $query = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
+            ->whereBetween('lng', [$range[1], $range[3]])
+            /*->groupBy(['main_no', 'sub_no'])*/
+            ->orderBy('yearmonth', 'desc');
+        //$actualPrices = Redis::get($latlng);
         /*if(!$actualPrices){*/
-            $actualPrices = ActualPrice::whereBetween('lat', [$range[0], $range[2]])
-                ->whereBetween('lng', [$range[1], $range[3]])
-                ->orderBy('yearmonth', 'desc')
-                ->get();
+            $actualPrices = $query->get();
             /*Redis::set($latlng, $actualPrices);
         }*/
 
         return response()->json([
             'result' => 1,
+            'debug'=>[
+                'sql'=>$query->toSql()
+            ],
             'lists' => $actualPrices
         ]);
     }
