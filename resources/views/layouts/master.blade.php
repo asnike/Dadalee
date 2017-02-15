@@ -24,8 +24,10 @@
 
   @include('layouts.partial.flash_message')
 
-  <div class="container contents">
-    @yield('content')
+  <div class="body">
+    <div class="body-content container">
+      @yield('content')
+    </div>
   </div>
 
   @include('layouts.partial.footer')

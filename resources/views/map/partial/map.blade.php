@@ -6,7 +6,7 @@
     @endif
 
     <div class="row clearfix">
-        <div class="col-md-8">
+        <div class="col-md-8 map-container" style="position:relative;">
             <div id="map" style="width:100%;min-height:768px;border:1px solid #ddd;"></div>
         </div>
         <div class="col-md-4" style="padding:15px 8px;">

@@ -11,7 +11,7 @@
                 events = [],
             init = function(){
                 initMap();
-
+                initMapControl();
                 $("select").select2();
             },
             initMap = function(){
@@ -28,6 +28,13 @@
                     averageCenter:true,
                     minLevel:3
                 });
+            },
+            initMapControl = function(){
+                var zoomControl = new daum.maps.ZoomControl();
+                map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+                var template = Handlebars.compile($('#map-control-panel').html());
+                $(template({})).appendTo('.map-container');
             },
             mapBoundChange = function(){
                 var bounds = map.getBounds(),

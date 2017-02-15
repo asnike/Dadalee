@@ -17,3 +17,11 @@
     <td>{{ price }}만원</td>
 </tr>
 </script>
+
+<script id="map-control-panel" type="text/x-handlebars-template">
+    <div class="panel panel-default custom-control-panel">
+        <div class="panel-body">
+            Panel content
+        </div>
+    </div>
+</script>
