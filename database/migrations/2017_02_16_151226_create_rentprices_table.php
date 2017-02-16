@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActualPriceTable extends Migration
+class CreateRentpricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,8 @@ class CreateActualPriceTable extends Migration
      */
     public function up()
     {
-        Schema::create('actualprices', function (Blueprint $table) {
+        //
+        Schema::create('rental_costs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('sigungu');
             $table->string('main_no');
@@ -23,7 +24,9 @@ class CreateActualPriceTable extends Migration
             $table->float('land_size');
             $table->string('yearmonth');
             $table->string('day');
-            $table->integer('price');
+            $table->integer('deposit');
+            $table->integer('rental_cost')->nullable();
+            $table->string('rental_type');
             $table->integer('floor')->nullable();
             $table->string('completed_at');
             $table->string('new_address')->nullable();

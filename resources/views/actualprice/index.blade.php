@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @include('map.partial.map', ['realestates'=>[], 'type'=>'actualprice'])
 
+
+@section('handlebars')
+    @include('actualprice.partial.handlebars')
+@stop
+
 @section('script')
     <script>
         var Controller = (function(){
@@ -32,9 +37,6 @@
             initMapControl = function(){
                 var zoomControl = new daum.maps.ZoomControl();
                 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-
-                var template = Handlebars.compile($('#map-control-panel').html());
-                $(template({})).appendTo('.map-container');
             },
             mapBoundChange = function(){
                 var bounds = map.getBounds(),
@@ -103,6 +105,7 @@
                 $('.marker-content.selected').removeClass('selected');
                 $(target).addClass('selected');
                 getPriceHistory(mainNo+','+subNo);
+                getRentalHistory(mainNo+','+subNo);
             },
             getPriceHistory = function(bunji){
                 U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
@@ -139,10 +142,41 @@
                     var opt = $('#tradeSize').val() == 0 ? {} : {'exclusive_size':+$('#tradeSize').val()};
                     $('#actualPricesTable').bootstrapTable('filterBy', opt);
                 });
+            },
+            getRentalHistory = function(bunji){
+                U.http(getRentalHistoryEnd, 'rentalcosts/' + bunji, {method:'GET'})
+            },
+            getRentalHistoryEnd = function(data){
+                var selectData, sizes, i, j, key;
+
+                console.log('get history : ', data);
+
+                for(selectData = [], sizes = {}, i = 0, j = data.rentalcosts.length ; i < j ; i++){
+                    sizes[data.rentalcosts[i].exclusive_size] = 1;
+                }
+                i = 0;
+                selectData[0] = {id:0, text:'전체'};
+                for(key in sizes){
+                    selectData[selectData.length] = {id:key, text:key};
+                    i++;
+                }
+                //$('#actualPrices').html(html);
+                $('#rentalCostsTable').bootstrapTable('destroy');
+                $('#rentalCostsTable').bootstrapTable({data:data.rentalcosts});
+
+
+                $('#rentalSize').select2('destroy');
+                $('#rentalSize').html('');
+                $('#rentalSize').select2({
+                    data:selectData
+                });
+                $('#rentalSize').on('select2:select', function (e) {
+                    var opt = $('#rentalSize').val() == 0 ? {} : {'exclusive_size':+$('#rentalSize').val()};
+                    $('#rentalCostsTable').bootstrapTable('filterBy', opt);
+                });
             };
             init();
         })();
     </script>
 @stop
 
-@include('actualprice.partial.handlebars')

@@ -3,12 +3,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h5 class="page-header">{{ trans('common.actualPriceList') }}</h5>
+            <h5 class="page-header">{{ trans('common.rentalCostList') }}</h5>
 
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('common.search') }}</div>
                 <div class="panel-body">
-                    <form action="{{ route('admin.prices.store') }}" method="post" class="form-inline" enctype="multipart/form-data">
+                    <form action="{{ route('admin.rental.store') }}" method="post" class="form-inline" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="" class="control-label">{{ trans('common.excel') }}</label>
                             <input type="file" class="form-control" name="excel" />
@@ -40,18 +40,18 @@
                 <th>{{ trans('common.subNo') }}</th>
                 </thead>
                 <tbody>
-                @foreach($prices as $price)
+                @foreach($costs as $cost)
                     <tr>
-                        <td>{{ $price->id }}</td>
-                        <td>{{ $price->building_name }}</td>
-                        <td>{{ $price->main_no }}</td>
-                        <td>{{ $price->sub_no }}</td>
+                        <td>{{ $cost->id }}</td>
+                        <td>{{ $cost->building_name }}</td>
+                        <td>{{ $cost->main_no }}</td>
+                        <td>{{ $cost->sub_no }}</td>
                     </tr>
                 @endforeach
                 </tbody>
 
             </table>
-            <div class="text-center">{{ $prices->links() }}</div>
+            <div class="text-center">{{ $costs->links() }}</div>
         </div>
     </div>
 
@@ -63,7 +63,7 @@
         (function(){
             var YOUR_API_KEY = 'AIzaSyDp7NxG06QPH1aXl0vS8-t9cZUMajMhS48',
                 geocoder = new daum.maps.services.Geocoder(),
-                prices = JSON.parse({!! json_encode(json_encode($prices)) !!}),
+                prices = JSON.parse({!! json_encode(json_encode($costs)) !!}),
                 geoCache = {},
                 currCnt = 0, totalCnt = 0,
             init = function(){

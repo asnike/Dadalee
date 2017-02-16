@@ -1,4 +1,4 @@
-<div class="row realestate-add-form">
+<div class="row">
 
     <form action="" class="search-form" onsubmit="return Controller.onSubmit();" style="margin: 0;">
         <div class="fomr-group clearfix">

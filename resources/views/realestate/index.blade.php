@@ -1,6 +1,14 @@
+
+
+
 @extends('layouts.master')
 
 @include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
+
+@include('realestate.partial.modal')
+@section('handlebars')
+    @include('realestate.partial.handlebars')
+@stop
 
 @section('script')
 
@@ -91,7 +99,7 @@
                 var mapContainer = document.getElementById('map'),
                     mapOption = {
                         center: new daum.maps.LatLng(37.5635710006, 126.9755292634),
-                        level: 6
+                        level: 4
                     };
                 map = new daum.maps.Map(mapContainer, mapOption);
             },
@@ -375,5 +383,5 @@
     </script>
 @stop
 
-@include('realestate.partial.handlebars')
-@include('realestate.partial.modal')
+
+

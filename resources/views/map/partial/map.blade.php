@@ -5,11 +5,11 @@
         @include('pricetag.partial.add')
     @endif
 
-    <div class="row clearfix">
-        <div class="col-md-8 map-container" style="position:relative;">
-            <div id="map" style="width:100%;min-height:768px;border:1px solid #ddd;"></div>
+    <div class="row clearfix" style="flex:1;">
+        <div class="col-md-8 map-container">
+            <div id="map"></div>
         </div>
-        <div class="col-md-4" style="padding:15px 8px;">
+        <div class="col-md-4" style="padding:15px 8px;height: 100%; overflow-y: auto;">
             @if($type == 'actualprice')
                 <div class="actual-price-info">
                     <div class="actual-price-info-header">
@@ -33,20 +33,22 @@
 
                         </table>
                         <hr>
-                        <h6>{{ trans('common.rendPrice') }}</h6>
-                        {{--<table class="table table-striped table-bordered table-condensed" id="rentPricesTable">
+                        <h6>{{ trans('common.rentPrice') }}</h6>
+                        <div style="margin-bottom:10px;">
+                            <span>{{ trans('common.exclusiveSize') }} </span><select style="width:150px;display: inline-block;" name="" class="form-control" id="rentalSize"></select>
+                        </div>
+                        <table class="table table-striped table-bordered table-condensed" id="rentalCostsTable">
                             <thead>
                             <tr>
-                                <th>{{ trans('common.exclusiveSize') }}</th>
-                                <th>{{ trans('common.tradeYearMonth') }}</th>
-                                <th>{{ trans('common.tradeDay') }}</th>
-                                <th>{{ trans('common.tradePrice') }}</th>
+                                <th data-field="exclusive_size" data-sortable="true">{{ trans('common.exclusiveSize') }}</th>
+                                <th data-field="yearmonth" data-sortable="true">{{ trans('common.tradeYearMonth') }}</th>
+                                <th data-field="day" data-sortable="true">{{ trans('common.tradeDay') }}</th>
+                                <th data-field="deposit" data-sortable="true">{{ trans('common.deposit') }}</th>
+                                <th data-field="rental_cost" data-sortable="true">{{ trans('common.rentalCost') }}</th>
                             </tr>
                             </thead>
-                            <tbody id="rentPrices">
-                            <tr><td colspan="4">{{ trans('common.notSelectedRealestate') }}</td></tr>
-                            </tbody>
-                        </table>--}}
+
+                        </table>
                     </div>
                 </div>
             @else

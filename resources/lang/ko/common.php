@@ -97,5 +97,40 @@ return [
     'tradeDay'=>'거래일',
     'tradePrice'=>'매매가',
     'notSelectedRealestate'=>'선택된 물건이 없습니다.',
-    'rendPrice'=>'월세',
+    'rentPrice'=>'월세',
+
+    'excel'=>'엑셀',
+    'rentalCost'=>'월세',
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    'building_name'=>'건물이름',
+    'mainNo'=>'본번',
+    'subNo'=>'부번',
+    'actualPriceList'=>'실거래가 - 매매',
+    'rentalCostList'=>'실거래가 - 월세',
+    'geocoding'=>'지오코딩',
+    'upload'=>'업로드',
 ];

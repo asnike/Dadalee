@@ -31,9 +31,13 @@
   </div>
 
   @include('layouts.partial.footer')
+  @include('layouts.partial.modal')
+
+  @yield('modal')
+  @yield('handlebars')
 
   <script src="{{ elixir("js/app.js") }}"></script>
-  @include('layouts.partial.modal')
+
   @yield('script')
 </body>
 

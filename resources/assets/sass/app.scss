@@ -82,6 +82,7 @@ body{background:#fff;}
   position: fixed;
   height:50px;
   bottom:0;
+  width:100%;
 }
 .footer .logo, .footer .logo:hover{
   color:inherit;
@@ -247,7 +248,8 @@ body{background:#fff;}
 }
 .body-content{
   margin:100px auto 50px auto;
-  overflow-y:auto;
+  display: flex;
+  flex-direction:column;
 }
 
 .fixed-table-container{
@@ -265,4 +267,14 @@ body{background:#fff;}
   width:150px;
   height:80px;
   z-index: 1000;
+}
+
+.map-container, #map{
+  height:100%;
+}
+.map-container{
+  position:relative;
+}
+#map{
+  width:100%;border:1px solid #ddd;
 }

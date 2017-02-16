@@ -73,11 +73,13 @@ Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
 Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');
 Route::resource('actualprices', 'ActualPricesController');
+Route::resource('rentalcosts', 'RentalCostsController');
 
 Route::get('actualprices/contain/{latlng}', [
     'as'=>'contain',
     'uses'=>'ActualPricesController@contain'
 ]);
+
 
 Route::get('repaymethods',[
     'as'=>'repay.methods',
@@ -113,6 +115,7 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware'=>['admin']], functi
     ]);
     Route::resource('users', 'Admin\UsersController');
     Route::resource('prices', 'Admin\ActualPricesController');
+    Route::resource('rental', 'Admin\RentalCostsController');
     Route::post('prices/geocoding', [
         'as'=>'geocoding',
         'uses'=>'Admin\ActualPricesController@geocoding'

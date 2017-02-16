@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ActualPrice;
-use App\Http\Controllers\Controller;
+use App\RentalCost;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ActualPricesController extends Controller
+class RentalCostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class ActualPricesController extends Controller
     public function index()
     {
         //
-        $query = ActualPrice::query();
-        $prices = $query->paginate(15);
-        return view('admin.actualprice.list', ['prices'=>$prices]);
+        $query = RentalCost::query();
+        $costs = $query->paginate(15);
+        return view('admin.rentalcost.list', ['costs'=>$costs]);
     }
 
     /**
@@ -39,11 +39,6 @@ class ActualPricesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    private function numeric($a) {
-        $a = str_replace(",", "", $a);
-        return $a;
-    }
     public function store(Request $request)
     {
         //
@@ -54,33 +49,39 @@ class ActualPricesController extends Controller
             $data = $reader->toObject();
 
             foreach ($data as $row){
-                ActualPrice::create([
+                RentalCost::create([
                     'sigungu'=>$row[1],
                     'main_no'=>$row[2],
                     'sub_no'=>$row[3],
                     'building_name'=>$row[4],
-                    'exclusive_size'=>$row[5],
-                    'land_size'=>$row[6],
-                    'yearmonth'=>$row[7],
+                    'rental_type'=>$row[5] == '월세' ? 1:2,
+                    'exclusive_size'=>$row[6],
+                    'land_size'=>$row[7],
+                    'yearmonth'=>$row[8],
                     'day'=>$row[8],
-                    'price'=>$this->numeric($row[9]),
-                    'floor'=>$row[10],
-                    'completed_at'=>$row[11],
-                    'new_address'=>$row[12],
+                    'deposit'=>$this->numeric($row[9]),
+                    'rental_cost'=>$this->numeric($row[10]),
+                    'floor'=>$row[11],
+                    'completed_at'=>$row[12],
+                    'new_address'=>$row[13],
                 ]);
             }
-            redirect(route('admin.prices.index'));
+            redirect(route('admin.rental.index'));
 
         });
+    }
+    private function numeric($a) {
+        $a = str_replace(",", "", $a);
+        return $a;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ActualPrice  $actualPrice
+     * @param  \App\RentalCost  $rentalCost
      * @return \Illuminate\Http\Response
      */
-    public function show(ActualPrice $actualPrice)
+    public function show(RentalCost $rentalCost)
     {
         //
     }
@@ -88,10 +89,10 @@ class ActualPricesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ActualPrice  $actualPrice
+     * @param  \App\RentalCost  $rentalCost
      * @return \Illuminate\Http\Response
      */
-    public function edit(ActualPrice $actualPrice)
+    public function edit(RentalCost $rentalCost)
     {
         //
     }
@@ -100,10 +101,10 @@ class ActualPricesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ActualPrice  $actualPrice
+     * @param  \App\RentalCost  $rentalCost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ActualPrice $actualPrice)
+    public function update(Request $request, RentalCost $rentalCost)
     {
         //
     }
@@ -111,30 +112,11 @@ class ActualPricesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ActualPrice  $actualPrice
+     * @param  \App\RentalCost  $rentalCost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ActualPrice $actualPrice)
+    public function destroy(RentalCost $rentalCost)
     {
         //
-    }
-    public function geocoding(Request $request){
-        $this->validate($request, [
-            'id'=>'required',
-            'lng'=>'required',
-            'lat'=>'required',
-        ]);
-
-        $data = $request->all();
-        $actualPrice = ActualPrice::findOrFail($request->id);
-        $actualPrice->update($data);
-
-        return response()->json([
-            'result'=>1,
-            'data'=>[
-                'realestate'=>$actualPrice,
-            ],
-            'msg'=>trans('common.realestate_add_success')
-        ]);
     }
 }
