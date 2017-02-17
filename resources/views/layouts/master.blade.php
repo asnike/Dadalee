@@ -25,12 +25,15 @@
   @include('layouts.partial.flash_message')
 
   <div class="body">
-    <div class="body-content container">
-      @yield('content')
-    </div>
+
+    @yield('content')
+
+  </div>
+  <div class="sidebar">
+    @yield('content')
   </div>
 
-  @include('layouts.partial.footer')
+  {{--@include('layouts.partial.footer')--}}
   @include('layouts.partial.modal')
 
   @yield('modal')

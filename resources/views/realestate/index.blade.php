@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.master')
 
 @include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
@@ -102,6 +99,10 @@
                         level: 4
                     };
                 map = new daum.maps.Map(mapContainer, mapOption);
+
+                $(window).resize(function(){
+                    map.relayout();
+                });
             },
             onSubmit = function(){
                 var name = $('#name').val(),

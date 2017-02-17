@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
-  <div class="container">
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
         <span class="sr-only">Toggle Navigation</span>
@@ -14,7 +14,7 @@
       </a>
     </div>
 
-    <div class="collapse navbar-collapse navbar-responsive-collapse">
+    <div class="collapse navbar-collapse navbar-responsive-collapse" style="margin-right: 10px;">
       <ul class="nav navbar-nav navbar-right">
         @if(! auth()->check())
           <li>
@@ -40,5 +40,4 @@
         @endif
       </ul>
     </div>
-  </div>
 </nav>

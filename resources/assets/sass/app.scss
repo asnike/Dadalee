@@ -28,6 +28,10 @@ body {
 }
 body{background:#fff;}
 
+.navbar{
+  box-shadow:0 2px 4px rgba(0,0,0,.1);
+}
+
 .logo-txt{
   font-size:22px;
   line-height:42px;
@@ -243,14 +247,19 @@ body{background:#fff;}
 }
 
 .body{
-  display: flex;
   height:100vh;
+  padding-top:50px;
 }
-.body-content{
-  margin:100px auto 50px auto;
-  display: flex;
-  flex-direction:column;
+.sidebar{
+  width:400px;
+  height:100%;
+  position: absolute;
+  top:0;
+  right:0;
+  box-shadow:0 0 10px rgba(0,0,0,.2);
+  z-index: 10;
 }
+
 
 .fixed-table-container{
   border:0;
@@ -269,12 +278,11 @@ body{background:#fff;}
   z-index: 1000;
 }
 
-.map-container, #map{
-  height:100%;
-}
-.map-container{
-  position:relative;
-}
 #map{
-  width:100%;border:1px solid #ddd;
+  position: absolute;
+  right:400px;
+  top:50px;
+  bottom:0;
+  left:0;
 }
+
