@@ -12731,6 +12731,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding-top: 100px;
+  overflow-y: auto;
 }
 
 .fixed-table-container {
