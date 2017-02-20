@@ -51,11 +51,9 @@ body{background:#fff;}
 }
 
 .search-form{
-  padding:15px;
+
 }
-.search-form input[type="text"]{
-  width:100%;
-}
+
 
 .list-group-item{
   border-color: #ddd;
@@ -249,6 +247,7 @@ body{background:#fff;}
 .body{
   height:100vh;
   padding-top:50px;
+  position: relative;
 }
 .sidebar{
   width:400px;
@@ -258,6 +257,7 @@ body{background:#fff;}
   right:0;
   box-shadow:0 0 10px rgba(0,0,0,.2);
   z-index: 10;
+  padding-top:100px;
 }
 
 
@@ -269,20 +269,35 @@ body{background:#fff;}
   height:inherit;
 }
 
-.custom-control-panel{
-  position: absolute;
-  top:10px;
-  left:10px;
-  width:150px;
-  height:80px;
-  z-index: 1000;
+.realestate-add-panel{
+
 }
 
 #map{
   position: absolute;
   right:400px;
-  top:50px;
+  top:85px;
   bottom:0;
   left:0;
 }
 
+.navbar-sub{
+  height: 50px;
+  width:100%;
+  background: #f7f7f7;
+  border-top:1px solid #d3e0e9;
+  padding:10px;
+}
+
+.checkbox{
+  margin-top:0;
+  margin-bottom:0;
+}
+
+.sidebar-content{
+  padding:10px;
+}
+
+.sidebar-content .realestate-list .list-group-item{
+  border-radius:0;
+}

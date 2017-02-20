@@ -2,6 +2,10 @@
 
 @include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
 
+@section('sidebar')
+    @include('realestate.partial.sidebar', ['type'=>'realestate'])
+@stop
+
 @include('realestate.partial.modal')
 @section('handlebars')
     @include('realestate.partial.handlebars')
@@ -15,6 +19,7 @@
                 repayMethods,
             init = function(){
                 initMap();
+                initMapControl();
                 getRealestates();
                 initDetailModal();
 
@@ -36,6 +41,9 @@
                 new Cleave('#loanPanel input[name="account_no"]', {
                     numericOnly:true,
                 });
+            },
+            initMapControl = function (){
+
             },
             initDetailModal = function(){
                 $('.btn-tab').click(function(e){

@@ -40,7 +40,7 @@
         </div>
     </div>
 @else
-    <div>
+    <div class="sidebar-content">
         <div class="clearfix">
             <div class="btn-group btn-tab pull-right">
                 <a href="#own-tab" class="btn btn-default active" data-toggle="tab">{{ trans('common.own') }}</a>

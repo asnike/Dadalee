@@ -30,7 +30,7 @@
 
   </div>
   <div class="sidebar">
-    @yield('content')
+    @yield('sidebar')
   </div>
 
   {{--@include('layouts.partial.footer')--}}
