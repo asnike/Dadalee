@@ -17,9 +17,9 @@
         </div>
 
         <div class="tools">
-            <div class="btn btn-info btn-xs btn-detail ladda-button" data-id="{{ id }}" data-style="zoom-in" data-size="1"><span class="ladda-label"><i class="fa fa-pencil-square-o"></i> 상세</span></div>
-
-            <div class="btn btn-danger btn-xs btn-del" data-id="{{ id }}"><i class="fa fa-trash-o"></i> 삭제</div>
+            <div class="btn btn-success btn-xs btn-detail ladda-button" data-id="{{ id }}" data-style="zoom-in" data-size="1"><span class="ladda-label"><i class="fa fa-info-circle"></i> 정보</span></div>
+            <div class="btn btn-success btn-xs btn-price ladda-button" data-id="{{ id }}" data-bunji="{{ bunji }}" data-style="zoom-in" data-size="1"><span class="ladda-label"><i class="fa fa-won"></i> 실거래가</span></div>
+            <div class="btn btn-danger btn-xs btn-del" data-id="{{ id }}"><i class="fa fa-remove"></i> 삭제</div>
         </div>
     </li>
 </script>

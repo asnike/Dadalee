@@ -2,14 +2,25 @@
 
 @include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
 
-@section('sidebar')
-    @include('realestate.partial.sidebar', ['type'=>'realestate'])
-@stop
+
+@include('realestate.partial.navbarsub')
+
+
+
+@include('realestate.partial.sidebar', ['type'=>'realestate'])
+
+
 
 @include('realestate.partial.modal')
+
+@include('realestate.partial.info')
+
 @section('handlebars')
     @include('realestate.partial.handlebars')
 @stop
+
+
+
 
 @section('script')
 
@@ -23,6 +34,7 @@
                 getRealestates();
                 initDetailModal();
 
+                $("select").select2();
                 $('#datetimepicker').datetimepicker({format:'YYYY-MM-DD', icons:{
                     previous: 'fa fa-arrow-left',
                     next: 'fa fa-arrow-right',
@@ -126,7 +138,8 @@
                         own:own,
                         sigungu:searchedInfo.localName_1 + ' ' + searchedInfo.localName_2 + ' ' + searchedInfo.localName_3,
                         sigungu_code:addrInfo.sigunguCode,
-                        main_address:searchedInfo.mainAddress,
+                        main_no:searchedInfo.mainAddress,
+                        sub_no:searchedInfo.subAddress,
                         new_address:searchedInfo.newAddress,
                         building_name:addrInfo.buildingName,
                     });
@@ -169,21 +182,15 @@
                 for(ownHtml = attensionHtml = '', i = 0, j = data.lists.length ; i < j ; i++){
                     realestate = data.lists[i];
                     setMarker(data.lists[i], i == 0);
-                    if(realestate.own) {
-                        ownHtml += template({
-                            'id': realestate.id,
-                            'name': realestate.name,
-                            'address': realestate.address,
-                            'earningRate': 0,
-                        });
-                    }else{
-                        attensionHtml += template({
-                            'id': realestate.id,
-                            'name': realestate.name,
-                            'address': realestate.address,
-                            'earningRate': 0,
-                        });
-                    }
+                    tmplData = {
+                        'id': realestate.id,
+                        'name': realestate.name,
+                        'address': realestate.address,
+                        'earningRate': 0,
+                        'bunji':realestate.main_no+','+realestate.sub_no
+                    };
+                    if(realestate.own) ownHtml += template(tmplData);
+                    else attensionHtml += template(tmplData);
                 }
                 var emptyTmpl = Handlebars.compile($('#realestate-list-no-item').html());
                 if(ownHtml == '') ownHtml = emptyTmpl();
@@ -202,7 +209,7 @@
                 $('.realestate-list>.list-group-item>.tools>.btn-del').off();
                 $('.realestate-list>.list-group-item').click(focusRealestate);
                 $('.realestate-list>.list-group-item>.tools>.btn-detail').click(openDetailModal);
-                $('.realestate-list>.list-group-item>.tools>.btn-price').click(openPriceModal);
+                $('.realestate-list>.list-group-item>.tools>.btn-price').click(showPrice);
                 $('.realestate-list>.list-group-item>.tools>.btn-del').click(delConfirm);
 
 
@@ -253,9 +260,6 @@
                 }
                 overlay.setMap(null);
                 markers[i].overlay = overlay = null;
-            },
-            openPriceModal = function(e){
-                U.http(function(data){ console.log('price : ', data) },'/realestates/tradeprice', {method:'GET'});
             },
             openDetailModal = function(e){
                 var l = Ladda.create(this);
@@ -372,6 +376,81 @@
                 if(data.result){
                     U.Modal.confirmClose();
                 }
+            },
+            showPrice = function(e){
+                var bunji = $(this).attr('data-bunji');
+                getPriceHistory(bunji);
+                getRentalHistory(bunji);
+            },
+            getPriceHistory = function(bunji){
+                U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
+            },
+            getPriceHistoryEnd = function(data){
+                var selectData, sizes, i, j, key;
+
+                $('#selectedName').html(data.actualprices[0].building_name);
+                $('#selectedAddr').html(data.actualprices[0].sigungu + ' '
+                    + +data.actualprices[0].main_no + '-'
+                    + +data.actualprices[0].sub_no);
+                console.log('get history : ', data);
+
+                for(selectData = [], sizes = {}, i = 0, j = data.actualprices.length ; i < j ; i++){
+                    sizes[data.actualprices[i].exclusive_size] = 1;
+                }
+                i = 0;
+                selectData[0] = {id:0, text:'전체'};
+                for(key in sizes){
+                    selectData[selectData.length] = {id:key, text:key};
+                    i++;
+                }
+                //$('#actualPrices').html(html);
+                $('#actualPricesTable').bootstrapTable('destroy');
+                $('#actualPricesTable').bootstrapTable({data:data.actualprices});
+
+
+                $('#tradeSize').select2('destroy');
+                $('#tradeSize').html('');
+                $('#tradeSize').select2({
+                    data:selectData
+                });
+                $('#tradeSize').on('select2:select', function (e) {
+                    var opt = $('#tradeSize').val() == 0 ? {} : {'exclusive_size':+$('#tradeSize').val()};
+                    $('#actualPricesTable').bootstrapTable('filterBy', opt);
+                });
+
+                $('.price-info').addClass('show');
+            },
+            getRentalHistory = function(bunji){
+                U.http(getRentalHistoryEnd, 'rentalcosts/' + bunji, {method:'GET'})
+            },
+            getRentalHistoryEnd = function(data){
+                var selectData, sizes, i, j, key;
+
+                console.log('get history : ', data);
+
+                for(selectData = [], sizes = {}, i = 0, j = data.rentalcosts.length ; i < j ; i++){
+                    sizes[data.rentalcosts[i].exclusive_size] = 1;
+                }
+                i = 0;
+                selectData[0] = {id:0, text:'전체'};
+                for(key in sizes){
+                    selectData[selectData.length] = {id:key, text:key};
+                    i++;
+                }
+                //$('#actualPrices').html(html);
+                $('#rentalCostsTable').bootstrapTable('destroy');
+                $('#rentalCostsTable').bootstrapTable({data:data.rentalcosts});
+
+
+                $('#rentalSize').select2('destroy');
+                $('#rentalSize').html('');
+                $('#rentalSize').select2({
+                    data:selectData
+                });
+                $('#rentalSize').on('select2:select', function (e) {
+                    var opt = $('#rentalSize').val() == 0 ? {} : {'exclusive_size':+$('#rentalSize').val()};
+                    $('#rentalCostsTable').bootstrapTable('filterBy', opt);
+                });
             };
             init();
             return {

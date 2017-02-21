@@ -1,4 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    Your content here!!
+    <div class="container">
+        content
+    </div>
 @stop

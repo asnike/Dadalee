@@ -90,12 +90,16 @@ class ActualPricesController extends Controller
     {
         //
         $bunji = explode(',', $no);
-        $actualprices = ActualPrice::where('main_no', $bunji[0])
-            ->where('sub_no', $bunji[1])
-            ->orderBy('yearmonth', 'desc')
-            ->get();
+        $query = ActualPrice::where('main_no', (int)$bunji[0])
+            ->where('sub_no', (int)$bunji[1])
+            ->orderBy('yearmonth', 'desc');
+        $actualprices = $query->get();
         return response()->json([
             'result'=>1,
+            'debug'=>[
+                'sql'=>$query->toSql(),
+                'bunji'=>$bunji
+            ],
             'actualprices'=>$actualprices
         ]);
     }

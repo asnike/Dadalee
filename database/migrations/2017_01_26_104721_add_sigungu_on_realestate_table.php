@@ -17,7 +17,8 @@ class AddSigunguOnRealestateTable extends Migration
         Schema::table('realestates', function (Blueprint $table) {
             $table->string('sigungu')->after('address');
             $table->string('building_name')->after('sigungu')->nullable();
-            $table->string('main_address')->after('sigungu');
+            $table->string('sub_no')->after('sigungu');
+            $table->string('main_no')->after('sigungu');
             $table->string('new_address')->after('main_address');
             $table->string('sigungu_code')->after('sigungu');
         });

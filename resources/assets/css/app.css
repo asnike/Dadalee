@@ -12515,7 +12515,7 @@ body {
 }
 
 .login.panel, .register.panel {
-  margin: 0px 0 200px 0;
+  margin: 100px 0 200px 0;
 }
 
 .checkbox label::before {
@@ -12541,14 +12541,6 @@ body {
 
 .realestate-list .addr {
   font-size: 12px;
-}
-
-.realestate-list .info {
-  float: left;
-}
-
-.realestate-list .tools {
-  float: right;
 }
 
 #realestate-detail .modal-dialog {
@@ -12700,10 +12692,38 @@ body {
   box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.75);
 }
 
+.price-info {
+  position: absolute;
+  background: #fff;
+  padding-top: 187px;
+  left: 0;
+  top: 0;
+  width: 430px;
+  height: 100%;
+  z-index: 100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.price-info.show {
+  display: block;
+}
+
+.actual-price-info {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
 .actual-price-info > .actual-price-info-header {
+  width: 430px;
   background: #4E8300;
   color: #fff;
   padding: 10px;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 101;
 }
 
 .actual-price-info > .actual-price-info-body {
@@ -12731,7 +12751,11 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding-top: 100px;
+}
+
+.sidebar-container {
   overflow-y: auto;
+  height: 100%;
 }
 
 .fixed-table-container {

@@ -29,11 +29,10 @@
     @yield('content')
 
   </div>
-  <div class="sidebar">
-    @yield('sidebar')
-  </div>
+  @yield('sidebar')
 
   {{--@include('layouts.partial.footer')--}}
+  @yield('info')
   @include('layouts.partial.modal')
 
   @yield('modal')
