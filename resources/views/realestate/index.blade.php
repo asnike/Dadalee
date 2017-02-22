@@ -54,9 +54,10 @@
                     numericOnly:true,
                 });
             },
-            initMapControl = function (){
-
-            },
+                initMapControl = function(){
+                    var zoomControl = new daum.maps.ZoomControl();
+                    map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+                },
             initDetailModal = function(){
                 $('.btn-tab').click(function(e){
                     $('.btn-tab>.btn').removeClass('active');
@@ -81,23 +82,35 @@
             earningInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#earningPanel', function(val){ return numeral(val).value(); });
                 data = $.extend(data, {method:'POST','_method':'put'});
-                data.rate = data.real_earning?data.real_earning:0*12/data.investment?data.investment:1;
+                data.rate = (data.real_earning?data.real_earning:0)*12/(data.investment?data.investment:1)*100;
                 console.log('data : ',data);
                 U.http(function(data){
-                    U.Modal.alert(data.msg);
+                    if(data.result) U.Modal.alert(data.msg);
+                    else U.Modal.alert(data.data);
                 }, '/realestates/' + selectedData.id + '/earning', data);
 
                 return false;
             },
             loanInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#loanPanel', function(val){
-                    if(isNaN(+val)) return val;
+                    if(isNaN(+(val.replace(/,/g, '')))) return val;
                     return numeral(val).value();
                 });
-                    data = $.extend(data, {method:'POST','_method':'put'});
+                data = $.extend(data, {method:'POST','_method':'put'});
                 console.log('data : ',data);
                 U.http(function(data){
-                    U.Modal.alert(data.msg);
+                    if(data.result) U.Modal.alert(data.msg);
+                    else{
+                        if(data.validation){
+                            var msg = [], k, sk;
+                            for(k in data.validation){
+                                for(sk in data.validation[k]){
+                                    msg[msg.length] = data.validation[k][sk];
+                                }
+                            }
+                            U.Modal.alert(msg.join('<br>'));
+                        }
+                    }
                 }, '/realestates/' + selectedData.id + '/loan', data);
 
                 return false;
@@ -116,7 +129,7 @@
                 var mapContainer = document.getElementById('map'),
                     mapOption = {
                         center: new daum.maps.LatLng(37.5635710006, 126.9755292634),
-                        level: 4
+                        level: 2
                     };
                 map = new daum.maps.Map(mapContainer, mapOption);
 
@@ -153,9 +166,17 @@
             },
             setMarker = function(data, moveCenter){
                 var coords = new daum.maps.LatLng(data.lat, data.lng);
+
+                var imageSrc = '/image/house-marker.png',
+                    imageSize = new daum.maps.Size(56, 62),
+                    imageOprion = {offset: new daum.maps.Point(27, 69)}
+                var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOprion);
+
+
                 var marker = new daum.maps.Marker({
                     map: map,
-                    position: coords
+                    position: coords,
+                    image:markerImage
                 }), markerData;
                 if(moveCenter) map.setCenter(coords);
                 markers[markers.length] = markerData = {data:data, marker:marker, click:function(){ showInfo(markerData); }};
@@ -186,7 +207,7 @@
                         'id': realestate.id,
                         'name': realestate.name,
                         'address': realestate.address,
-                        'earningRate': 0,
+                        'earningRate': realestate.earning_rate ? realestate.earning_rate.rate : 0,
                         'bunji':realestate.main_no+','+realestate.sub_no
                     };
                     if(realestate.own) ownHtml += template(tmplData);

@@ -10,7 +10,8 @@
       </button>
 
       <a href="{{ route('home') }}" class="navbar-brand" style="padding:4px;">
-        <span class="logo-txt">Dadalee</span>
+        {{--<span class="logo-txt">Dadalee</span>--}}
+          <img class="logo" src="{{ url('image/logo.png') }}" alt="">
       </a>
     </div>
 

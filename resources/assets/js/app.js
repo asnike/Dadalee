@@ -44,6 +44,19 @@ var U = (function(){
         }).done(function(data){
             U.Modal.blockClose();
             end(data);
+        }).fail(function(xhr, status){
+            var data;
+            U.Modal.blockClose();
+            console.log(xhr, status);
+            data = {
+                result:0,
+            };
+            switch(xhr.status){
+                case 422:
+                    data.validation = xhr.responseJSON;
+                    break;
+            }
+            end(data);
         });
     },
     Form = (function(){

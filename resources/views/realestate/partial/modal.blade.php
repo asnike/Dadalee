@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="">{{ trans('common.interestRate') }}</label>
-                                    <div class="col-md-4"><input name="interest_rate" maxlength="5" type="text" class="form-control" required></div>
+                                    <div class="col-md-4"><input name="interest_rate" maxlength="5" type="text" class="form-control" required onchange="Controller.calcEarning(event);"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="">{{ trans('common.repayCommission') }}</label>
@@ -155,7 +155,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="">{{ trans('common.repayMethod') }}</label>
                                     <div class="col-md-4">
-                                        <select name="repay_method_id" id="" class="form-control">
+                                        <select name="repay_method_id" id="" class="select">
 
                                         </select>
                                     </div>

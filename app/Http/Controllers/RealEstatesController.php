@@ -56,8 +56,8 @@ class RealEstatesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required|max:50',
-            'address'=>'required|max:255',
+            'name'=>'required',
+            'address'=>'required',
         ]);
 
         $data = $request->all();
@@ -117,12 +117,12 @@ class RealEstatesController extends Controller
     {
         //
         $this->validate($request, [
-            'name'=>'required|max:50',
-            'address'=>'required|max:255',
-            'floor'=>'numeric|max:10',
-            'completed_at'=>'max:15',
+            'name'=>'required',
+            'address'=>'required',
+            'floor'=>'numeric',
+            'completed_at'=>'nullable',
             'exclusive_size'=>'numeric',
-            'memo'=>'max:500',
+            'memo'=>'nullable',
         ]);
 
         $data = $request->all();
@@ -164,16 +164,16 @@ class RealEstatesController extends Controller
 
     public function earning(Request $request, $id){
         $this->validate($request, [
-            'price'=>'required|max:20',
-            'deposit'=>'required|max:20',
-            'monthlyfee'=>'max:10',
-            'investment'=>'max:20',
-            'mediation_cost'=>'max:10',
-            'judicial_cost'=>'max:20',
-            'tax'=>'max:20',
-            'etc_cost'=>'max:20',
-            'interest_amount'=>'required|max:20',
-            'real_earning'=>'max:20',
+            'price'=>'required',
+            'deposit'=>'required',
+            'monthlyfee'=>'nullable',
+            'investment'=>'nullable',
+            'mediation_cost'=>'nullable',
+            'judicial_cost'=>'nullable',
+            'tax'=>'nullable',
+            'etc_cost'=>'nullable',
+            'interest_amount'=>'required',
+            'real_earning'=>'nullable',
         ]);
 
         $realestate = RealEstate::findOrFail($id);
@@ -191,14 +191,14 @@ class RealEstatesController extends Controller
 
     public function loan(Request $request, $id){
         $this->validate($request, [
-            'amount'=>'required|max:20',
-            'interest_rate'=>'required|max:5',
-            'repay_commission'=>'required|max:5',
-            'unredeem_period'=>'max:10',
-            'repay_period'=>'required|max:10',
-            'bank'=>'max:10',
-            'account_no'=>'max:20',
-            'options'=>'max:200',
+            'amount'=>'integer|required',
+            'interest_rate'=>'numeric|required',
+            'repay_commission'=>'numeric|required',
+            'unredeem_period'=>'integer',
+            'repay_period'=>'integer|required',
+            'bank'=>'nullable',
+            'account_no'=>'nullable',
+            'options'=>'nullable',
         ]);
 
         $realestate = RealEstate::findOrFail($id);

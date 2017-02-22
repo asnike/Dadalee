@@ -23,9 +23,9 @@ class CreateLoansTable extends Migration
             $table->integer('unredeem_period')->default(0);
             $table->integer('repay_period');
             $table->integer('repay_method_id')->unsigned();
-            $table->char('bank');
-            $table->char('account_no');
-            $table->text('options');
+            $table->char('bank')->nullable();
+            $table->char('account_no')->nullable();
+            $table->text('options')->nullable();
 
             $table->timestamps();
 

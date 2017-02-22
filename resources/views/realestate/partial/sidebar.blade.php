@@ -4,8 +4,8 @@
         <div class="sidebar-content">
             <div class="clearfix">
                 <div class="btn-group btn-tab pull-right">
-                    <a href="#own-tab" class="btn btn-default active" data-toggle="tab">{{ trans('common.own') }}</a>
-                    <a href="#attension-tab" class="btn btn-default" data-toggle="tab">{{ trans('common.attension') }}</a>
+                    <a href="#own-tab" class="btn btn-sm btn-default active" data-toggle="tab">{{ trans('common.own') }}</a>
+                    <a href="#attension-tab" class="btn btn-sm btn-default" data-toggle="tab">{{ trans('common.attension') }}</a>
                 </div>
             </div>
             <!-- Tab panes -->
