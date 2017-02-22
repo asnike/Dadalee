@@ -16,16 +16,24 @@ class CreatePricetagsTable extends Migration
         //
         Schema::create('pricetags', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('realestate_id')->unsigned();
-            $table->integer('price');
-            $table->integer('deposit');
-            $table->integer('monthlyfee')->nullable();
+            $table->string('sigungu');
+            $table->string('main_no');
+            $table->string('sub_no');
+            $table->string('building_name');
+            $table->string('new_address')->nullable();
+            $table->string('lng')->nullable();
+            $table->string('lat')->nullable();
+            $table->integer('user_id')->unsigned();
 
-            $table->integer('year');
-            $table->integer('month');
+
+            $table->date('completed_at')->nullable();
+            $table->date('reported_at');
+            $table->integer('price')->nullable();
+            $table->integer('deposit')->nullable();
+            $table->integer('rental_cost')->nullable();
+            $table->integer('floor')->nullable();
+
             $table->timestamps();
-
-            $table->foreign('realestate_id')->references('id')->on('realestates')->onUpate('cascade')->onDelete('cascade');
         });
     }
 

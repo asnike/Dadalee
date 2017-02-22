@@ -29,7 +29,8 @@ return [
     'address'=>'주소',
     
     'realestateAdd'=>'추가',
-
+    'completed_at'=>'보존등기',
+    'reported_at'=>'조사일',
     'price'=>'매매가',
     'deposit'=>'보증금',
     'monthlyFee'=>'차임',

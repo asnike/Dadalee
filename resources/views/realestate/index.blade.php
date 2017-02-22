@@ -7,7 +7,7 @@
 
 
 
-@include('realestate.partial.sidebar', ['type'=>'realestate'])
+@include('realestate.partial.sidebar')
 
 
 
@@ -237,7 +237,7 @@
                 markerData.overlay = overlay;
             },
             focusRealestate = function(e){
-                var i, j, id = $(this).attr('data-id'), idx, coords;
+                var i, j, id = $(this).attr('data-id'), idx, coords, projection;
                 if(!id) return;
                 for(i = 0, j = realestates.length ; i < j ; i++){
                     if(realestates[i].id == id){
@@ -246,11 +246,15 @@
                     }
                 }
                 coords = new daum.maps.LatLng(realestates[idx].lat, realestates[idx].lng);
+                if($('.price-info.show')[0]){
+                    projection = map.getProjection();
+                    point = projection.pointFromCoords(coords);
+                    point.x -= 215;
+                    coords = projection.coordsFromPoint(point);
+                }
                 map.setCenter(coords);
             },
-            hideInfo = function(target) {
-                console.log(target);
-
+            hideInfo = function(target){
                 var i, j, id = $(target).attr('data-id'), overlay;
                 for(i = 0, j = markers.length ; i < j ; i++){
                     if(markers[i].data.id == id){
@@ -381,6 +385,8 @@
                 var bunji = $(this).attr('data-bunji');
                 getPriceHistory(bunji);
                 getRentalHistory(bunji);
+                //console.log(e.target, e.currentTarget);
+                selectedTarget = e.currentTarget;
             },
             getPriceHistory = function(bunji){
                 U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
@@ -419,6 +425,10 @@
                 });
 
                 $('.price-info').addClass('show');
+                if(selectedTarget){
+                    focusRealestate.apply(selectedTarget);
+                    selectedTarget = null;
+                }
             },
             getRentalHistory = function(bunji){
                 U.http(getRentalHistoryEnd, 'rentalcosts/' + bunji, {method:'GET'})
@@ -451,6 +461,9 @@
                     var opt = $('#rentalSize').val() == 0 ? {} : {'exclusive_size':+$('#rentalSize').val()};
                     $('#rentalCostsTable').bootstrapTable('filterBy', opt);
                 });
+            },
+            closePriceInfo = function(){
+                $('.price-info.show').removeClass('show');
             };
             init();
             return {
@@ -466,6 +479,7 @@
                 earningInfoEdit:earningInfoEdit,
                 loanInfoEdit:loanInfoEdit,
                 tenantInfoEdit:tenantInfoEdit,
+                closePriceInfo:closePriceInfo,
             }
         })();
     </script>

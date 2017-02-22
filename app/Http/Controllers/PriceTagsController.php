@@ -16,7 +16,7 @@ class PriceTagsController extends Controller
     public function index(Request $request)
     {
         //
-        $realestates = RealEstate::where('user_id', auth()->id())->where('market', 1)->get();
+        $realestates = PriceTag::where('user_id', auth()->id())->get();
         if($request->ajax()){
             return response()->json([
                 'result'=>1,
@@ -45,19 +45,28 @@ class PriceTagsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['addr', 'lat', 'lng']);
+        $data = $request->only([
+            'sigungu',
+            'main_no',
+            'sub_no',
+            'building_name',
+            'new_address',
+            'lat',
+            'lng',
+            'reported_at',
+            'compolete_at',
+            'price',
+            'deposit',
+            'rental_cost',
+            'floor',
+        ]);
         $data['user_id'] = auth()->id();
-        $realestate = RealEstate::firstOrCreate($data);
-
-        $data = $request->only(['price', 'deposit', 'monthlyfee']);
-        $data['realestate_id'] = $realestate->id;
-        $pricetag = $realestate->priceTags()->create($data);
+        $pricetag = PriceTag::create($data);
 
         return response()->json([
             'result'=>1,
             'data'=>[
-                'realestate_id'=>$realestate->id,
-                'pricetag_id'=>$pricetag->id,
+                'pricetag'=>$pricetag
             ]
         ]);
     }

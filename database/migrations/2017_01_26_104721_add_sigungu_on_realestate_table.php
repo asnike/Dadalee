@@ -19,7 +19,7 @@ class AddSigunguOnRealestateTable extends Migration
             $table->string('building_name')->after('sigungu')->nullable();
             $table->string('sub_no')->after('sigungu');
             $table->string('main_no')->after('sigungu');
-            $table->string('new_address')->after('main_address');
+            $table->string('new_address')->after('main_no');
             $table->string('sigungu_code')->after('sigungu');
         });
     }

@@ -4,6 +4,7 @@
             <div class="actual-price-info-header">
                 <h4 id="selectedName"></h4>
                 <h5 id="selectedAddr"></h5>
+                <img src="{{ url('/image/cancel.png') }}" class="btn-close" onclick="Controller.closePriceInfo();" />
             </div>
             <div class="actual-price-info-body">
                 <h6>{{ trans('common.tradePrice') }}</h6>

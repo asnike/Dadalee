@@ -12543,6 +12543,17 @@ body {
   font-size: 12px;
 }
 
+.realestate-list .info {
+  position: relative;
+}
+
+.realestate-list .info > .rate {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  font-size: 12px;
+}
+
 #realestate-detail .modal-dialog {
   width: 800px;
 }
@@ -12717,7 +12728,7 @@ body {
 
 .actual-price-info > .actual-price-info-header {
   width: 430px;
-  background: #4E8300;
+  background: #3fab43;
   color: #fff;
   padding: 10px;
   position: fixed;
@@ -12769,7 +12780,7 @@ body {
 #map {
   position: absolute;
   right: 400px;
-  top: 85px;
+  top: 100px;
   bottom: 0;
   left: 0;
 }
@@ -12793,6 +12804,14 @@ body {
 
 .sidebar-content .realestate-list .list-group-item {
   border-radius: 0;
+}
+
+.price-info .actual-price-info-header > .btn-close {
+  position: absolute;
+  display: block;
+  right: 10px;
+  top: 22px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=app.css.map */
