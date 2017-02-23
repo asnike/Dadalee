@@ -20,7 +20,7 @@
         <script>
         var Controller = (function(){
             var map, realestates, markers = [], searchedInfo = {}, addrInfo = {}, selectedData = {}, selectedRealestate,
-                repayMethods,
+                repayMethods, ladda,
             init = function(){
                 initMap();
                 initMapControl();
@@ -403,10 +403,15 @@
                 for(i = 0, j = realestates.length ; i < j ; i++){
                     if(id == realestates[i].id) selectedRealestate = realestates[i];
                 }
+                ladda = Ladda.create(this);
+                ladda.start();
 
+                getMyLog(bunji);
                 getPriceHistory(bunji);
                 getRentalHistory(bunji);
+                getPcost(bunji);
                 //console.log(e.target, e.currentTarget);
+
                 selectedTarget = e.currentTarget;
             },
             getPriceHistory = function(bunji){
@@ -448,6 +453,8 @@
                     focusRealestate.apply(selectedTarget);
                     selectedTarget = null;
                 }
+                ladda.stop();
+                ladda = null;
             },
             getRentalHistory = function(bunji){
                 U.http(getRentalHistoryEnd, 'rentalcosts/' + bunji, {method:'GET'})
@@ -481,6 +488,47 @@
                     $('#rentalCostsTable').bootstrapTable('filterBy', opt);
                 });
             },
+                getMyLog = function(bunji){
+                    U.http(getMyLogEnd, 'pricetags/' + bunji, {method:'GET'})
+                },
+                getMyLogEnd = function(data){
+                    var selectData, sizes, i, j, key;
+
+                    for(selectData = [], sizes = {}, i = 0, j = data.pricetags.length ; i < j ; i++){
+                        sizes[data.pricetags[i].exclusive_size] = 1;
+                    }
+                    i = 0;
+                    selectData[0] = {id:0, text:'전체'};
+                    for(key in sizes){
+                        selectData[selectData.length] = {id:key, text:key};
+                        i++;
+                    }
+                    //$('#actualPrices').html(html);
+                    $('#myLogTable').bootstrapTable('destroy');
+                    $('#myLogTable').bootstrapTable({
+                        data:data.pricetags,
+                        iconSize:'sm'
+                    });
+
+
+                    $('#myLogSize').select2('destroy');
+                    $('#myLogSize').html('');
+                    $('#myLogSize').select2({
+                        data:selectData
+                    });
+                    $('#myLogSize').on('select2:select', function (e) {
+                        var opt = $('#myLogSize').val() == 0 ? {} : {'exclusive_size':$('#myLogSize').val()};
+                        $('#myLogTable').bootstrapTable('filterBy', opt);
+                    });
+                },
+                getPcost = function(bunji){
+                    U.http(getPcostEnd, 'actualprices/pcost/' + bunji, {method:'GET'})
+                },
+                getPcostEnd = function(data){
+                    console.log(data);
+                    $('.avg-value').html(numeral(data.data.average_price).format('0,0'));
+                    $('.pcost-value').html(numeral(data.data.pcost).format('0,0'));
+                },
             closePriceInfo = function(){
                 $('.price-info.show').removeClass('show');
             };

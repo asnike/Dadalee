@@ -196,7 +196,7 @@
                 getRentalHistory(bunji);
                 getPcost(bunji);
                 //console.log(e.target, e.currentTarget);
-                selectedTarget = e.currentTarget;
+                selectedTarget = e ? e.currentTarget : null;
             },
             getPriceHistory = function(bunji){
                 U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
@@ -205,7 +205,7 @@
                 var selectData, sizes, i, j, key;
 
                 $('#selectedName').html(selectedRealestate.building_name);
-                $('#selectedAddr').html(selectedRealestate.address);
+                $('#selectedAddr').html(selectedRealestate.sigungu + ' ' + selectedRealestate.main_no + (+selectedRealestate.sub_no?'-'+ selectedRealestate.sub_no:''));
                 console.log('get history : ', data);
 
                 for(selectData = [], sizes = {}, i = 0, j = data.actualprices.length ; i < j ; i++){
@@ -308,6 +308,8 @@
             },
             getPcostEnd = function(data){
                 console.log(data);
+                $('.avg-value').html(numeral(data.data.average_price).format('0,0'));
+                $('.pcost-value').html(numeral(data.data.pcost).format('0,0'));
             },
             closePriceInfo = function(){
                 $('.price-info.show').removeClass('show');

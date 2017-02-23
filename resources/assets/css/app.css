@@ -12827,4 +12827,15 @@ body {
   top: 50px;
 }
 
+.avg-title, .pcost-title {
+  font-size: 14px;
+  color: #3fab43;
+}
+
+.avg-info, .pcost-info {
+  font-size: 22px;
+  color: #3fab43;
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=app.css.map */
