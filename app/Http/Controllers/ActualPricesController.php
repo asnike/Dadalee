@@ -26,27 +26,33 @@ class ActualPricesController extends Controller
         $max_completed_range = 2;
         $price = ActualPrice::where('main_no', $main_no)
             ->where('sub_no', $sub_no)
-            ->get();
+            ->limit(1)
+            ->firstOrFail();
 
-        echo $main_no.'<br>';
-        echo $sub_no.'<br>';
+        dd($price->completed_at);
 
         $min_size = $price->exclusive_size - $min_size_range;
         $max_size = $price->exclusive_size + $max_size_range;
-        $min_completed_range = (int)$price->completed_at - $min_completed_range;
-        $max_completed_range = (int)$price->completed_at + $min_completed_range;
+        $min_completed = (int)$price->completed_at - $min_completed_range;
+        $max_completed = (int)$price->completed_at + $max_completed_range;
 
-        $query = ActualPrice::select('AVG(price)')
+        $query = ActualPrice::selectRaw('price')
             ->where('sigungu', $price->sigungu)
             ->where('exclusive_size', '>=', $min_size)
             ->where('exclusive_size', '<=', $max_size)
-            ->where('completed_at', '<=', $min_completed_range)
-            ->where('completed_at', '>=',$max_completed_range);
+            ->where('completed_at', '<=', $min_completed)
+            ->where('completed_at', '>=',$max_completed);
         $pcost = $query->get();
 
         return response()->json([
             'result' => 1,
             'debug'=>[
+                'params'=>[
+                    'min_size'=>$min_size,
+                    'max_size'=>$max_size,
+                    'min_completed_range'=>$min_completed_range,
+                    'max_completed_range'=>$max_completed_range
+                ],
                 'sql'=>$query->toSql()
             ],
             'pcost' => $pcost
