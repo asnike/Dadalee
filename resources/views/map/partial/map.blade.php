@@ -2,7 +2,7 @@
 
 
 
-    <div id="map"></div>
+    <div id="map" class="{{ $type == 'actualprices'?'actual-prices':'' }}"></div>
 
 
 

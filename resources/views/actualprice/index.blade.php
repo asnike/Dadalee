@@ -1,7 +1,6 @@
 @extends('layouts.master')
-@include('map.partial.map', ['realestates'=>[], 'type'=>'actualprice'])
-
-
+@include('map.partial.map', ['realestates'=>[], 'type'=>'actualprices'])
+@include('layouts.partial.info', ['type'=>'actualprice'])
 @section('handlebars')
     @include('actualprice.partial.handlebars')
 @stop
@@ -142,6 +141,12 @@
                     var opt = $('#tradeSize').val() == 0 ? {} : {'exclusive_size':+$('#tradeSize').val()};
                     $('#actualPricesTable').bootstrapTable('filterBy', opt);
                 });
+
+                $('.price-info').addClass('show');
+                /*if(selectedTarget){
+                    focusRealestate.apply(selectedTarget);
+                    selectedTarget = null;
+                }*/
             },
             getRentalHistory = function(bunji){
                 U.http(getRentalHistoryEnd, 'rentalcosts/' + bunji, {method:'GET'})
@@ -174,8 +179,14 @@
                     var opt = $('#rentalSize').val() == 0 ? {} : {'exclusive_size':+$('#rentalSize').val()};
                     $('#rentalCostsTable').bootstrapTable('filterBy', opt);
                 });
+            },
+            closePriceInfo = function(){
+                $('.price-info.show').removeClass('show');
             };
             init();
+            return {
+                closePriceInfo:closePriceInfo,
+            }
         })();
     </script>
 @stop

@@ -79,6 +79,14 @@ Route::get('actualprices/contain/{latlng}', [
     'as'=>'contain',
     'uses'=>'ActualPricesController@contain'
 ]);
+Route::get('actualprices/pcost/{bunji}', [
+    'as'=>'pcost',
+    'uses'=>'ActualPricesController@pcost'
+]);
+Route::get('pricetags/contain/{latlng}', [
+    'as'=>'contain',
+    'uses'=>'PriceTagsController@contain'
+]);
 
 
 Route::get('repaymethods',[

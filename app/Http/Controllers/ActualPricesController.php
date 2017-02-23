@@ -17,6 +17,42 @@ class ActualPricesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function pcost(Request $request, $bunji){
+        $main_no = (int)explode(',', $bunji)[0];
+        $sub_no = (int)explode(',', $bunji)[1];
+        $min_size_range = 2;
+        $max_size_range = 2;
+        $min_completed_range = 2;
+        $max_completed_range = 2;
+        $price = ActualPrice::where('main_no', $main_no)
+            ->where('sub_no', $sub_no)
+            ->get();
+
+        echo $main_no.'<br>';
+        echo $sub_no.'<br>';
+
+        $min_size = $price->exclusive_size - $min_size_range;
+        $max_size = $price->exclusive_size + $max_size_range;
+        $min_completed_range = (int)$price->completed_at - $min_completed_range;
+        $max_completed_range = (int)$price->completed_at + $min_completed_range;
+
+        $query = ActualPrice::select('AVG(price)')
+            ->where('sigungu', $price->sigungu)
+            ->where('exclusive_size', '>=', $min_size)
+            ->where('exclusive_size', '<=', $max_size)
+            ->where('completed_at', '<=', $min_completed_range)
+            ->where('completed_at', '>=',$max_completed_range);
+        $pcost = $query->get();
+
+        return response()->json([
+            'result' => 1,
+            'debug'=>[
+                'sql'=>$query->toSql()
+            ],
+            'pcost' => $pcost
+        ]);
+    }
+
     public function contain(Request $request, $latlng){
         $range = explode(',', $latlng);
         $query = ActualPrice::where('lat', '>=', $range[0])

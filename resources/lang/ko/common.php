@@ -102,8 +102,8 @@ return [
 
     'excel'=>'엑셀',
     'rentalCost'=>'월세',
-    
-    
+
+    'reportedAt'=>'작성일',
     
     
     
@@ -134,4 +134,5 @@ return [
     'rentalCostList'=>'실거래가 - 월세',
     'geocoding'=>'지오코딩',
     'upload'=>'업로드',
+    'myLog'=>'내기록',
 ];

@@ -1,6 +1,6 @@
 <script id="marker-template" type="text/x-handlebars-template">
 <div class="marker">
-    <div class="marker-content" onclick="markerClick(this)" data-id="{{ id }}" data-main-no="{{ main_no }}" data-sub-no="{{ sub_no }}">
+    <div class="marker-content" onclick="Controller.showPrice.apply(this)" data-bunji="{{ bunji }}" data-id="{{ id }}" data-main-no="{{ main_no }}" data-sub-no="{{ sub_no }}">
         <span class="name">{{ name }}</span>
         <div class="price">{{ price }}만</div>
         <div class="size">{{ size }}m&sup2;</div>

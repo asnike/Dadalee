@@ -2,18 +2,11 @@
 
 @include('map.partial.map', ['realestates'=>$realestates, 'type'=>'realestate'])
 
-
 @include('realestate.partial.navbarsub')
-
-
-
 @include('realestate.partial.sidebar')
-
-
-
 @include('realestate.partial.modal')
+@include('layouts.partial.info', ['type'=>'realestate'])
 
-@include('realestate.partial.info')
 
 @section('handlebars')
     @include('realestate.partial.handlebars')
@@ -26,7 +19,7 @@
 
         <script>
         var Controller = (function(){
-            var map, realestates, markers = [], searchedInfo = {}, addrInfo = {}, selectedData = {},
+            var map, realestates, markers = [], searchedInfo = {}, addrInfo = {}, selectedData = {}, selectedRealestate,
                 repayMethods,
             init = function(){
                 initMap();
@@ -176,7 +169,7 @@
                 var marker = new daum.maps.Marker({
                     map: map,
                     position: coords,
-                    image:markerImage
+                    /*image:markerImage*/
                 }), markerData;
                 if(moveCenter) map.setCenter(coords);
                 markers[markers.length] = markerData = {data:data, marker:marker, click:function(){ showInfo(markerData); }};
@@ -403,7 +396,14 @@
                 }
             },
             showPrice = function(e){
-                var bunji = $(this).attr('data-bunji');
+                var bunji = $(this).attr('data-bunji'),
+                    id = $(this).attr('data-id'),
+                    i, j;
+
+                for(i = 0, j = realestates.length ; i < j ; i++){
+                    if(id == realestates[i].id) selectedRealestate = realestates[i];
+                }
+
                 getPriceHistory(bunji);
                 getRentalHistory(bunji);
                 //console.log(e.target, e.currentTarget);
@@ -415,10 +415,8 @@
             getPriceHistoryEnd = function(data){
                 var selectData, sizes, i, j, key;
 
-                $('#selectedName').html(data.actualprices[0].building_name);
-                $('#selectedAddr').html(data.actualprices[0].sigungu + ' '
-                    + +data.actualprices[0].main_no + '-'
-                    + +data.actualprices[0].sub_no);
+                $('#selectedName').html(selectedRealestate.building_name);
+                $('#selectedAddr').html(selectedRealestate.address);
                 console.log('get history : ', data);
 
                 for(selectData = [], sizes = {}, i = 0, j = data.actualprices.length ; i < j ; i++){

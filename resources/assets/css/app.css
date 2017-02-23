@@ -12632,8 +12632,8 @@ body {
 }
 
 .marker-content {
-  background: #4E8300;
-  border: 1px solid #406100;
+  background: #3fab43;
+  border: 1px solid #318435;
   border-radius: 5px;
   padding: 7px 4px 7px 4px;
   cursor: pointer;
@@ -12656,9 +12656,9 @@ body {
   content: '';
   opacity: 1;
   position: absolute;
-  background: #4E8300;
-  border: 1px solid #406100;
-  border-color: transparent transparent #406100 #406100;
+  background: #3fab43;
+  border: 1px solid #318435;
+  border-color: transparent transparent #318435 #318435;
   bottom: -5px;
   left: 10px;
   -webkit-transform: rotate(-45deg);
@@ -12709,7 +12709,7 @@ body {
   padding-top: 187px;
   left: 0;
   top: 0;
-  width: 430px;
+  width: 420px;
   height: 100%;
   z-index: 100;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -12727,7 +12727,7 @@ body {
 }
 
 .actual-price-info > .actual-price-info-header {
-  width: 430px;
+  width: 420px;
   background: #3fab43;
   color: #fff;
   padding: 10px;
@@ -12785,6 +12785,11 @@ body {
   left: 0;
 }
 
+#map.actual-prices {
+  right: 0px;
+  top: 50px;
+}
+
 .navbar-sub {
   height: 50px;
   width: 100%;
@@ -12812,6 +12817,14 @@ body {
   right: 10px;
   top: 22px;
   cursor: pointer;
+}
+
+.price-info.actual-prices {
+  padding-top: 137px;
+}
+
+.price-info.actual-prices .actual-price-info > .actual-price-info-header {
+  top: 50px;
 }
 
 /*# sourceMappingURL=app.css.map */

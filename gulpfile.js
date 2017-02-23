@@ -42,6 +42,7 @@ elixir((mix) => {
         'css/admin.css',
         'js/app.js'
     ])
+    .copy("resources/assets/image", 'public/image')
     .copy("resources/assets/vendor/font-awesome/fonts", 'public/build/fonts');
 
 });

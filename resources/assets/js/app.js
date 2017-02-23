@@ -55,6 +55,9 @@ var U = (function(){
                 case 422:
                     data.validation = xhr.responseJSON;
                     break;
+                case 500:
+                    return U.Modal.alert('서버 에러 발생!! :(');
+                    break;
             }
             end(data);
         });

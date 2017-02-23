@@ -21,13 +21,13 @@ class CreatePricetagsTable extends Migration
             $table->string('sub_no');
             $table->string('building_name');
             $table->string('new_address')->nullable();
-            $table->string('lng')->nullable();
-            $table->string('lat')->nullable();
+            $table->string('lng');
+            $table->string('lat');
             $table->integer('user_id')->unsigned();
 
-
+            $table->string('exclusive_size')->nullable();
             $table->date('completed_at')->nullable();
-            $table->date('reported_at');
+            $table->date('reported_at')->nullable();
             $table->integer('price')->nullable();
             $table->integer('deposit')->nullable();
             $table->integer('rental_cost')->nullable();

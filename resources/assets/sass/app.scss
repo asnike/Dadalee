@@ -187,7 +187,7 @@ body{background:#fff;}
   position: relative;bottom:20px;
 }
 .marker-content{
-  background: #4E8300;border:1px solid #406100; border-radius: 5px;padding:7px 4px 7px 4px;
+  background: #3fab43;border:1px solid #318435; border-radius: 5px;padding:7px 4px 7px 4px;
   cursor:pointer;
   box-shadow:1px 1px 1px 0px rgba(50, 50, 50, 0.75);
 }
@@ -207,9 +207,9 @@ body{background:#fff;}
   content:'';
   opacity:1;
   position:absolute;
-  background:#4E8300;
-  border:1px solid #406100;
-  border-color:transparent transparent #406100 #406100;
+  background:#3fab43;
+  border:1px solid #318435;
+  border-color:transparent transparent #318435 #318435;
   bottom:-5px;
   left:10px;
   transform:rotate(-45deg);
@@ -246,7 +246,7 @@ body{background:#fff;}
   padding-top:187px;
   left:0;
   top:0;
-  width:430px;
+  width:420px;
   height:100%;
   z-index: 100;
   box-shadow:0 0 10px rgba(0,0,0,.2);
@@ -264,7 +264,7 @@ body{background:#fff;}
 }
 
 .actual-price-info > .actual-price-info-header{
-  width:430px;
+  width:420px;
   background:#3fab43;
   color:#fff;
   padding:10px;
@@ -325,6 +325,10 @@ body{background:#fff;}
   bottom:0;
   left:0;
 }
+#map.actual-prices{
+  right:0px;
+  top:50px;
+}
 
 .navbar-sub{
   height: 50px;
@@ -353,4 +357,12 @@ body{background:#fff;}
   right:10px;
   top:22px;
   cursor: pointer;
+
+}
+.price-info.actual-prices{
+  padding-top:137px;
+}
+
+.price-info.actual-prices .actual-price-info > .actual-price-info-header{
+  top:50px;
 }

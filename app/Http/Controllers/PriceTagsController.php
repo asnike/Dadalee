@@ -13,6 +13,28 @@ class PriceTagsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function contain(Request $request, $latlng){
+        $range = explode(',', $latlng);
+        $query = PriceTag::where('lat', '>=', $range[0])
+            ->where('lat', '<=', $range[2])
+            ->where('lng', '>=', $range[1])
+            ->where('lng', '<=', $range[3])
+            ->distinct()
+            /*->groupBy(['main_no', 'sub_no'])*/
+            ->orderBy('reported_at', 'desc');
+
+        $priceTags = $query->get();
+
+        return response()->json([
+            'result' => 1,
+            'debug'=>[
+                'sql'=>$query->toSql()
+            ],
+            'lists' => $priceTags
+        ]);
+    }
+
     public function index(Request $request)
     {
         //
@@ -45,6 +67,15 @@ class PriceTagsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'sigungu'=>'string|required',
+            'main_no'=>'string|required',
+            'sub_no'=>'string|required',
+            'building_name'=>'string|required',
+            'new_address'=>'string',
+            'lat'=>'string|required',
+            'lng'=>'string|required',
+        ]);
         $data = $request->only([
             'sigungu',
             'main_no',
@@ -55,6 +86,7 @@ class PriceTagsController extends Controller
             'lng',
             'reported_at',
             'compolete_at',
+            'exclusive_size',
             'price',
             'deposit',
             'rental_cost',
@@ -77,9 +109,21 @@ class PriceTagsController extends Controller
      * @param  \App\PriceTag  $priceTag
      * @return \Illuminate\Http\Response
      */
-    public function show(PriceTag $priceTag)
+    public function show($no)
     {
-        //
+        $bunji = explode(',', $no);
+        $query = PriceTag::where('main_no', (int)$bunji[0])
+            ->where('sub_no', (int)$bunji[1])
+            ->orderBy('reported_at', 'desc');
+        $pricetags = $query->get();
+        return response()->json([
+            'result'=>1,
+            'debug'=>[
+                'sql'=>$query->toSql(),
+                'bunji'=>$bunji
+            ],
+            'pricetags'=>$pricetags
+        ]);
     }
 
     /**
@@ -111,8 +155,17 @@ class PriceTagsController extends Controller
      * @param  \App\PriceTag  $priceTag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PriceTag $priceTag)
+    public function destroy($id)
     {
         //
+        $priceTag = PriceTag::findOrFail($id);
+        $priceTag->delete();
+
+        return response()->json([
+            'result'=>1,
+            'data'=>[
+                'id'=>$id
+            ]
+        ]);
     }
 }
