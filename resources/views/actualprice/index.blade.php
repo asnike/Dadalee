@@ -105,6 +105,7 @@
                 $(target).addClass('selected');
                 getPriceHistory(mainNo+','+subNo);
                 getRentalHistory(mainNo+','+subNo);
+                getPcost(mainNo+','+subNo);
             },
             getPriceHistory = function(bunji){
                 U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})
@@ -179,6 +180,14 @@
                     var opt = $('#rentalSize').val() == 0 ? {} : {'exclusive_size':+$('#rentalSize').val()};
                     $('#rentalCostsTable').bootstrapTable('filterBy', opt);
                 });
+            },
+            getPcost = function(bunji){
+                U.http(getPcostEnd, 'actualprices/pcost/' + bunji, {method:'GET'})
+            },
+            getPcostEnd = function(data){
+                console.log(data);
+                $('.avg-value').html(numeral(data.data.average_price).format('0,0'));
+                $('.pcost-value').html(numeral(data.data.pcost).format('0,0'));
             },
             closePriceInfo = function(){
                 $('.price-info.show').removeClass('show');
