@@ -10,8 +10,9 @@
       </button>
 
       <a href="{{ route('home') }}" class="navbar-brand" style="padding:4px;">
-        {{--<span class="logo-txt">Dadalee</span>--}}
-          <img class="logo" src="{{ url('image/logo.png') }}" alt="">
+        <span class="logo-txt" style="font-size:14px;">다달이</span>
+
+          {{--<img class="logo" src="{{ url('image/logo.png') }}" alt="">--}}
       </a>
     </div>
 
@@ -43,6 +44,7 @@
                 @endif
             </ul>
         </div>
-        @yield('navbarsub')
+
     </div>
 </nav>
+@yield('navbarsub')

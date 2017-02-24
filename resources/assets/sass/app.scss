@@ -29,7 +29,7 @@ body {
 body{background:#fff;}
 
 .navbar{
-  box-shadow:0 2px 4px rgba(0,0,0,.1);
+  /*box-shadow:0 2px 4px rgba(0,0,0,.1);*/
 }
 
 .logo{
@@ -331,11 +331,16 @@ body{background:#fff;}
 }
 
 .navbar-sub{
+  position: absolute;
+  left:0;
+  top:50px;
   height: 50px;
   width:100%;
   background: #f7f7f7;
   border-top:1px solid #d3e0e9;
   padding:10px;
+  z-index: 50;
+  box-shadow:0 2px 4px rgba(0,0,0,.1);
 }
 
 .checkbox{
@@ -375,4 +380,66 @@ body{background:#fff;}
   font-size:22px;
   color:#3fab43;
   font-weight:bold;
+}
+
+.mobile.btn-add{
+  display: none;
+  position: absolute;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  bottom:24px;
+  right:24px;
+  background: #fff;
+  border:1px solid #ddd;
+  z-index: 60;
+  cursor: pointer;
+  box-shadow:0px 2px 10px rgba(0,0,0,.3), 0px 0px 1px rgba(0,0,0,.1), inset 0px 1px 0px rgba(255,255,255,.25), inset 0px -1px 0px rgba(0,0,0,.15)
+}
+.mobile.btn-add > .fa.fa-plus{
+  position: absolute;
+  top:21px;
+  left:21px;
+}
+
+@media (max-width: 768px) {
+  .mobile.btn-add{
+    display: block;
+  }
+  .sidebar{
+    width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:100%;
+    display: none;
+  }
+  #map{
+    right:0px;
+    top:50px;
+    bottom:0;
+    left:0;
+  }
+  .navbar-sub{
+    position: absolute;
+    left:0;
+    top:0;
+    height:100%;
+    z-index:1070;
+    display:none;
+    padding-top:50px;
+  }
+}
+
+.form-item{
+  margin-bottom:15px;
+}
+.navbar-top{
+  height:50px;
+  line-height:50px;
+  width:100%;
+  position: fixed;
+  top:0;
+  left:0;
+  border-bottom:1px solid #ddd;
 }

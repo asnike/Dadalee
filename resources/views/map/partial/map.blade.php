@@ -2,7 +2,12 @@
 
 
 
-    <div id="map" class="{{ $type == 'actualprices'?'actual-prices':'' }}"></div>
+    <div id="map" class="{{ $type == 'actualprices'?'actual-prices':'' }}">
+
+        <div class="btn-add mobile">
+            <i class="fa fa-plus"></i>
+        </div>
+    </div>
 
 
 
