@@ -46,11 +46,12 @@
                 new Cleave('#loanPanel input[name="account_no"]', {
                     numericOnly:true,
                 });
+                $('.mobile.btn-add').click(addPopupOpen);
             },
-                initMapControl = function(){
-                    var zoomControl = new daum.maps.ZoomControl();
-                    map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-                },
+            initMapControl = function(){
+                var zoomControl = new daum.maps.ZoomControl();
+                map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+            },
             initDetailModal = function(){
                 $('.btn-tab').click(function(e){
                     $('.btn-tab>.btn').removeClass('active');
@@ -531,6 +532,9 @@
                 },
             closePriceInfo = function(){
                 $('.price-info.show').removeClass('show');
+            },
+            addPopupOpen = function () {
+                $('.navbar-sub').show();
             };
             init();
             return {

@@ -14,6 +14,10 @@ class PriceTagsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function contain(Request $request, $latlng){
         $range = explode(',', $latlng);
         $query = PriceTag::where('lat', '>=', $range[0])
