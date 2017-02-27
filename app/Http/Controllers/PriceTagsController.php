@@ -42,6 +42,7 @@ class PriceTagsController extends Controller
     public function index(Request $request)
     {
         //
+        header('Vary:X-Requested-With');
         $realestates = PriceTag::where('user_id', auth()->id())->get();
         if($request->ajax()){
             return response()->json([
