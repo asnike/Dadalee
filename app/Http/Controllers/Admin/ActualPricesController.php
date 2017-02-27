@@ -59,14 +59,22 @@ class ActualPricesController extends Controller
                     'main_no'=>$row[2],
                     'sub_no'=>$row[3],
                     'building_name'=>$row[4],
-                    'exclusive_size'=>$row[5],
+                    'exclusive_size'=>$row[6],
+                    'land_size'=>$row[7],
+                    'yearmonth'=>$row[8],
+                    'day'=>$row[9],
+                    'price'=>$this->numeric($row[10]),
+                    'floor'=>$row[11],
+                    'completed_at'=>$row[12],
+                    'new_address'=>$row[13],
+                    /*'exclusive_size'=>$row[5],
                     'land_size'=>$row[6],
                     'yearmonth'=>$row[7],
                     'day'=>$row[8],
                     'price'=>$this->numeric($row[9]),
                     'floor'=>$row[10],
                     'completed_at'=>$row[11],
-                    'new_address'=>$row[12],
+                    'new_address'=>$row[12],*/
                 ]);
             }
             redirect(route('admin.prices.index'));
