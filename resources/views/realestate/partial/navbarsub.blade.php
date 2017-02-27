@@ -4,7 +4,7 @@
         <div class="visible-xs visible-sm navbar-top text-center">
             {{ trans('common.realestateAdd') }}
         </div>
-        <div class="" style="margin-top:25px;">
+        <div class="">
             <div class="col-xs-12 col-md-6">
 
                 <form action="" class="search-form" onsubmit="return Controller.onSubmit();" style="margin: 0;">
