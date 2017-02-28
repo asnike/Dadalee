@@ -17,6 +17,7 @@ elixir((mix) => {
     mix.sass('app.scss', 'resources/assets/css')
     .sass('admin.scss', 'resources/assets/css')
     .styles([
+        '../vendor/EasyAutocomplete-master/dist/easy-autocomplete.css',
         '../vendor/bootstrap-table/dist/bootstrap-table.css','app.css'
     ], 'public/css/app.css')
     .styles([
@@ -35,6 +36,7 @@ elixir((mix) => {
         '../vendor/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
         '../vendor/cleave.js/dist/cleave.js',
         '../vendor/bootstrap-table/dist/bootstrap-table.js',
+        '../vendor/EasyAutocomplete-master/dist/jquery.easy-autocomplete.js',
         'app.js'
     ], 'public/js/app.js')
     .version([

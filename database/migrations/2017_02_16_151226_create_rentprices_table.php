@@ -33,6 +33,10 @@ class CreateRentpricesTable extends Migration
             $table->string('lng')->nullable();
             $table->string('lat')->nullable();
             $table->timestamps();
+
+            $table->index('lng');
+            $table->index('lat');
+            $table->index(['main_no', 'sub_no']);
         });
     }
 

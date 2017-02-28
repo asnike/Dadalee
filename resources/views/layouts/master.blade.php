@@ -33,6 +33,9 @@
 
   {{--@include('layouts.partial.footer')--}}
   @yield('info')
+
+  @yield('mapcontrol')
+
   @include('layouts.partial.modal')
 
   @yield('modal')

@@ -30,6 +30,10 @@ class CreateActualPriceTable extends Migration
             $table->string('lng')->nullable();
             $table->string('lat')->nullable();
             $table->timestamps();
+
+            $table->index('lng');
+            $table->index('lat');
+            $table->unique(['main_no', 'sub_no']);
         });
     }
 

@@ -1,9 +1,14 @@
 @extends('layouts.master')
 @include('map.partial.map', ['realestates'=>[], 'type'=>'actualprices'])
 @include('layouts.partial.info', ['type'=>'actualprice'])
+
+
+@include('actualprice.partial.controlpanel')
 @section('handlebars')
     @include('actualprice.partial.handlebars')
 @stop
+
+
 
 @section('script')
     <script>
@@ -13,6 +18,7 @@
                 clusterer,
                 markers = [],
                 events = [],
+                sigungu = [],
             init = function(){
                 initMap();
                 initMapControl();
@@ -36,6 +42,31 @@
             initMapControl = function(){
                 var zoomControl = new daum.maps.ZoomControl();
                 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+                $('.btn-go').click(searchWhere);
+                $('input[name="address"]').easyAutocomplete({
+                    data: ["Superman", "Wonder Woman", "Iron Man", "Batman", "Catwoman"],
+                    list: {
+                        match: {
+                            enabled: true
+                        }
+                    }
+                });
+            },
+            searchWhere = function(e){
+                var geocoder = new daum.maps.services.Geocoder(),
+                    address = $('input[name="address"]').val();
+
+                geocoder.addr2coord(address, function (status, result) {
+                    if (status === daum.maps.services.Status.OK) {
+                        console.log(result);
+
+                        coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+                        map.setCenter(coords);
+                    }else{
+                        console.log(status, result);
+                    }
+                });
             },
             mapBoundChange = function(){
                 var bounds = map.getBounds(),
