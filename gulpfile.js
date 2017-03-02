@@ -37,6 +37,7 @@ elixir((mix) => {
         '../vendor/cleave.js/dist/cleave.js',
         '../vendor/bootstrap-table/dist/bootstrap-table.js',
         '../vendor/EasyAutocomplete-master/dist/jquery.easy-autocomplete.js',
+        '../vendor/js-cookie/src/js.cookie.js',
         'app.js'
     ], 'public/js/app.js')
     .version([

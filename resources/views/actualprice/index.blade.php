@@ -19,10 +19,36 @@
                 markers = [],
                 events = [],
                 sigungu = [],
+                searchConditions = {
+                    type:0,
+                    size:0,
+                    year:0,
+                },
             init = function(){
                 initMap();
                 initMapControl();
-                $("select").select2();
+                getSigunguList();
+                $(".select2").select2();
+                $('.map-control-panel select').change(changeConditions);
+            },
+            changeConditions = function(e){
+                searchConditions[$(this).attr('name')] = $(this).val();
+                mapBoundChange();
+            },
+            getSigunguList = function(){
+                U.http(getSigunguListEnd, 'sigungus/', {method:'GET'})
+            },
+            getSigunguListEnd = function(data){
+                sigungu = data.lists;
+                $('input[name="address"]').easyAutocomplete({
+                    data: sigungu,
+                    getValue:'full',
+                    list: {
+                        match: {
+                            enabled: true
+                        }
+                    }
+                });
             },
             initMap = function(){
                 var mapContainer = document.getElementById('map'),
@@ -44,14 +70,7 @@
                 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
                 $('.btn-go').click(searchWhere);
-                $('input[name="address"]').easyAutocomplete({
-                    data: ["Superman", "Wonder Woman", "Iron Man", "Batman", "Catwoman"],
-                    list: {
-                        match: {
-                            enabled: true
-                        }
-                    }
-                });
+
             },
             searchWhere = function(e){
                 var geocoder = new daum.maps.services.Geocoder(),
@@ -78,7 +97,9 @@
             getActualPrices = function(min ,max){
                 min = min.replace(/[\(\)\s]/g, '');
                 max = max.replace(/[\(\)\s]/g, '');
-                U.http(getActualPricesEnd, 'actualprices/contain/'+ min + ',' + max,{method:'GET'});
+                U.http(getActualPricesEnd, 'actualprices/contain/'+ min + ',' + max + '?type=' + searchConditions.type +
+                    '&size=' + searchConditions.size + '&year=' + searchConditions.year
+                    ,{method:'GET'});
             },
             getActualPricesEnd = function(data){
                 //console.log(data.lists);
@@ -224,6 +245,7 @@
                 $('.price-info.show').removeClass('show');
             };
             init();
+            console.log('sigungu :: ', sigungu);
             return {
                 closePriceInfo:closePriceInfo,
             }

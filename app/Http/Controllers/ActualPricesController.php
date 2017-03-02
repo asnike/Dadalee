@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ActualPrice;
+use App\RentalCost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -67,13 +68,36 @@ class ActualPricesController extends Controller
 
     public function contain(Request $request, $latlng){
         $range = explode(',', $latlng);
-        $query = ActualPrice::where('lat', '>=', $range[0])
-            ->where('lat', '<=', $range[2])
+
+        if($request->type == 2){
+            $query = RentalCost::where('lat', '>=', $range[0]);
+        }else{
+            $query = ActualPrice::where('lat', '>=', $range[0]);
+        }
+        $query->where('lat', '<=', $range[2])
             ->where('lng', '>=', $range[1])
-            ->where('lng', '<=', $range[3])
+            ->where('lng', '<=', $range[3]);
+
+        if($request->size == 59){
+            $query->where('exclusive_size', '<=', 59);
+        }else if($request->size == 60){
+            $query->where('exclusive_size', '>', 60);
+        }
+        if($request->year == 1999){
+            $query->where('completed_at', '<=', 1999);
+        }else if($request->year == 2010){
+            $query->where('completed_at', '>', 1999);
+            $query->where('completed_at', '<=', 2010);
+        }else if($request->year == 'latest'){
+            $query->where('completed_at', '>', 2010);
+        }
+
+
             /*->groupBy(['main_no', 'sub_no'])*/
-            ->distinct()
+        $query->distinct()
             ->orderBy('yearmonth', 'desc');
+
+
         $actualPrices = Redis::get($latlng);
         if(!$actualPrices){
             $actualPrices = $query->get();

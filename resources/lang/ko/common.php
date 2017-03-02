@@ -135,4 +135,12 @@ return [
     'geocoding'=>'지오코딩',
     'upload'=>'업로드',
     'myLog'=>'내기록',
+    'total'=>'전체',
+    'size59under'=>'60m&sup2;미만',
+    'size60over'=>'60m&sup2;이상',
+    'jeonse'=>'전세',
+    'wolse'=>'월세',
+    'oldHouse'=>'구옥',
+    'midHouse'=>'중간',
+    'newHouse'=>'신축'
 ];

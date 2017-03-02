@@ -75,6 +75,8 @@ Route::resource('pricetags', 'PriceTagsController');
 Route::resource('actualprices', 'ActualPricesController');
 Route::resource('rentalcosts', 'RentalCostsController');
 
+Route::resource('sigungus', 'SigungusController');
+
 Route::get('actualprices/contain/{latlng}', [
     'as'=>'contain',
     'uses'=>'ActualPricesController@contain'
