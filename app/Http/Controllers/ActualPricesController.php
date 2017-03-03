@@ -93,12 +93,14 @@ class ActualPricesController extends Controller
         }
 
 
-            /*->groupBy(['main_no', 'sub_no'])*/
-        $query->distinct()
+
+        $query->groupBy(['main_no', 'sub_no'])
             ->orderBy('yearmonth', 'desc');
 
 
-        $actualPrices = Redis::get($latlng);
+        $key = $latlng.$request->type.$request->size.$request->year;
+
+        $actualPrices = Redis::get($key);
         if(!$actualPrices){
             $actualPrices = $query->get();
             Redis::set($latlng, $actualPrices);

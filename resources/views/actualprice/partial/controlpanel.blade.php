@@ -1,5 +1,5 @@
 @section('mapcontrol')
-<div class="map-control-panel" style="background: #fff;border-radius: 7px; border:1px solid #ddd;width: 400px; position: absolute; top:65px;left:15px; z-index: 101;padding:15px;">
+<div class="map-control-panel" style="background: #fff;border-radius: 7px; border:1px solid #ddd;width: 400px; position: absolute; top:65px;left:15px; z-index: 20;padding:15px;">
     <div class="input-group">
         <input type="text" class="form-control" name="address" placeholder="{{ trans('common.address') }}"
             style="border-bottom-left-radius: 0;"
@@ -8,10 +8,10 @@
     </div>
     <div class="input-group" style="width: 100%;">
         <select name="type" class="form-control"
-                style="width:122px;border-top-left-radius: 0; border-top:0;border-right:0;">
+                style="width:122px;border-top-left-radius: 0; border-top:0;border-right:0;" disabled>
             <option value="0">{{ trans('common.total') }}</option>
-            <option value="1">{{ trans('common.jeonse') }}</option>
-            <option value="2">{{ trans('common.wolse') }}</option>
+            <option value="1" selected>{{ trans('common.maemae') }}</option>
+            <option value="2">{{ trans('common.jeonwolse') }}</option>
         </select>
         <select name="size" class="form-control"
                 style="width:122px;border-top-left-radius: 0; border-top-right-radius: 0;border-top:0;border-right:0;">

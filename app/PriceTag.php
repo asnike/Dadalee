@@ -23,6 +23,7 @@ class PriceTag extends Model
         'rental_cost',
         'floor',
         'completed_at',
+        'exclusive_size',
     ];
     public function realestate(){
         return $this->belongsTo('App\RealEstate');

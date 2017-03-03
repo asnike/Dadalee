@@ -103,12 +103,16 @@
             },
             getActualPricesEnd = function(data){
                 //console.log(data.lists);
+                removeMarkers();
                 setMarkers(data.lists);
+            },
+            removeMarkers = function () {
+                $('.marker-content').attr('onclick', null).unbind('click');
+                clusterer.clear();
             },
             setMarkers = function(prices){
                 var marker, last = {}, i, j;
 
-                $('.marker-content').attr('onclick', null).unbind('click');
                 for(markers = [], events = [], i = 0, j = prices.length ; i < j ; i++){
                     data = prices[i];
                     if(data.main_no != last.main_no && data.sub_no != last.sub_no){
@@ -116,7 +120,6 @@
                         last = data;
                     }
                 }
-                clusterer.clear();
                 clusterer.addMarkers(markers);
             },
             makeBasicMarker = function(data){

@@ -20,12 +20,13 @@ class PriceTagsController extends Controller
 
     public function contain(Request $request, $latlng){
         $range = explode(',', $latlng);
-        $query = PriceTag::where('lat', '>=', $range[0])
+        $query = PriceTag::where('user_id', auth()->id())
+            ->where('lat', '>=', $range[0])
             ->where('lat', '<=', $range[2])
             ->where('lng', '>=', $range[1])
             ->where('lng', '<=', $range[3])
             ->distinct()
-            /*->groupBy(['main_no', 'sub_no'])*/
+            ->groupBy(['main_no', 'sub_no'])
             ->orderBy('reported_at', 'desc');
 
         $priceTags = $query->get();
@@ -43,7 +44,7 @@ class PriceTagsController extends Controller
     {
         //
         header('Vary:X-Requested-With');
-        $realestates = PriceTag::where('user_id', auth()->id())->get();
+        $realestates = PriceTag::where('user_id', auth()->id())->groupBy(['main_no', 'sub_no'])->get();
         if($request->ajax()){
             return response()->json([
                 'result'=>1,
@@ -90,7 +91,7 @@ class PriceTagsController extends Controller
             'lat',
             'lng',
             'reported_at',
-            'compolete_at',
+            'completed_at',
             'exclusive_size',
             'price',
             'deposit',

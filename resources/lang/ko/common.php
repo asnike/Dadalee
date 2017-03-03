@@ -142,5 +142,7 @@ return [
     'wolse'=>'월세',
     'oldHouse'=>'구옥',
     'midHouse'=>'중간',
-    'newHouse'=>'신축'
+    'newHouse'=>'신축',
+    'maemae'=>'매매',
+    'jeonwolse'=>'전월세',
 ];
