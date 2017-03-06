@@ -89,8 +89,14 @@
                 var data = U.Form.getValueWithForm('#loanPanel', function(val){
                     if(isNaN(+(val.replace(/,/g, '')))) return val;
                     return numeral(val).value();
+                }),
+                    earning = U.Form.getValueWithForm('#earningPanel', function(val){ return numeral(val).value(); });
+                data = $.extend(data, {
+                    method:'POST',
+                    '_method':'put',
+                    investment:earning.investment,
+                    rate:(earning.real_earning?earning.real_earning:0)*12/(earning.investment?earning.investment:1)*100,
                 });
-                data = $.extend(data, {method:'POST','_method':'put'});
                 console.log('data : ',data);
                 U.http(function(data){
                     if(data.result) U.Modal.alert(data.msg);

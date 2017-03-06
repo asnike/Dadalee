@@ -202,6 +202,10 @@ class RealEstatesController extends Controller
         ]);
 
         $realestate = RealEstate::findOrFail($id);
+        $earningRate = EarningRate::updateOrCreate(['realestate_id'=>$id], $request->only([
+            'investment',
+            'rate',
+        ]));
         $loan = Loan::updateOrCreate(['realestate_id'=>$id], $request->except(['_method']));
 
         return response()->json([

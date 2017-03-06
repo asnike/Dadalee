@@ -170,6 +170,8 @@ return [
         \Laracasts\Flash\FlashServiceProvider::class,
         Nathanmac\Utilities\Parser\ParserServiceProvider::class,
         \Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        Barryvdh\Debugbar\ServiceProvider::class,
         //
 
         /*
@@ -233,6 +235,7 @@ return [
         'Flash'=>\Laracasts\Flash\Flash::class,
         'Parser' => Nathanmac\Utilities\Parser\Facades\Parser::class,
         'Excel'=>\Maatwebsite\Excel\Facades\Excel::class,
+        'Debugbar'=>Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
