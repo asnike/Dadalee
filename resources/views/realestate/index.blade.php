@@ -47,6 +47,10 @@
                     numericOnly:true,
                 });
                 $('.mobile.btn-add').click(addPopupOpen);
+                $('.btn-import-ga').click(importGoodauctionOpen);
+            },
+            importGoodauctionOpen = function(){
+                $('#goodauction-import').modal();
             },
             initMapControl = function(){
                 var zoomControl = new daum.maps.ZoomControl();

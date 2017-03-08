@@ -155,5 +155,8 @@ return [
     'sumTotal'=>'합계',
     'spend'=>'지출',
     'import'=>'수입',
-    'earningRateYear'=>'년수익률'
+    'earningRateYear'=>'년수익률',
+    'goodauctionImport'=>'굿옥션 물건 불러오기',
+    'load'=>'불러오기',
+    'goodauctionURL'=>'물건 URL'
 ];

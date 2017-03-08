@@ -21,6 +21,7 @@
 
                         </div>
                         <div class="col-xs-12 col-md-2"><button type="submit" class="btn btn-success btn-sm btn-block">{{ trans('common.realestateAdd') }}</button></div>
+                        <div class="col-xs-12 col-md-2"><div class="btn btn-success btn-sm btn-block btn-import-ga">{{ trans('common.goodauctionImport') }}</div></div>
                     </div>
                 </form>
 

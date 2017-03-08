@@ -74,6 +74,11 @@ Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
         'as'=>'excel.download',
         'uses'=>'ExcelsController@exportRealEstate'
     ]);
+    Route::post('import/goodauction', [
+        'as'=>'import.goodauction',
+        'uses'=>'ImportsController@goodauction'
+    ]);
+
 });
 Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');

@@ -224,4 +224,28 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="goodauction-import" data-backdrop="static">
+        <div class="modal-dialog">
+            <form class="form-horizontal" action="{{ route('realestate.import.goodauction') }}" method="POST">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ trans('common.goodauctionImport') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.goodauctionURL') }}</label>
+                            <div class="col-md-10"><input name="url" type="text" class="form-control" required></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info btn-excel">{{ trans('common.load') }}</button>
+                        <div class="btn btn-default btn-close" data-dismiss="modal">{{ trans('common.close') }}</div>
+                    </div>
+                </div>
+                {!! csrf_field() !!}
+            </form>
+        </div>
+    </div>
 @stop
