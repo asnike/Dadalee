@@ -92,6 +92,7 @@
                     swLatlng = bounds.getSouthWest(),
                     neLatlng = bounds.getNorthEast();
 
+                closePriceInfo();
                 getActualPrices(swLatlng.toString(), neLatlng.toString());
             },
             getActualPrices = function(min ,max){

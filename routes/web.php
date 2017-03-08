@@ -69,6 +69,11 @@ Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
         'as'=>'tenant.update',
         'uses'=>'RealEstatesController@tenant'
     ]);
+
+    Route::get('{id}/excel', [
+        'as'=>'excel.download',
+        'uses'=>'ExcelsController@exportRealEstate'
+    ]);
 });
 Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');

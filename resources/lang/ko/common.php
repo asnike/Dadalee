@@ -104,8 +104,13 @@ return [
     'rentalCost'=>'월세',
 
     'reportedAt'=>'작성일',
-    
-    
+    'loanAmount'=>'대출금액',
+    'loanInterestRate'=>'대출이율',
+    'loanInterestAmount'=>'대출이자',
+    'actualInvestment'=>'실투자금',
+    'actualEarning'=>'실수익(월)',
+    'conclusion'=>'종합',
+    'p'=>'평',
     
     
     
@@ -145,4 +150,10 @@ return [
     'newHouse'=>'신축',
     'maemae'=>'매매',
     'jeonwolse'=>'전월세',
+    'excelDownload'=>'엑셀 다운로드',
+    'earningRateSheet'=>'수익률표',
+    'sumTotal'=>'합계',
+    'spend'=>'지출',
+    'import'=>'수입',
+    'earningRateYear'=>'년수익률'
 ];

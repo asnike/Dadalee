@@ -71,7 +71,7 @@
                 var bounds = map.getBounds(),
                     swLatlng = bounds.getSouthWest(),
                     neLatlng = bounds.getNorthEast();
-
+                /*closePriceInfo();*/
                 getPriceTags(swLatlng.toString(), neLatlng.toString());
             },
             getPriceTags = function(min ,max){
@@ -191,12 +191,16 @@
                     if(id == realestates[i].id) selectedRealestate = realestates[i];
                 }
 
+
                 getMyLog(bunji);
                 getPriceHistory(bunji);
                 getRentalHistory(bunji);
                 getPcost(bunji);
                 //console.log(e.target, e.currentTarget);
                 selectedTarget = e ? e.currentTarget : null;
+
+                $('.marker-content.selected').removeClass('selected');
+                $('.marker-content[data-bunji="' + bunji + '"]').addClass('selected');
             },
             getPriceHistory = function(bunji){
                 U.http(getPriceHistoryEnd, 'actualprices/' + bunji, {method:'GET'})

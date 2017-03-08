@@ -298,6 +298,8 @@
                     searchedInfo.lat = realestate.lat,
                     searchedInfo.lng = realestate.lng;
 
+                    $('#excelDownload').attr('href','realestates/' + realestate.id + '/excel');
+
                     if(repayMethods){
                         repayMethodsRender();
                     }else{

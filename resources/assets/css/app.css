@@ -12711,7 +12711,7 @@ body {
   top: 0;
   width: 420px;
   height: 100%;
-  z-index: 50;
+  z-index: 45;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: none;
 }

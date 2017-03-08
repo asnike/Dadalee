@@ -218,6 +218,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a href="" id="excelDownload"><button type="button" class="btn btn-info btn-excel">{{ trans('common.excelDownload') }}</button></a>
                     <button type="button" class="btn btn-default btn-close">{{ trans('common.close') }}</button>
                 </div>
             </div>
