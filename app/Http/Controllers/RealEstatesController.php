@@ -58,6 +58,7 @@ class RealEstatesController extends Controller
         $this->validate($request, [
             'name'=>'required',
             'address'=>'required',
+            ''
         ]);
 
         $data = $request->all();

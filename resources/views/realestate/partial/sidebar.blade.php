@@ -3,6 +3,7 @@
     <div class="sidebar-container">
         <div class="sidebar-content">
             <div class="clearfix">
+                <div class="btn btn-success btn-sm btn-import-ga pull-left">{{ trans('common.goodauctionImport') }}</div>
                 <div class="btn-group btn-tab pull-right">
                     <a href="#own-tab" class="btn btn-sm btn-default active" data-toggle="tab">{{ trans('common.own') }}</a>
                     <a href="#attension-tab" class="btn btn-sm btn-default" data-toggle="tab">{{ trans('common.attension') }}</a>

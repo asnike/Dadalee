@@ -228,7 +228,7 @@
 
     <div class="modal fade" tabindex="-1" role="dialog" id="goodauction-import" data-backdrop="static">
         <div class="modal-dialog">
-            <form class="form-horizontal" action="{{ route('realestate.import.goodauction') }}" method="POST">
+            <form class="form-horizontal">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">{{ trans('common.goodauctionImport') }}</h4>
@@ -240,11 +240,49 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-info btn-excel">{{ trans('common.load') }}</button>
+                        <div class="btn btn-info btn-import">{{ trans('common.load') }}</div>
                         <div class="btn btn-default btn-close" data-dismiss="modal">{{ trans('common.close') }}</div>
                     </div>
                 </div>
-                {!! csrf_field() !!}
+            </form>
+        </div>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="goodauction-import-preview" data-backdrop="static">
+        <div class="modal-dialog">
+            <form class="form-horizontal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ trans('common.goodauctionImport') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.name') }}</label>
+                            <div class="col-md-6"><input name="name" type="text" class="form-control" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.address') }}</label>
+                            <div class="col-md-6"><input name="address" type="text" class="form-control" required readonly></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.floor') }}</label>
+                            <div class="col-md-6"><input name="floor" type="text" class="form-control" required readonly></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.completed_at') }}</label>
+                            <div class="col-md-6"><input name="completed_at" type="text" class="form-control" required readonly></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.exclusiveSize') }}</label>
+                            <div class="col-md-6"><input name="exclusive_size" type="text" class="form-control" required readonly></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn btn-info btn-save">{{ trans('common.save') }}</div>
+                        <div class="btn btn-default btn-close" data-dismiss="modal">{{ trans('common.close') }}</div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

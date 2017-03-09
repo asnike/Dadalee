@@ -48,6 +48,33 @@
                 });
                 $('.mobile.btn-add').click(addPopupOpen);
                 $('.btn-import-ga').click(importGoodauctionOpen);
+                $('.btn-import').click(importFromGa);
+                $('#goodauction-import-preview .btn-save').click(saveFromImport);
+            },
+            saveFromImport = function(){
+                var t0, data = U.Form.getValueWithForm('#goodauction-import-preview');
+                var geocoder = new daum.maps.services.Geocoder();
+
+                geocoder.addr2coord(data.address, function (status, result) {
+                    if (status === daum.maps.services.Status.OK) {
+                        console.log(status, result);
+                        t0 = result.addr[0];
+                        data = $.extend(data, {
+                            method:'POST',
+                            sigungu:t0.localName_1+' '+t0.localName_2+' '+t0.localName_3,
+                            sigungu_code:t0.zone_no,
+                            main_no:t0.mainAddress,
+                            sub_no:t0.subAddress,
+                            new_address:t0.newAddress,
+                            building_name:t0.buildingAddress,
+                            lat:t0.lat,
+                            lng:t0.lng,
+                        });
+                        U.http(getRealestates, '/realestates', data);
+                    }else{
+                        console.log(status, result);
+                    }
+                });
             },
             importGoodauctionOpen = function(){
                 $('#goodauction-import').modal();
@@ -66,6 +93,28 @@
                     U.global.isDetailModalOpened = false;
                     $('#realestate-detail').modal('hide');
                 });
+            },
+            importFromGa = function(){
+                var data = U.Form.getValueWithForm('#basicPanel');
+                data = $.extend(data, {method:'POST', url:$('#goodauction-import input[name="url"]').val()});
+                console.log('data : ',data);
+                U.http(importFromGaEnd, '/realestates/import/goodauction', data);
+            },
+            importFromGaEnd = function(data){
+                console.log(data);
+
+                if(data.result){
+                    U.Form.setTextWithForm({
+                        '#goodauction-import-preview input[name="name"]':data.data.no,
+                        '#goodauction-import-preview input[name="address"]':data.data.addr,
+                        '#goodauction-import-preview input[name="floor"]':data.data.floor,
+                        '#goodauction-import-preview input[name="completed_at"]':data.data.completed_at,
+                        '#goodauction-import-preview input[name="exclusive_size"]':data.data.exclusive_size,
+                    });
+                    $('#goodauction-import-preview').modal();
+                }else{
+
+                }
             },
             basicInfoEdit = function(e){
                 var data = U.Form.getValueWithForm('#basicPanel');
