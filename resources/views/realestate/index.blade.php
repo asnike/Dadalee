@@ -113,7 +113,7 @@
                     });
                     $('#goodauction-import-preview').modal();
                 }else{
-
+                    U.Modal.alert('물건을 불러올 수 없습니다.');
                 }
             },
             basicInfoEdit = function(e){
@@ -237,7 +237,12 @@
 
             },
             getRealestates = function(data){
-                if(data && data.msg) U.Modal.alert(data.msg);
+                if(data && data.msg){
+                    U.Modal.alert(data.msg);
+                    $('#goodauction-import').modal('hide');
+                    $('#goodauction-import-preview').modal('hide');
+                }
+
                 U.http(getRealestatesSuccess, '/realestates', {method:'GET'});
             },
             getRealestatesSuccess = function(data){
