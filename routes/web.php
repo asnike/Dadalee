@@ -79,6 +79,10 @@ Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
         'uses'=>'ImportsController@goodauction'
     ]);
 
+    Route::get('import/googlesheet', [
+        'as'=>'import.googlesheet',
+        'uses'=>'GoogleSheetsController@import'
+    ]);
 });
 Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');

@@ -158,5 +158,9 @@ return [
     'earningRateYear'=>'년수익률',
     'goodauctionImport'=>'굿옥션 물건 불러오기',
     'load'=>'불러오기',
-    'goodauctionURL'=>'물건 URL'
+    'goodauctionURL'=>'물건 URL',
+    'molitPrice'=>'국토교통부 실거래가',
+    'sameDongAvgPrice'=>'같은동 비슷한 물건 평균가',
+    'sameDongAvgPprice'=>'같은동 비슷한 물건 평단가',
+    'manWon'=>'만원',
 ];

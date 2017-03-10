@@ -12632,9 +12632,9 @@ body {
 }
 
 .marker-content {
-  background: #3fab43;
+  background: #2ab27b;
   border: 1px solid #318435;
-  border-radius: 5px;
+  border-radius: 5px 5px;
   padding: 7px 4px 7px 4px;
   cursor: pointer;
   box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.75);
@@ -12656,9 +12656,9 @@ body {
   content: '';
   opacity: 1;
   position: absolute;
-  background: #3fab43;
-  border: 1px solid #318435;
-  border-color: transparent transparent #318435 #318435;
+  background: #2ab27b;
+  border: 1px solid #1c9667;
+  border-color: transparent transparent #1c9667 #1c9667;
   bottom: -5px;
   left: 10px;
   -webkit-transform: rotate(-45deg);
@@ -12728,7 +12728,7 @@ body {
 
 .actual-price-info > .actual-price-info-header {
   width: 420px;
-  background: #3fab43;
+  background: #2ab27b;
   color: #fff;
   padding: 10px;
   position: fixed;
@@ -12834,12 +12834,12 @@ body {
 
 .avg-title, .pcost-title {
   font-size: 14px;
-  color: #3fab43;
+  color: #2ab27b;
 }
 
 .avg-info, .pcost-info {
   font-size: 22px;
-  color: #3fab43;
+  color: #2ab27b;
   font-weight: bold;
 }
 
@@ -12976,6 +12976,23 @@ body {
 
 .easy-autocomplete-container {
   margin-top: 37px;
+}
+
+.modal-content {
+  border-radius: 4px;
+}
+
+.map-control-panel {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  border-radius: 7px;
+  border: 1px solid #ddd;
+  width: 400px;
+  position: absolute;
+  top: 65px;
+  left: 15px;
+  z-index: 20;
+  padding: 15px;
 }
 
 /*# sourceMappingURL=app.css.map */

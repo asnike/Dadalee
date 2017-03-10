@@ -75,7 +75,7 @@
             searchWhere = function(e){
                 var geocoder = new daum.maps.services.Geocoder(),
                     address = $('input[name="address"]').val();
-
+                if(!address) return;
                 geocoder.addr2coord(address, function (status, result) {
                     if (status === daum.maps.services.Status.OK) {
                         console.log(result);
@@ -247,11 +247,18 @@
             },
             closePriceInfo = function(){
                 $('.price-info.show').removeClass('show');
+            },
+            searchAddr = function(e){
+                console.log(e.keyCode);
+                if(e.keyCode == 13){//enter
+                    searchWhere();
+                }
             };
             init();
             console.log('sigungu :: ', sigungu);
             return {
                 closePriceInfo:closePriceInfo,
+                searchAddr:searchAddr,
             }
         })();
     </script>

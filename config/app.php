@@ -172,6 +172,9 @@ return [
         \Maatwebsite\Excel\ExcelServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+
+        PulkitJalan\Google\GoogleServiceProvider::class,
+        GoogleSheets\Providers\SheetsServiceProvider::class,
         //
 
         /*
@@ -236,6 +239,9 @@ return [
         'Parser' => Nathanmac\Utilities\Parser\Facades\Parser::class,
         'Excel'=>\Maatwebsite\Excel\Facades\Excel::class,
         'Debugbar'=>Barryvdh\Debugbar\Facade::class,
+
+        'Google' => PulkitJalan\Google\Facades\Google::class,
+        'Sheets' => GoogleSheets\Facades\Sheets::class,
     ],
 
 ];

@@ -593,6 +593,8 @@
                 },
                 getPcostEnd = function(data){
                     console.log(data);
+                    $('.avg-value').html('');
+                    $('.pcost-value').html('');
                     $('.avg-value').html(numeral(data.data.average_price).format('0,0'));
                     $('.pcost-value').html(numeral(data.data.pcost).format('0,0'));
                 },

@@ -27,11 +27,11 @@
                     </table>
                     <hr>
                 @endif
-                <h4>국토교통부 실거래가</h4>
-                <div class="avg-title">같은동 비슷한 물건 평균가</div>
-                <div class="avg-info"><span class="avg-value"></span>만원</div>
-                <div class="pcost-title">같은동 비슷한 물건 평단가</div>
-                <div class="pcost-info"><span class="pcost-value"></span>만원</div>
+                <h4>{{ trans('common.molitPrice') }}</h4>
+                <div class="avg-title">{{ trans('common.sameDongAvgPrice') }}</div>
+                <div class="avg-info"><span class="avg-value"></span>{{ trans('common.manWon') }}</div>
+                <div class="pcost-title">{{ trans('common.sameDongAvgPprice') }}</div>
+                <div class="pcost-info"><span class="pcost-value"></span>{{ trans('common.manWon') }}</div>
                 <h5>{{ trans('common.tradePrice') }}</h5>
                 <div style="margin-bottom:10px;">
                     <span>{{ trans('common.exclusiveSize') }} </span><select style="width:150px;display: inline-block;" name="" class="form-control select2" id="tradeSize"></select>
