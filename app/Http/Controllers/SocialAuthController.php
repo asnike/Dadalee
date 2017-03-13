@@ -26,4 +26,22 @@ class SocialAuthController extends Controller
 
         return redirect(route('home'));
     }
+
+    public function getGoogleAuth(){
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function getGoogleAuthCallback(){
+        $user = Socialite::driver('google')->user();
+
+        $user = (User::whereEmail($user->getEmail())->first())
+            ?: User::create([
+                'name'=>$user->getName(),
+                'email'=>$user->getEmail(),
+            ]);
+
+        auth()->login($user, true);
+
+        return redirect(route('home'));
+    }
 }

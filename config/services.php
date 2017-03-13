@@ -41,4 +41,10 @@ return [
         'redirect'=>'http://dadalee.app/auth/fb/callback'
     ],
 
+    'google'=>[
+        'client_id'=>'854089819380-ftntrv0j3ag06e6ou52dfi5f9g71p4jf.apps.googleusercontent.com',
+        'client_secret'=>'5ABSD-Np7O6q9C0XZO2B_oQv',
+        'redirect'=>'http://dadalee.app/auth/google/callback'
+    ],
+
 ];

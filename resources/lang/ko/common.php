@@ -111,31 +111,30 @@ return [
     'actualEarning'=>'실수익(월)',
     'conclusion'=>'종합',
     'p'=>'평',
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    'registerWithGoogle'=>'구글로 가입하기',
+    'loginWithGoogle'=>'구글로 로그인하기기',
     
     'building_name'=>'건물이름',
     'mainNo'=>'본번',
-    'subNo'=>'부번',
-    'actualPriceList'=>'실거래가 - 매매',
+    'subNo'=>'부번',    'actualPriceList'=>'실거래가 - 매매',
     'rentalCostList'=>'실거래가 - 월세',
     'geocoding'=>'지오코딩',
     'upload'=>'업로드',

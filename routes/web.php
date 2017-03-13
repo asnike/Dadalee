@@ -48,6 +48,14 @@ Route::group(['prefix' => 'auth', 'as' => 'session.'], function(){
         'as'=>'fb.callback',
         'uses'=>'SocialAuthController@getFbAuthCallback'
     ]);
+    Route::get('google', [
+        'as'=>'google.login',
+        'uses'=>'SocialAuthController@getGoogleAuth'
+    ]);
+    Route::get('google/callback', [
+        'as'=>'google.callback',
+        'uses'=>'SocialAuthController@getGoogleAuthCallback'
+    ]);
 });
 Auth::routes();
 
@@ -145,3 +153,8 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware'=>['admin']], functi
         'uses'=>'Admin\ActualPricesController@geocoding'
     ]);
 });
+
+Route::get('auth2/callback', [
+    'as'=>'auth2',
+    'uses'=>'GoogleSheetsController@callback'
+]);

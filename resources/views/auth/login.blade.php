@@ -70,6 +70,14 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <a class="btn btn-default btn-block btn-fb" href="{{ route('session.google.login') }}">
+                                    <strong><i class="fa fa-google icon"></i> {{ trans('common.loginWithGoogle') }}</strong>
+                                </a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
