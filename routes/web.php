@@ -91,6 +91,13 @@ Route::group(['prefix'=>'realestates', 'as'=>'realestate.'], function(){
         'as'=>'import.googlesheet',
         'uses'=>'GoogleSheetsController@import'
     ]);
+    Route::post('export/googlesheet', [
+        'as'=>'export.googlesheet',
+        'uses'=>'GoogleSheetsController@export'
+    ]);
+
+
+
 });
 Route::resource('realestates', 'RealEstatesController');
 Route::resource('pricetags', 'PriceTagsController');
@@ -155,6 +162,10 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware'=>['admin']], functi
 });
 
 Route::get('auth2/callback', [
-    'as'=>'auth2',
-    'uses'=>'GoogleSheetsController@callback'
+    'as'=>'auth2.callback',
+    'uses'=>'GoogleSheetsController@authCallback'
+]);
+Route::get('auth2/authCheck', [
+    'as'=>'auth2.authCheck',
+    'uses'=>'GoogleSheetsController@authCheck'
 ]);

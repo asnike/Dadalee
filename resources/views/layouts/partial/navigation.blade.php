@@ -39,6 +39,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('session.destroy') }}"><i class="fa fa-sign-out icon"></i> {{ trans('common.logout') }}</a></li>
+                            <li><a href="{{ route('session.destroy') }}"><i class="fa fa-sign-out icon"></i> {{ trans('common.logout') }}</a></li>
                         </ul>
                     </li>
                 @endif

@@ -162,4 +162,6 @@ return [
     'sameDongAvgPrice'=>'같은동 비슷한 물건 평균가',
     'sameDongAvgPprice'=>'같은동 비슷한 물건 평단가',
     'manWon'=>'만원',
+    
+    'googleSheets'=>'구글시트로 내보내기',
 ];

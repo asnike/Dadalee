@@ -1,5 +1,6 @@
 @section('modal')
     <div class="modal fade" tabindex="-1" role="dialog" id="realestate-detail" data-backdrop="static">
+        <input type="hidden" name="id">
         <div class="modal-dialog modal-tab">
             <div class="modal-content">
                 <div class="modal-header">
@@ -218,6 +219,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sheets">{{ trans('common.googleSheets') }}</button>
                     <a href="" id="excelDownload"><button type="button" class="btn btn-info btn-excel">{{ trans('common.excelDownload') }}</button></a>
                     <button type="button" class="btn btn-default btn-close">{{ trans('common.close') }}</button>
                 </div>
@@ -280,6 +282,29 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn btn-info btn-save">{{ trans('common.save') }}</div>
+                        <div class="btn btn-default btn-close" data-dismiss="modal">{{ trans('common.close') }}</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="sheets-info-modal" data-backdrop="static">
+        <div class="modal-dialog">
+            <form class="form-horizontal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ trans('common.googleSheets') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="">{{ trans('common.name') }}</label>
+                            <div class="col-md-6"><input name="sheet_id" type="text" class="form-control" required></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn btn-info btn-sheet-export">{{ trans('common.export') }}</div>
                         <div class="btn btn-default btn-close" data-dismiss="modal">{{ trans('common.close') }}</div>
                     </div>
                 </div>

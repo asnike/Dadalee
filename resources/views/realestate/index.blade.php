@@ -20,7 +20,7 @@
         <script>
         var Controller = (function(){
             var map, realestates, markers = [], searchedInfo = {}, addrInfo = {}, selectedData = {}, selectedRealestate,
-                repayMethods, ladda,
+                repayMethods, ladda, selectedId,
             init = function(){
                 initMap();
                 initMapControl();
@@ -50,6 +50,25 @@
                 $('.btn-import-ga').click(importGoodauctionOpen);
                 $('.btn-import').click(importFromGa);
                 $('#goodauction-import-preview .btn-save').click(saveFromImport);
+                $('#realestate-detail .btn-sheets').click(exportToSheetsModal);
+                $('#sheets-info-modal .btn-sheet-export').click(exportToSheetsClick);
+            },
+            exportToSheetsModal = function(e){
+                $('#sheets-info-modal').modal();
+                $('#realestate-detail').modal('hide');
+            },
+            exportToSheetsClick = function(e){
+                var id = $('#realestate-detail input[name="id"]').val();
+                exportToSheets(id);
+            },
+            exportToSheets = function(id){
+                var data = U.Form.getValueWithForm('#sheets-info-modal');
+                data = $.extend(data, {
+                    method:'POST',
+                    id:id,
+                });
+                console.log('data : ',data);
+                U.http(importFromGaEnd, '/realestates/export/googlesheet', data);
             },
             saveFromImport = function(){
                 var t0, data = U.Form.getValueWithForm('#goodauction-import-preview');
@@ -407,6 +426,7 @@
                     U.global.isDetailModalOpened = true;
                     $('#realestate-detail').modal();
                 }, '/realestates/' + $(this).attr('data-id') + '/edit', {method:'GET'});
+                $('#realestate-detail input[name="id"]').val($(this).attr('data-id'));
             },
             repayMethodsRender = function(){
                 var html, i, j, template = Handlebars.compile($('#option-item').html());
