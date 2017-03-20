@@ -164,4 +164,5 @@ return [
     'manWon'=>'만원',
     
     'googleSheets'=>'구글시트로 내보내기',
+    'googleLink'=>'구글시트연동설정',
 ];

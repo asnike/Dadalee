@@ -165,7 +165,19 @@ Route::get('auth2/callback', [
     'as'=>'auth2.callback',
     'uses'=>'GoogleSheetsController@authCallback'
 ]);
-Route::get('auth2/authCheck', [
-    'as'=>'auth2.authCheck',
+Route::get('auth2/authcheck', [
+    'as'=>'auth2.authcheck',
     'uses'=>'GoogleSheetsController@authCheck'
 ]);
+
+
+Route::group(['prefix' => 'mypage/google', 'as' => 'mypage.google.'], function(){
+    Route::get('link', [
+        'as' => 'link',
+        'uses'=>'GoogleSheetsController@link'
+    ]);
+    Route::post('linked', [
+        'as' => 'linked',
+        'uses'=>'GoogleSheetsController@login'
+    ]);
+});

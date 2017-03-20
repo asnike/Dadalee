@@ -18,7 +18,8 @@ class User extends Authenticatable
         'is_admin'=>'boolean',
     ];
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password',
+        'sheets_id',
     ];
 
     /**
@@ -35,5 +36,8 @@ class User extends Authenticatable
     }
     public function isAdmin(){
         return $this->is_admin;
+    }
+    public function sheetsId(){
+        return $this->sheets_id;
     }
 }
