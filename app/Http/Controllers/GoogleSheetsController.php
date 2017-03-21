@@ -20,14 +20,13 @@ class GoogleSheetsController extends Controller
     }
     public function export(Request $request){
         $realestate = RealEstate::with(['earningRate', 'loan'])->findOrFail($request->input('id'));
-        $user = User::findOrFail(auth()->id());
 
         $filename = $realestate->building_name.' '.trans('common.earningRateSheet');
 
         $client = $this->authCheck($request->session()->get('access_token'));
-        $sheetId = $user->sheetsId();
+        $result = $this->addSheet($client, $filename, TRUE)->batchUpdate($client);
+        $result = $this->addRealEstate($client, $filename, $realestate);
 
-        $result = $this->addSheet($client, $filename, TRUE)->addRealEstate($client, $realestate)->batchUpdate();
         return response()->json($result);
     }
     public function import(Request $request){
@@ -68,8 +67,8 @@ class GoogleSheetsController extends Controller
 
     }
     public function link(Request $request){
-        $user = User::findOrFail(auth()->id());
-        if($user->sheetsId()){
+        $sheetsId = $this->getSheetsId();
+        if($sheetsId){
 
         }else{
             $client = $this->authCheck($request->session()->get('access_token'));
@@ -87,23 +86,7 @@ class GoogleSheetsController extends Controller
         $response = $service->spreadsheets_values->get($sheetId, $range);
         return $response;
     }
-    protected function setData($client, $sheetId){
 
-
-        /*$range = 'A5';
-        $body = new \Google_Service_Sheets_ValueRange(array(
-            'values' => array(
-                array('d3333', 'rewrwerwer', 123123123)
-            )
-        ));
-        $param = array(
-            'valueInputOption' => 'RAW'
-        );
-        $response = $service->spreadsheets_values->append($sheetId, $range, $body, $param);
-
-        $range = 'A1:C10';
-        $response = $service->spreadsheets_values->get($sheetId, $range);*/
-    }
     protected function createSpreadSheets($client){
         $service = new \Google_Service_Sheets($client);
         $sheets = new \Google_Service_Sheets_Spreadsheet();
@@ -135,17 +118,47 @@ class GoogleSheetsController extends Controller
         );
         return $this;
     }
-    protected function addRealEstate($client, $title){
-        $user = User::findOrFail(auth()->id());
+    protected function addRealEstate($client, $sheetName, $realestate){
+        $sheetName = "'".$sheetName."'";
+        $service = new \Google_Service_Sheets($client);
+        $batchUpdateRequest = new \Google_Service_Sheets_BatchUpdateValuesRequest(
+            [
+                'data'=>[
+                    'range'=>$sheetName.'!A1',
+                    'values'=>[
+                        array(trans('common.basicInfo')),
+                        [trans('common.address'), $realestate->address],
+                        [trans('common.floor'), $realestate->floor],
+                        [trans('common.completed_at'), $realestate->completed_at],
+                        [trans('common.exclusiveSize'), $realestate->exclusive_size.'('.$realestate->exclusive_size/3.3.trans('common.p').')'],
+                        [trans('common.memo'), $realestate->memo],
+                        [trans('common.spend')],
+                        [trans('common.tradePrice'), $realestate->earningRate?$realestate->earningRate->price:''],
+                        [trans('common.tax'), $realestate->earningRate?$realestate->earningRate->tax:''],
+                        [trans('common.mediation_cost'), $realestate->earningRate?$realestate->earningRate->mediation_cost:''],
+                        [trans('common.judicial_cost'), $realestate->earningRate?$realestate->earningRate->judicial_cost:''],
+                        [trans('common.etc_cost'), $realestate->earningRate?$realestate->earningRate->etc_cost:''],
+                        [trans('common.sumTotal'), '=SUM('.$sheetName.'!B8:B12)'],
+                        [trans('common.loan')],
+                        [trans('common.loanAmount'), $realestate->loan?$realestate->loan->amount:''],
+                        [trans('common.loanInterestRate'), $realestate->loan?(float)$realestate->loan->interest_rate/100:''],
+                        [trans('common.repayCommission'), $realestate->loan?(float)$realestate->loan->repay_commission/100:''],
+                        [trans('common.loanInterestAmount'), '=('.$sheetName.'!B15*'.$sheetName.'!B16)/12'],
+                        [trans('common.import')],
+                        [trans('common.deposit'), $realestate->earningRate?$realestate->earningRate->deposit:''],
+                        [trans('common.monthlyFee'), $realestate->earningRate?$realestate->earningRate->monthlyfee:''],
+                        [trans('common.conclusion')],
+                        [trans('common.actualInvestment'), '=('.$sheetName.'!B13-'.$sheetName.'!B15-'.$sheetName.'!B20)'],
+                        [trans('common.actualEarning'), '=('.$sheetName.'!B21-'.$sheetName.'!B18)'],
+                        [trans('common.earningRateYear'), '=('.$sheetName.'!B24*12/'.$sheetName.'!B23)'],
+                    ],
+                ],
+                'valueInputOption'=>'USER_ENTERED'
+            ]
+        );
+        $response = $service->spreadsheets_values->batchUpdate($this->getSheetsId(), $batchUpdateRequest);
 
-        $service = new \Google_Service_Sheets_Sheet($client);
-        $range = '';
-        $optParams = [];
-        $optParams['valueInputOption'] = '';
-        $requestBody = new \Google_Service_Sheets_ValueRange();
-        /*$response = $service->spreadsheets_value->update($user->sheetsId(), $);*/
-
-        return $this;
+        return $response;
     }
     protected function batchUpdate($client){
 
@@ -155,10 +168,9 @@ class GoogleSheetsController extends Controller
                 'requests'=>$this->requests
             )
         );
-
-        $user = User::findOrFail(auth()->id());
+        $sheetsId = $this->getSheetsId();
         try{
-            $response = $service->spreadsheets->batchUpdate($user->sheetsId(), $batchUpdateRequest);
+            $response = $service->spreadsheets->batchUpdate($sheetsId, $batchUpdateRequest);
         }catch(\Google_Service_Exception $exception){
             $code = $exception->getCode();
             switch($code){
@@ -173,5 +185,14 @@ class GoogleSheetsController extends Controller
         }
 
         return $response;
+    }
+    protected function getSheetsId(){
+        try {
+            $user = User::findOrFail(auth()->id());
+        }catch(\Exception $exception){
+            $errors = array(array('message'=>'test'));
+            return view('errors.googlesheet')->with('errors', $errors);
+        }
+        return $user->sheetsId();
     }
 }
