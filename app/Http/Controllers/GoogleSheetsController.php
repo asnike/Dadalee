@@ -60,7 +60,7 @@ class GoogleSheetsController extends Controller
         }else{
             $client->authenticate($request->input('code'));
             $request->session()->set('access_token', $client->getAccessToken());
-            return redirect()->action('GoogleSheetsController@import');
+            /*return redirect()->action('GoogleSheetsController@import');*/
         }
     }
     public function linked(){
@@ -121,7 +121,7 @@ class GoogleSheetsController extends Controller
     protected function addRealEstate($client, $sheetName, $realestate){
         $sheetName = "'".$sheetName."'";
         $service = new \Google_Service_Sheets($client);
-        $batchUpdateRequest = new \Google_Service_Sheets_BatchUpdateValuesRequest(
+        /*$batchUpdateRequest = new \Google_Service_Sheets_BatchUpdateValuesRequest(
             [
                 'data'=>[
                     'range'=>$sheetName.'!A1',
@@ -156,8 +156,36 @@ class GoogleSheetsController extends Controller
                 'valueInputOption'=>'USER_ENTERED'
             ]
         );
-        $response = $service->spreadsheets_values->batchUpdate($this->getSheetsId(), $batchUpdateRequest);
+        $response = $service->spreadsheets_values->batchUpdate($this->getSheetsId(), $batchUpdateRequest);*/
 
+        /*$batchUpdateRequest = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest(
+            array(
+                'requests'=>[
+                    new \Google_Service_Sheets_Request([
+                        'repeatCell'=>[
+                            'range'=>[
+                                'sheetId'=>'109548473',
+                                'startRowIndex'=>'0',
+                                'endRowIndex'=>'2',
+                                'startColumnIndex'=>'0',
+                                'endColumnIndex'=>'2',
+                            ],
+                            'cell'=>[
+                                'userEnteredFormat'=>[
+                                    'numberFormat'=>[
+                                        'type'=>'PERCENT'
+                                    ]
+                                ]
+                            ],
+                            'fields'=>'*'
+                        ]
+                    ])
+                ]
+            )
+        );
+        $response = $service->spreadsheets->batchUpdate($this->getSheetsId(), $batchUpdateRequest);*/
+        $response = $service->spreadsheets->get($this->getSheetsId(), array('includeGridData'=>true));
+        dd($response->getSheets()[1]->getProperties());
         return $response;
     }
     protected function batchUpdate($client){

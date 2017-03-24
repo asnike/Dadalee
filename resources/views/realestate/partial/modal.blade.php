@@ -1,6 +1,5 @@
 @section('modal')
     <div class="modal fade" tabindex="-1" role="dialog" id="realestate-detail" data-backdrop="static">
-        <input type="hidden" name="id">
         <div class="modal-dialog modal-tab">
             <div class="modal-content">
                 <div class="modal-header">
@@ -219,7 +218,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-sheets">{{ trans('common.googleSheets') }}</button>
+                    <form action="{{ route('realestate.export.googlesheet') }}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id">
+                        <button type="submit" class="btn btn-info btn-sheets">{{ trans('common.googleSheets') }}</button>
+                    </form>
                     <a href="" id="excelDownload"><button type="button" class="btn btn-info btn-excel">{{ trans('common.excelDownload') }}</button></a>
                     <button type="button" class="btn btn-default btn-close">{{ trans('common.close') }}</button>
                 </div>

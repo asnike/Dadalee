@@ -50,13 +50,9 @@
                 $('.btn-import-ga').click(importGoodauctionOpen);
                 $('.btn-import').click(importFromGa);
                 $('#goodauction-import-preview .btn-save').click(saveFromImport);
-                $('#realestate-detail .btn-sheets').click(exportToSheetsModal);
                 $('#sheets-info-modal .btn-sheet-export').click(exportToSheetsClick);
             },
-            exportToSheetsModal = function(e){
-                $('#sheets-info-modal').modal();
-                $('#realestate-detail').modal('hide');
-            },
+
             exportToSheetsClick = function(e){
                 var id = $('#realestate-detail input[name="id"]').val();
                 exportToSheets(id);
