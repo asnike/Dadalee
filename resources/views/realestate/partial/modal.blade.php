@@ -218,7 +218,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('realestate.export.googlesheet') }}" method="post">
+                    <form action="{{ route('realestate.export.googlesheet') }}" method="post" style="display: inline-block;">
                         {{ csrf_field() }}
                         <input type="hidden" name="id">
                         <button type="submit" class="btn btn-info btn-sheets">{{ trans('common.googleSheets') }}</button>
