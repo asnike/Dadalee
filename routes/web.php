@@ -180,4 +180,8 @@ Route::group(['prefix' => 'mypage/google', 'as' => 'mypage.google.'], function()
         'as' => 'linked',
         'uses'=>'GoogleSheetsController@login'
     ]);
+    Route::get('revoke', [
+        'as' => 'revoke',
+        'uses'=>'GoogleSheetsController@revoke'
+    ]);
 });

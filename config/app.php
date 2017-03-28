@@ -186,6 +186,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\GoogleApiProvider::class,
+
     ],
 
     /*
@@ -242,6 +244,8 @@ return [
 
         'Google' => PulkitJalan\Google\Facades\Google::class,
         'Sheets' => GoogleSheets\Facades\Sheets::class,
+
+        'GoogleApi'=> App\Libraries\Facades\GoogleApiFacade::class,
     ],
 
 ];

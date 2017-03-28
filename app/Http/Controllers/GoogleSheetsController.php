@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 
+
+use App\Libraries\Google\Facades\GoogleApiFacade;
+use App\Libraries\Google\GoogleApi;
 use App\RealEstate;
 use App\User;
 use Illuminate\Http\Request;
@@ -30,10 +33,23 @@ class GoogleSheetsController extends Controller
         return response()->json($result);
     }
     public function import(Request $request){
-        $client = $this->authCheck($request->session()->get('access_token'));
+        /*$client = $this->authCheck($request->session()->get('access_token'));
         if(isset($client)){
             return $this->addSheet($client, 'teee', TRUE)->batchUpdate($client);
-        }
+        }*/
+
+        GoogleApiFacade::init(
+            'json/credential.json',
+            route('auth2.callback'),
+            \Google_Service_Sheets::SPREADSHEETS
+        );
+    }
+    public function revoke(){
+        dd(GoogleApiFacade::init(
+            'json/credential.json',
+            route('auth2.callback'),
+            \Google_Service_Sheets::SPREADSHEETS
+        )->revoke());
     }
     protected function authCheck($access_token){
         $client = new Google_Client();
@@ -63,6 +79,14 @@ class GoogleSheetsController extends Controller
             /*return redirect()->action('GoogleSheetsController@import');*/
         }
     }
+    /*public function authCallback(Request $request){
+        GoogleApiFacade::init(
+            'json/credential.json',
+            route('auth2.callback'),
+            \Google_Service_Sheets::SPREADSHEETS
+        )
+            ->authCallback();
+    }*/
     public function linked(){
 
     }
@@ -102,7 +126,7 @@ class GoogleSheetsController extends Controller
         }
         $sheet_properties = new \Google_Service_Sheets_SheetProperties();
         $sheet_properties->setTitle('list');
-        $sheets->getSheets()[0]->setProperties($sheet_properties);
+
 
         return $sheets;
     }
@@ -198,7 +222,7 @@ class GoogleSheetsController extends Controller
                             'cell'=>[
                                 'userEnteredFormat'=>[
                                     'numberFormat'=>[
-                                        'type'=>'PERCENT'
+                                        'type'=>'PERCENT',
                                     ],
                                     'borders'=>[
                                         'top'=>[
@@ -259,7 +283,8 @@ class GoogleSheetsController extends Controller
                             'cell'=>[
                                 'userEnteredFormat'=>[
                                     'numberFormat'=>[
-                                        'type'=>'PERCENT'
+                                        'type'=>'NUMBER',
+                                        'pattern'=>'00.00%'
                                     ],
                                     'borders'=>[
                                         'top'=>[
