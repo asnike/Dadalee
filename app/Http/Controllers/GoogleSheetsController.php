@@ -17,8 +17,6 @@ class GoogleSheetsController extends Controller
 
     public function __construct()
     {
-
-
         GoogleApiFacade::init(
             'json/credential.json',
             route('auth2.callback'),
@@ -37,31 +35,13 @@ class GoogleSheetsController extends Controller
         $result = GoogleApiFacade::auth()->addSheet($this->getSheetsId(), $sheetname);
         $result = GoogleApiFacade::auth()->addRealEstate($this->getSheetsId(), $sheetname, $realestate);
 
-
-
-        return response()->json($result);
-    }
-    public function import(Request $request){
-        //GoogleApiFacade::auth();
-    }
-    public function revoke(){
-
-    }
-    protected function authCheck($access_token){
-        $client = new Google_Client();
-        $client->setAuthConfig('json/credential.json');
-        $client->addScope(\Google_Service_Sheets::SPREADSHEETS);
-
-        if(isset($access_token) && $access_token){
-            $client->setAccessToken($access_token);
-            return $client;
-        }else{
-            header('Location: '. filter_var(route('auth2.callback'), FILTER_SANITIZE_URL));
-            exit;
-        }
+        return redirect()->route('realestates.index');
     }
     public function authCallback(Request $request){
         GoogleApiFacade::authCallback();
+    }
+    public function revoke(){
+        dd(GoogleApiFacade::auth()->revoke());
     }
 
     public function linked(){

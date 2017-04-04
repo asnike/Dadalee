@@ -169,6 +169,10 @@ Route::get('auth2/authcheck', [
     'as'=>'auth2.authcheck',
     'uses'=>'GoogleSheetsController@authCheck'
 ]);
+Route::get('auth2/revoke', [
+    'as'=>'auth2.revoke',
+    'uses'=>'GoogleSheetsController@revoke'
+]);
 
 
 Route::group(['prefix' => 'mypage/google', 'as' => 'mypage.google.'], function(){

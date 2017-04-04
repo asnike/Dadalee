@@ -18,10 +18,10 @@ class GoogleApi
     private $client;
 
     public function init($auth_path, $callback, $scope){
+        session_start();
         $this->auth_path = $auth_path;
         $this->callback = $callback;
         $this->scope = $scope;
-        //$this->client = $this->auth();
         return $this;
     }
     public function revoke(){
@@ -98,11 +98,13 @@ class GoogleApi
         $this->client->addScope($this->scope);
 
         $access_token = request()->session()->get('access_token');
+        request()->session()->set('redirect', url()->current());
+
         if(isset($access_token) && $access_token){
+
             $this->client->setAccessToken($access_token);
             return $this;
         }else{
-            request()->session()->set('redirect', url()->current());
             header('Location: '. filter_var($this->callback, FILTER_SANITIZE_URL));
             exit;
         }
@@ -123,10 +125,14 @@ class GoogleApi
             request()->session()->set('access_token', $this->client->getAccessToken());
             $redirect = request()->session()->get('redirect');
             request()->session()->set('redirect', NULL);
-            if(isset($redirect)) url()->to();
+            if(isset($redirect)){
+                header('Location: '. filter_var($redirect, FILTER_SANITIZE_URL));
+                exit;
+            }
 
         }
     }
+
     private function border($style = 'SOLID', $width = 1, $color = ['red'=>0, 'green'=>0, 'blue'=>0]){
         $border = [
             'style'=>$style,
