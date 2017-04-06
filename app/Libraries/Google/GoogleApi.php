@@ -125,10 +125,11 @@ class GoogleApi
             request()->session()->set('access_token', $this->client->getAccessToken());
             $redirect = request()->session()->get('redirect');
             request()->session()->set('redirect', NULL);
-            if(isset($redirect)){
+            /*if(isset($redirect)){
+                session_abort();
                 header('Location: '. filter_var($redirect, FILTER_SANITIZE_URL));
                 exit;
-            }
+            }*/
 
         }
     }
