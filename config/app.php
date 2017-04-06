@@ -171,10 +171,6 @@ return [
         Nathanmac\Utilities\Parser\ParserServiceProvider::class,
         \Maatwebsite\Excel\ExcelServiceProvider::class,
 
-        Barryvdh\Debugbar\ServiceProvider::class,
-
-        PulkitJalan\Google\GoogleServiceProvider::class,
-        GoogleSheets\Providers\SheetsServiceProvider::class,
         //
 
         /*
@@ -240,12 +236,8 @@ return [
         'Flash'=>\Laracasts\Flash\Flash::class,
         'Parser' => Nathanmac\Utilities\Parser\Facades\Parser::class,
         'Excel'=>\Maatwebsite\Excel\Facades\Excel::class,
-        'Debugbar'=>Barryvdh\Debugbar\Facade::class,
 
-        'Google' => PulkitJalan\Google\Facades\Google::class,
-        'Sheets' => GoogleSheets\Facades\Sheets::class,
-
-        'GoogleApi'=> App\Libraries\Facades\GoogleApiFacade::class,
+        'GoogleApi'=> App\Libraries\Google\Facades\GoogleApiFacade::class,
     ],
 
 ];
