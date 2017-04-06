@@ -218,11 +218,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('realestate.export.googlesheet') }}" method="post" style="display: inline-block;">
+                    {{--<form action="{{ route('realestate.export.googlesheet') }}" method="post" style="display: inline-block;">
                         {{ csrf_field() }}
                         <input type="hidden" name="id">
                         <button type="submit" class="btn btn-info btn-sheets">{{ trans('common.googleSheets') }}</button>
-                    </form>
+                    </form>--}}
                     <a href="" id="excelDownload"><button type="button" class="btn btn-info btn-excel">{{ trans('common.excelDownload') }}</button></a>
                     <button type="button" class="btn btn-default btn-close">{{ trans('common.close') }}</button>
                 </div>
