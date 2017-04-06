@@ -20,7 +20,8 @@ class ActualPricesController extends Controller
         //
         $query = ActualPrice::query();
         $prices = $query->paginate(15);
-        return view('admin.actualprice.list', ['prices'=>$prices]);
+        $all = ActualPrice::all();
+        return view('admin.actualprice.list', ['prices'=>$prices, 'all'=>$all]);
     }
 
     /**
@@ -56,9 +57,9 @@ class ActualPricesController extends Controller
             foreach ($data as $row){
                 ActualPrice::create([
                     'sigungu'=>$row[1],
-                    'main_no'=>$row[2],
-                    'sub_no'=>$row[3],
-                    'building_name'=>$row[4],
+                    'main_no'=>$row[3],
+                    'sub_no'=>$row[4],
+                    'building_name'=>$row[5],
                     'exclusive_size'=>$row[6],
                     'land_size'=>$row[7],
                     'yearmonth'=>$row[8],

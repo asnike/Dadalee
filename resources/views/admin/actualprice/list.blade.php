@@ -63,7 +63,7 @@
         (function(){
             var YOUR_API_KEY = 'AIzaSyDp7NxG06QPH1aXl0vS8-t9cZUMajMhS48',
                 geocoder = new daum.maps.services.Geocoder(),
-                prices = JSON.parse({!! json_encode(json_encode($prices)) !!}),
+                prices = JSON.parse({!! json_encode(json_encode($all)) !!}),
                 geoCache = {},
                 currCnt = 0, totalCnt = 0,
             init = function(){
@@ -78,6 +78,7 @@
                     geocodingStart();
                     return;
                 }
+                console.log('addr : ', t0.sigungu + ' ' + +t0.main_no  + '-' + +t0.sub_no);
                 geocoding(t0.sigungu + ' ' + +t0.main_no  + '-' + +t0.sub_no);
 
             },

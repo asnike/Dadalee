@@ -162,13 +162,7 @@ class GoogleApi
 
         return $range;
     }
-    private function makeSheetsRequest($method, $data){
-        $request = [];
-        $request{$method} = $data;
-        new \Google_Service_Sheets_Request($request);
 
-        return $request;
-    }
     public function addRealEstate($sheetsId, $sheetName, $realestate){
         $sheetName = "'".$sheetName."'";
         $service = new \Google_Service_Sheets($this->client);
