@@ -87,10 +87,12 @@
                     }
                 });
             },
-            mapBoundChange = function(){
+                mapBoundChange = function(){
                 var bounds = map.getBounds(),
                     swLatlng = bounds.getSouthWest(),
                     neLatlng = bounds.getNorthEast();
+
+                console.log(swLatlng, neLatlng);
 
                 closePriceInfo();
                 getActualPrices(swLatlng.toString(), neLatlng.toString());
@@ -117,7 +119,7 @@
                 for(markers = [], events = [], i = 0, j = prices.length ; i < j ; i++){
                     data = prices[i];
                     if(data.main_no != last.main_no && data.sub_no != last.sub_no){
-                        marker = markers[markers.length] = makeCustomOverlay(data, i);//makeBasicMarker(data);
+                        marker = markers[markers.length] = /*makeCustomOverlay(data, i);*/makeBasicMarker(data);
                         last = data;
                     }
                 }
@@ -127,7 +129,7 @@
                 return new daum.maps.Marker({
                     position : new daum.maps.LatLng(data.lat, data.lng)
                 });
-            }
+            },
             makeCustomOverlay = function(data, idx){
                 var template = Handlebars.compile($('#marker-template').html()),
                     content = template({
