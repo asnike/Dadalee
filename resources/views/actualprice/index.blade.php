@@ -61,7 +61,7 @@
 
                 clusterer = new daum.maps.MarkerClusterer({
                     map:map,
-                    gridSize:35,
+                    gridSize:70,
                     averageCenter:true,
                     minLevel:3
                 });
@@ -124,7 +124,6 @@
                         last = data;
                     }
                 }
-                console.log(markers);
                 clusterer.addMarkers(markers);
             },
             makeBasicMarker = function(data){
