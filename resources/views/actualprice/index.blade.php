@@ -19,6 +19,7 @@
                 markers = [],
                 events = [],
                 sigungu = [],
+                markerTemplate = Handlebars.compile($('#marker-template').html()),
                 searchConditions = {
                     type:0,
                     size:0,
@@ -88,7 +89,7 @@
                     }
                 });
             },
-                mapBoundChange = function(){
+            mapBoundChange = function(){
                 var bounds = map.getBounds(),
                     swLatlng = bounds.getSouthWest(),
                     neLatlng = bounds.getNorthEast();
@@ -107,8 +108,12 @@
             },
             getActualPricesEnd = function(data){
                 //console.log(data.lists);
+                var before = performance.now();
                 removeMarkers();
+                console.log('removeMarkers :: ', performance.now()-before);
+                var before = performance.now();
                 setMarkers(data.lists);
+                console.log('setMarkers :: ', performance.now()-before);
             },
             removeMarkers = function () {
                 $('.marker-content').attr('onclick', null).unbind('click');
@@ -117,6 +122,7 @@
             setMarkers = function(prices){
                 var marker, last = {}, i, j;
 
+                var before = performance.now();
                 for(markers = [], events = [], i = 0, j = prices.length ; i < j ; i++){
                     data = prices[i];
                     if(data.lng != last.lng && data.lat != last.lat){
@@ -124,7 +130,11 @@
                         last = data;
                     }
                 }
+                console.log('data proccess :: ', performance.now()-before);
+
+                var before = performance.now();
                 clusterer.addMarkers(markers);
+                console.log('add markers in clusterer :: ', performance.now()-before);
             },
             makeBasicMarker = function(data){
                 return new daum.maps.Marker({
@@ -132,16 +142,15 @@
                 });
             },
             makeCustomOverlay = function(data, idx){
-                var template = Handlebars.compile($('#marker-template').html()),
-                    content = template({
-                        name:data.building_name,
-                        price:numeral(data.price).format('0,0'),
-                        size:data.exclusive_size,
-                        year:data.completed_at,
-                        main_no:data.main_no,
-                        sub_no:data.sub_no,
-                        id:data.id,
-                    });
+                content = markerTemplate({
+                    name:data.building_name,
+                    price:numeral(data.price).format('0,0'),
+                    size:data.exclusive_size,
+                    year:data.completed_at,
+                    main_no:data.main_no,
+                    sub_no:data.sub_no,
+                    id:data.id,
+                });
 
                 position = new daum.maps.LatLng(data.lat, data.lng),
                 customOverlay = new daum.maps.CustomOverlay({
