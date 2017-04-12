@@ -38,7 +38,7 @@
                             <i class="fa fa-user icon"></i> {{ auth()->user()->name }} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('mypage.google.link') }}"><i class="fa fa-link icon"></i> {{ trans('common.googleLink') }}</a></li>
+                            {{--<li><a href="{{ route('mypage.google.link') }}"><i class="fa fa-link icon"></i> {{ trans('common.googleLink') }}</a></li>--}}
                             <li><a href="{{ route('session.destroy') }}"><i class="fa fa-sign-out icon"></i> {{ trans('common.logout') }}</a></li>
                         </ul>
                     </li>
