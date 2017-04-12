@@ -61,6 +61,7 @@
 
                 clusterer = new daum.maps.MarkerClusterer({
                     map:map,
+                    gridSize:35,
                     averageCenter:true,
                     minLevel:3
                 });
@@ -118,11 +119,12 @@
 
                 for(markers = [], events = [], i = 0, j = prices.length ; i < j ; i++){
                     data = prices[i];
-                    if(data.main_no != last.main_no && data.sub_no != last.sub_no){
-                        marker = markers[markers.length] = /*makeCustomOverlay(data, i);*/makeBasicMarker(data);
+                    if(data.lng != last.lng && data.lat != last.lat){
+                        marker = markers[markers.length] = makeCustomOverlay(data, i);/*makeBasicMarker(data);*/
                         last = data;
                     }
                 }
+                console.log(markers);
                 clusterer.addMarkers(markers);
             },
             makeBasicMarker = function(data){
@@ -261,6 +263,7 @@
             return {
                 closePriceInfo:closePriceInfo,
                 searchAddr:searchAddr,
+                markerClick:markerClick,
             }
         })();
     </script>
