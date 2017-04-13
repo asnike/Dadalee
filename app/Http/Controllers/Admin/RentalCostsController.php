@@ -50,7 +50,7 @@ class RentalCostsController extends Controller
 
             foreach ($data as $row){
                 RentalCost::create([
-                    'sigungu'=>$row[1],
+                    'sigungu'=>$row[0],
                     'main_no'=>$row[2],
                     'sub_no'=>$row[3],
                     'building_name'=>$row[4],
