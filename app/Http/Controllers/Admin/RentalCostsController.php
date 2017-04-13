@@ -56,8 +56,8 @@ class RentalCostsController extends Controller
                     'building_name'=>$row[4],
                     'rental_type'=>$row[5] == '월세' ? 1:2,
                     'exclusive_size'=>$row[6],
-                    'land_size'=>$row[7],
-                    'yearmonth'=>$row[8],
+                    /*'land_size'=>$row[7],*/
+                    'yearmonth'=>$row[7],
                     'day'=>$row[8],
                     'deposit'=>$this->numeric($row[9]),
                     'rental_cost'=>$this->numeric($row[10]),
